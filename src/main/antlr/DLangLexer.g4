@@ -78,6 +78,7 @@ WHILE: 'while' ;
 RETURN: 'return' ;
 IS: 'is' ;
 END: 'end' ;
+PRINT: 'print' ;
 
 
 ReadInt: 'readInt' ;
