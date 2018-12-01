@@ -1,4 +1,6 @@
-package ir.values
+package ir
+
+import ir.values.Value
 
 interface Reference {
     fun getValue(context: Context): Value

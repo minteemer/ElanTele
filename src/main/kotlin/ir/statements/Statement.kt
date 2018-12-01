@@ -1,6 +1,6 @@
 package ir.statements
 
-import ir.values.Context
+import ir.Context
 
 interface Statement {
     fun execute(context: Context)

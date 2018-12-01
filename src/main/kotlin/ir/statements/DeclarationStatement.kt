@@ -1,7 +1,7 @@
 package ir.statements
 
 import ir.expressions.Expression
-import ir.values.Context
+import ir.Context
 
 class DeclarationStatement(
         private val variableName: String,

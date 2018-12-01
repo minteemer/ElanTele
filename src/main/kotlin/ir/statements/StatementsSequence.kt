@@ -1,6 +1,6 @@
 package ir.statements
 
-import ir.values.Context
+import ir.Context
 
 class StatementsSequence(private val statements: List<Statement>) {
 

@@ -1,5 +1,6 @@
-package ir.values
+package ir
 
+import ir.values.Value
 import java.lang.Exception
 
 class Context {
