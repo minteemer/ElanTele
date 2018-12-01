@@ -56,9 +56,8 @@ class IntegerValue(val value: Int): Value() {
         else -> super.lessOrEqual(other)
     }
 
-    override fun unaryMinus(): Value {
-        return IntegerValue(-value)
-    }
+    override fun unaryMinus(): Value = IntegerValue(-value)
+
 
 
 
