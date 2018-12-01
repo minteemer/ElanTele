@@ -91,7 +91,7 @@ functionLiteral
 
 funBody
     : IS body END
-    |expression
+    | DOUBLE_ARROW expression
     ;
 
 reference
