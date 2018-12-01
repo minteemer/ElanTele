@@ -71,7 +71,7 @@ PRINT: 'print' ;
 
 
 IntType: 'int' ;
-ReadType: 'real' ;
+RealType: 'real' ;
 StringType: 'string' ;
 BoolType: 'bool' ;
 EmptyType: 'empty' ;
