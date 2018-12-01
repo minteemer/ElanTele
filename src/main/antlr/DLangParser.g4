@@ -15,12 +15,12 @@ variableDefinition
     ;
 
 statement
-    :declaration
-    |assignment
-    |if_expression
-    |loop
-    |return_expression
-    |print
+    : declaration SEMICOLON?
+    | assignment SEMICOLON?
+    | if_expression SEMICOLON?
+    | loop SEMICOLON?
+    | return_expression SEMICOLON?
+    | print SEMICOLON?
     ;
 
 assignment
@@ -28,7 +28,7 @@ assignment
     ;
 
 if_expression
-    : IF expression THEN body (ELSE body) END
+    : IF expression NL* THEN NL* body NL* (ELSE NL* body NL*)? END
     ;
 
 loop
@@ -41,11 +41,11 @@ return_expression
     ;
 
 print
-    :PRINT expression (COMMA expression)?
+    : PRINT expression (COMMA expression)?
     ;
 
 expression
-    : relation ( (OR|AND|XOR) relation)*
+    : relation ((OR|AND|XOR) relation)*
     ;
 
 relation
@@ -63,7 +63,7 @@ term
 unary
     : reference
     | reference IS typeIndicator
-    | (ADD|SUB|NOT)? primary
+    | (ADD | SUB | NOT)? primary
     ;
 
 primary
@@ -74,6 +74,7 @@ primary
     | functionLiteral
     | LPAREN expression RPAREN
     ;
+
 typeIndicator
     : IntType
     | RealType
@@ -90,15 +91,16 @@ functionLiteral
     ;
 
 funBody
-    : IS body END
+    : IS NL* body NL* END
     | DOUBLE_ARROW expression
     ;
 
 reference
-    :Identifier
-    |reference LSQUARE expression RSQUARE
-    |reference LPAREN expression (COMMA expression)* RPAREN
-    |reference DOT Identifier
+    : Identifier
+    | reference LSQUARE expression RSQUARE
+    | reference LPAREN expression (COMMA expression)* RPAREN
+    | reference DOT IntegerLiteral
+    | reference DOT Identifier
     ;
 
 literal
@@ -106,17 +108,19 @@ literal
     | RealLiteral
     | lineStringLiteral
     | BooleanLiteral
-    | tupple
+    | tuple
     | array
     | EmptyType
     ;
+
 lineStringLiteral
-    : QUOTE_OPEN (lineStringContent | lineStringExpression)* QUOTE_CLOSE
+    : DOUBLE_QUOTE_OPEN (lineStringContent | lineStringExpression)* DOUBLE_QUOTE_CLOSE
+    | SINGLE_QUOTE_OPEN (lineStringContent | lineStringExpression)* SINGLE_QUOTE_CLOSE
     ;
+
 lineStringContent
     : LineStrText
     | LineStrEscapedChar
-
     ;
 
 lineStringExpression
@@ -124,16 +128,18 @@ lineStringExpression
     ;
 
 array
-    : LSQUARE (expression (COMMA expression)*)? RSQUARE
+    : (LSQUARE (expression (COMMA expression)*)? RSQUARE)
+    | ArrayType
     ;
-tupple
-    : LCURL tuppleElement (COMMA tuppleElement)* RCURL
+
+tuple
+    : LCURL tupleElement (COMMA tupleElement)* RCURL
     ;
-tuppleElement
-    : Identifier (ASSIGNMENT expression)?
+
+tupleElement
+    : (Identifier ASSIGNMENT)? expression
     ;
+
 body
-    : (declaration
-    | statement
-    | expression)*
+    : ((declaration | statement | expression) NL?)+
     ;
