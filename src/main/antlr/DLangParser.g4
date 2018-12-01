@@ -32,12 +32,12 @@ if_expression
     ;
 
 loop
-    : (WHILE expression THEN body END)
+    : (WHILE expression LOOP body END)
     | (FOR Identifier IN? expression RANGE expression)
     ;
 
 return_expression
-    : RETURN (expression)?
+    : RETURN expression?
     ;
 
 print
@@ -72,7 +72,6 @@ primary
     | ReadReal
     | ReadString
     | functionLiteral
-    |
     ;
 typeIndicator
     : IntType
@@ -108,7 +107,7 @@ literal
     | BooleanLiteral
     | tupple
     | array
-    | EmptyLiteral
+    | EmptyType
     ;
 lineStringLiteral
     : QUOTE_OPEN (lineStringContent | lineStringExpression)* QUOTE_CLOSE
@@ -116,15 +115,11 @@ lineStringLiteral
 lineStringContent
     : LineStrText
     | LineStrEscapedChar
-    | LineStrRef
+
     ;
 
 lineStringExpression
     : LineStrExprStart expression RCURL
-    ;
-boolean_literal
-    :
-    BooleanLiteral
     ;
 
 array

@@ -68,7 +68,7 @@ RETURN: 'return' ;
 IS: 'is' ;
 END: 'end' ;
 PRINT: 'print' ;
-
+LOOP: 'loop' ;
 
 IntType: 'int' ;
 RealType: 'real' ;
@@ -77,6 +77,7 @@ BoolType: 'bool' ;
 EmptyType: 'empty' ;
 ArrayType: '[]' ;
 TupleType: '{}' ;
+
 
 
 ReadInt: 'readInt' ;
