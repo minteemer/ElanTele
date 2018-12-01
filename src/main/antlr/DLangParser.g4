@@ -15,12 +15,12 @@ variableDefinition
     ;
 
 statement
-    :declaration
-    |assignment
-    |if_expression
-    |loop
-    |return_expression
-    |print
+    :declaration SEMICOLON?
+    |assignment SEMICOLON?
+    |if_expression SEMICOLON?
+    |loop SEMICOLON?
+    |return_expression SEMICOLON?
+    |print SEMICOLON?
     ;
 
 assignment
