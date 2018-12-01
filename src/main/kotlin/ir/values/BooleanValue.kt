@@ -15,9 +15,6 @@ class BooleanValue(val value: Boolean) : Value(){
         else -> super.xor(other)
     }
 
-    override fun equals(other: Value): Value = when(other){
-        is BooleanValue -> BooleanValue(value == other.value)
-        else -> super.equals(other)
-    }
+
 }
 
