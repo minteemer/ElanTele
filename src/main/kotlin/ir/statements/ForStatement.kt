@@ -17,8 +17,13 @@ class ForStatement(
         val end = secondExpression.execute(context)
         if (begin is IntegerValue && end is IntegerValue){
             for ( i in begin.value..end.value){
-                //TODO set context
-                forBody.executeAll(context)
+                if (variable!=null) {
+                    val newContext= context.getChildContext(mapOf(Pair(variable, IntegerValue(i))))
+                    forBody.executeAll(newContext)
+                }else{
+                    forBody.executeAll(context)
+                }
+
             }
         }else{
             throw UniterableRangeException("Iteration can not be done through ${firstExpression.toString()} and ${secondExpression.toString()}")
