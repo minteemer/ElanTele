@@ -34,7 +34,6 @@ NL: '\u000A' | '\u000D' '\u000A' | SEMICOLON ;
 
 //SEPARATORS & OPERATIONS
 
-
 DOT: '.' ;
 COMMA: ',' ;
 LPAREN: '(' -> pushMode(Inside) ;
@@ -69,16 +68,13 @@ NOT: 'not';
 
 FUNC: 'func' ;
 VAR: 'var' ;
-TYPEOF: 'typeof' ;
 IF: 'if' ;
 THEN: 'then';
 IN: 'in';
 ELSE: 'else' ;
 WHEN: 'when' ;
 FOR: 'for' ;
-DO: 'do' ;
 WHILE: 'while' ;
-FOR: 'for' ;
 RETURN: 'return' ;
 IS: 'is' ;
 END: 'end' ;
@@ -93,30 +89,7 @@ ReadString: 'readString' ;
 QUOTE_OPEN: '"' -> pushMode(LineString) ;
 
 
-TupleLiteral
-    :
-
- // { a := 5, b := “sss”, 12.34 }
-
-ArrayLiteral
-    :
-
- // [ 1, 2, 3 ]
-
-
-
-
-
 RealLiteral
-    : FloatLiteral
-    | DoubleLiteral
-    ;
-
-FloatLiteral
-    : (DoubleLiteral | IntegerLiteral) [fF]
-    ;
-
-DoubleLiteral
     : ( (DecDigitNoZero DecDigit*)? '.'
       | (DecDigitNoZero (DecDigit | '_')* DecDigit)? '.')
      ( DecDigit+
@@ -187,29 +160,9 @@ fragment UNICODE_CLASS_ND_NoZeros
 	| '\uff11'..'\uff19'
 	;
 
-HexLiteral
-    : '0' [xX] HexDigit (HexDigit | '_')*
-    ;
-
-fragment HexDigit
-    : [0-9a-fA-F]
-    ;
-
-BinLiteral
-    : '0' [bB] BinDigit (BinDigit | '_')*
-    ;
-
-fragment BinDigit
-    : [01]
-    ;
-
 BooleanLiteral
     : 'true'
     | 'false'
-    ;
-
-NullLiteral
-    : 'null'
     ;
 
 Identifier
@@ -217,30 +170,18 @@ Identifier
     | '`' ~('`')+ '`'
     ;
 
-LabelReference
-    : '@' Identifier
-    ;
-
-LabelDefinition
-    : Identifier '@'
-    ;
-
-FieldIdentifier
-    : '$' Identifier
-    ;
-
 CharacterLiteral
     : '\'' (EscapeSeq | .) '\''
     ;
 
-fragment EscapeSeq
-    : UniCharacterLiteral
-    | EscapedIdentifier
+EmptyLiteral
+    : 'empty'
     ;
 
-fragment UniCharacterLiteral
-    : '\\' 'u' HexDigit HexDigit HexDigit HexDigit
+fragment EscapeSeq
+    : EscapedIdentifier
     ;
+
 
 fragment EscapedIdentifier
     : '\\' ('t' | 'b' | 'r' | 'n' | '\'' | '"' | '\\' | '$')
@@ -293,22 +234,17 @@ Inside_IF: IF -> type(IF) ;
 Inside_ELSE: ELSE -> type(ELSE) ;
 Inside_WHEN: WHEN -> type(WHEN) ;
 Inside_FOR: FOR -> type(FOR) ;
-Inside_DO: DO -> type(DO) ;
 Inside_WHILE: WHILE -> type(WHILE) ;
 
 
 Inside_BooleanLiteral: BooleanLiteral -> type(BooleanLiteral) ;
 Inside_IntegerLiteral: IntegerLiteral -> type(IntegerLiteral) ;
-Inside_HexLiteral: HexLiteral -> type(HexLiteral) ;
-Inside_BinLiteral: BinLiteral -> type(BinLiteral) ;
 Inside_CharacterLiteral: CharacterLiteral -> type(CharacterLiteral) ;
 Inside_RealLiteral: RealLiteral -> type(RealLiteral) ;
-Inside_NullLiteral: NullLiteral -> type(NullLiteral) ;
+Inside_NullLiteral: EmptyLiteral -> type(EmptyLiteral) ;
 
 
 Inside_Identifier: Identifier -> type(Identifier) ;
-Inside_LabelReference: LabelReference -> type(LabelReference) ;
-Inside_LabelDefinition: LabelDefinition -> type(LabelDefinition) ;
 Inside_Comment: (LineComment | DelimitedComment) -> channel(HIDDEN) ;
 Inside_WS: WS -> skip ;
 Inside_NL: NL -> skip ;
@@ -320,17 +256,12 @@ QUOTE_CLOSE
     : '"' -> popMode
     ;
 
-LineStrRef
-    : FieldIdentifier
-    ;
-
 LineStrText
     : ~('\\' | '"' | '$')+ | '$'
     ;
 
 LineStrEscapedChar
     : '\\' .
-    | UniCharacterLiteral
     ;
 
 LineStrExprStart
@@ -371,15 +302,11 @@ StrExpr_QUOTE_OPEN: QUOTE_OPEN -> pushMode(LineString), type(QUOTE_OPEN) ;
 
 StrExpr_BooleanLiteral: BooleanLiteral -> type(BooleanLiteral) ;
 StrExpr_IntegerLiteral: IntegerLiteral -> type(IntegerLiteral) ;
-StrExpr_HexLiteral: HexLiteral -> type(HexLiteral) ;
-StrExpr_BinLiteral: BinLiteral -> type(BinLiteral) ;
 StrExpr_CharacterLiteral: CharacterLiteral -> type(CharacterLiteral) ;
 StrExpr_RealLiteral: RealLiteral -> type(RealLiteral) ;
-StrExpr_NullLiteral: NullLiteral -> type(NullLiteral) ;
+StrExpr_NullLiteral: EmptyLiteral -> type(EmptyLiteral) ;
 
 StrExpr_Identifier: Identifier -> type(Identifier) ;
-StrExpr_LabelReference: LabelReference -> type(LabelReference) ;
-StrExpr_LabelDefinition: LabelDefinition -> type(LabelDefinition) ;
 StrExpr_Comment: (LineComment | DelimitedComment) -> channel(HIDDEN) ;
 StrExpr_WS: WS -> skip ;
 StrExpr_NL: NL -> skip ;
