@@ -90,7 +90,7 @@ functionLiteral
     ;
 
 funBody
-    : IS body END
+    : IS NL* body NL* END
     | DOUBLE_ARROW expression
     ;
 
@@ -133,7 +133,7 @@ tuppleElement
     : Identifier (ASSIGNMENT expression)?
     ;
 body
-    : declaration
+    : (declaration
     | statement
-    | expression
+    | expression)*
     ;
