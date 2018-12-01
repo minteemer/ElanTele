@@ -38,6 +38,12 @@ class IntegerValue(val value: Int): Value() {
         else -> super.equals(other)
     }
 
+    override fun notEquals(other: Value): Value= when (other) {
+        is IntegerValue -> BooleanValue(value != other.value)
+        is RealValue -> BooleanValue(value.toDouble() != other.value)
+        else -> super.notEquals(other)
+    }
+
     override fun greaterOrEqual(other: Value): Value = when (other) {
         is IntegerValue -> BooleanValue(value >= other.value)
         is RealValue -> BooleanValue(value >= other.value)
