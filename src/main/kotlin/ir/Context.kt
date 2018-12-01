@@ -27,4 +27,7 @@ class Context(private val parentContext: Context? = null,
     fun getChildContext(arguments: Map<String, Value> = mapOf()) =
             Context(this, HashMap(arguments))
 
+    fun createLocalRef(reference: String, value: Value) {
+        values[reference] = value
+    }
 }
