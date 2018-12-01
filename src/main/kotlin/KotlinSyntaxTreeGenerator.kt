@@ -12,10 +12,10 @@ object KotlinSyntaxTreeGenerator {
      * @return [Map] that contains created AST
      */
     fun generateTree(filePath: Path): Map<String, Any>? {
-        val lexer = KotlinLexer(CharStreams.fromPath(filePath))
-        val parser = KotlinParser(CommonTokenStream(lexer))
+        val lexer = DLangLexer(CharStreams.fromPath(filePath))
+        val parser = DLangParser(CommonTokenStream(lexer))
 
-        return parser.kotlinFile().toMap()
+        return parser.program().toMap()
     }
 
     /** Traverse through the tree and create [Map] out of it */
@@ -31,8 +31,9 @@ object KotlinSyntaxTreeGenerator {
     }
 
     /** @return name of the token */
-    private fun Token.getName() = KotlinLexer.VOCABULARY.getSymbolicName(type)
+    private fun Token.getName() = DLangLexer.VOCABULARY.getSymbolicName(type)
 
     /** @return name of the rule */
-    private fun RuleContext.getName() = KotlinParser.ruleNames[ruleIndex]
+    private fun RuleContext.getName() = DLangParser.ruleNames[ruleIndex]
 }
+

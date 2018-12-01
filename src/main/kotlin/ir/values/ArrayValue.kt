@@ -1,11 +1,12 @@
 package ir.values
 
-class DictValue(val values: Map<String, Value>) : Value(ValueClass.DICT) {
+class ArrayValue(val values: List<Value>) : Value(ValueClass.ARRAY){
 
     override fun add(other: Value): Value = when (other) {
-        is DictValue -> DictValue(values + other.values)
+        is ArrayValue -> ArrayValue(values + other.values)
         else -> super.add(other)
     }
 
     override fun toString(): String = values.joinToString(prefix = "[", postfix = "]")
+
 }
