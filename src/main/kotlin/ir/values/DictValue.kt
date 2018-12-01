@@ -7,4 +7,5 @@ class DictValue(val values: Map<String, Value>) : Value(ValueClass.DICT) {
         else -> super.add(other)
     }
 
+    override fun toString(): String = values.joinToString(prefix = "[", postfix = "]")
 }

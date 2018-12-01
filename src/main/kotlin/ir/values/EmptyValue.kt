@@ -1,3 +1,5 @@
 package ir.values
 
-class EmptyValue(val value: Double) : Value(ValueClass.EMPTY)
+class EmptyValue() : Value(ValueClass.EMPTY){
+    override fun toString(): String = "empty"
+}

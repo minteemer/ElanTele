@@ -7,4 +7,6 @@ class ArrayValue(val values: List<Value>) : Value(ValueClass.ARRAY){
         else -> super.add(other)
     }
 
+    override fun toString(): String = values.joinToString(prefix = "[", postfix = "]")
+
 }

@@ -7,4 +7,5 @@ class StringValue(val value: String) : Value(ValueClass.STRING) {
         else -> super.add(other)
     }
 
+    override fun toString(): String = value
 }
