@@ -48,4 +48,5 @@ open class Value {
     open fun not(): Value =
             throw UnresolvedOperatorException("Can not apply 'not' logical operation to ${javaClass.simpleName}")
 
+    open fun isClass(valueClass: ValueClass)= BooleanValue(false)
 }
