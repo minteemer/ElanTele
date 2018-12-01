@@ -64,7 +64,7 @@ class IntegerValue(val value: Int): Value(ValueClass.INTEGER) {
 
     override fun unaryMinus(): Value = IntegerValue(-value)
 
-
+    override fun toString(): String = value.toString()
 
 
 }

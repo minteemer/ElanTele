@@ -15,6 +15,6 @@ class BooleanValue(val value: Boolean) : Value(ValueClass.BOOLEAN){
         else -> super.xor(other)
     }
 
-
+    override fun toString(): String = value.toString()
 }
 
