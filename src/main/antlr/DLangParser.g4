@@ -15,12 +15,12 @@ variableDefinition
     ;
 
 statement
-    :declaration SEMICOLON?
-    |assignment SEMICOLON?
-    |if_expression SEMICOLON?
-    |loop SEMICOLON?
-    |return_expression SEMICOLON?
-    |print SEMICOLON?
+    : declaration SEMICOLON?
+    | assignment SEMICOLON?
+    | if_expression SEMICOLON?
+    | loop SEMICOLON?
+    | return_expression SEMICOLON?
+    | print SEMICOLON?
     ;
 
 assignment
@@ -41,11 +41,11 @@ return_expression
     ;
 
 print
-    :PRINT expression (COMMA expression)?
+    : PRINT expression (COMMA expression)?
     ;
 
 expression
-    : relation ( (OR|AND|XOR) relation)*
+    : relation ((OR|AND|XOR) relation)*
     ;
 
 relation
@@ -74,6 +74,7 @@ primary
     | functionLiteral
     | LPAREN expression RPAREN
     ;
+
 typeIndicator
     : IntType
     | RealType
@@ -95,10 +96,11 @@ funBody
     ;
 
 reference
-    :Identifier
-    |reference LSQUARE expression RSQUARE
-    |reference LPAREN expression (COMMA expression)* RPAREN
-    |reference DOT Identifier
+    : Identifier
+    | reference LSQUARE expression RSQUARE
+    | reference LPAREN expression (COMMA expression)* RPAREN
+    | reference DOT IntegerLiteral
+    | reference DOT Identifier
     ;
 
 literal
@@ -106,7 +108,7 @@ literal
     | RealLiteral
     | lineStringLiteral
     | BooleanLiteral
-    | tupple
+    | tuple
     | array
     | EmptyType
     ;
@@ -119,7 +121,6 @@ lineStringLiteral
 lineStringContent
     : LineStrText
     | LineStrEscapedChar
-
     ;
 
 lineStringExpression
@@ -129,12 +130,15 @@ lineStringExpression
 array
     : LSQUARE (expression (COMMA expression)*)? RSQUARE
     ;
-tupple
-    : LCURL tuppleElement (COMMA tuppleElement)* RCURL
+
+tuple
+    : LCURL tupleElement (COMMA tupleElement)* RCURL
     ;
-tuppleElement
-    : Identifier (ASSIGNMENT expression)?
+
+tupleElement
+    : (Identifier ASSIGNMENT)? expression
     ;
+
 body
     : ((declaration | statement | expression) NL?)+
     ;
