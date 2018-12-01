@@ -47,7 +47,6 @@ LE: '<=' ;
 GE: '>=' ;
 EXCL_EQ: '/=' ;
 EQEQ: '=' ;
-SINGLE_QUOTE: '\'' ;
 AND: 'and';
 XOR: 'xor';
 OR: 'or';
@@ -87,8 +86,8 @@ ReadString: 'readString' ;
 
 //
 
-QUOTE_OPEN: '"' -> pushMode(LineString) ;
-
+DOUBLE_QUOTE_OPEN: '"' -> pushMode(LineString) ;
+SINGLE_QUOTE_OPEN: '\'' -> pushMode(LineString) ;
 
 RealLiteral
     : ( (DecDigitNoZero DecDigit*)? '.'
@@ -171,9 +170,6 @@ Identifier
     | '`' ~('`')+ '`'
     ;
 
-CharacterLiteral
-    : '\'' (EscapeSeq | .) '\''
-    ;
 
 fragment EscapeSeq
     : EscapedIdentifier
@@ -221,8 +217,8 @@ Inside_LE: LE  -> type(LE) ;
 Inside_GE: GE  -> type(GE) ;
 Inside_EXCL_EQ: EXCL_EQ  -> type(EXCL_EQ) ;
 Inside_EQEQ: EQEQ  -> type(EQEQ) ;
-Inside_SINGLE_QUOTE: SINGLE_QUOTE  -> type(SINGLE_QUOTE) ;
-Inside_QUOTE_OPEN: QUOTE_OPEN -> pushMode(LineString), type(QUOTE_OPEN) ;
+Inside_DOUBLE_QUOTE_OPEN: DOUBLE_QUOTE_OPEN -> pushMode(LineString), type(DOUBLE_QUOTE_OPEN) ;
+Inside_SINGLE_QUOTE_OPEN: SINGLE_QUOTE_OPEN -> pushMode(LineString), type(SINGLE_QUOTE_OPEN) ;
 
 
 Inside_VAR: VAR -> type(VAR) ;
@@ -236,7 +232,6 @@ Inside_WHILE: WHILE -> type(WHILE) ;
 
 Inside_BooleanLiteral: BooleanLiteral -> type(BooleanLiteral) ;
 Inside_IntegerLiteral: IntegerLiteral -> type(IntegerLiteral) ;
-Inside_CharacterLiteral: CharacterLiteral -> type(CharacterLiteral) ;
 Inside_RealLiteral: RealLiteral -> type(RealLiteral) ;
 
 
@@ -248,12 +243,16 @@ Inside_NL: NL -> skip ;
 
 mode LineString ;
 
-QUOTE_CLOSE
+DOUBLE_QUOTE_CLOSE
     : '"' -> popMode
     ;
 
+SINGLE_QUOTE_CLOSE
+    : '\'' -> popMode
+    ;
+
 LineStrText
-    : ~('\\' | '"' | '$')+ | '$'
+    : ~('\\' | '\'' | '"' | '$')+ | '$'
     ;
 
 LineStrEscapedChar
@@ -292,13 +291,12 @@ StrExpr_GE: GE  -> type(GE) ;
 StrExpr_EXCL_EQ: EXCL_EQ  -> type(EXCL_EQ) ;
 StrExpr_IS: IS -> type(IN) ;
 StrExpr_EQEQ: EQEQ  -> type(EQEQ) ;
-StrExpr_SINGLE_QUOTE: SINGLE_QUOTE  -> type(SINGLE_QUOTE) ;
-StrExpr_QUOTE_OPEN: QUOTE_OPEN -> pushMode(LineString), type(QUOTE_OPEN) ;
+StrExpr_DOUBLE_QUOTE_OPEN: DOUBLE_QUOTE_OPEN -> pushMode(LineString), type(DOUBLE_QUOTE_OPEN) ;
+StrExpr_SINGLE_QUOTE_OPEN: SINGLE_QUOTE_OPEN -> pushMode(LineString), type(SINGLE_QUOTE_OPEN) ;
 
 
 StrExpr_BooleanLiteral: BooleanLiteral -> type(BooleanLiteral) ;
 StrExpr_IntegerLiteral: IntegerLiteral -> type(IntegerLiteral) ;
-StrExpr_CharacterLiteral: CharacterLiteral -> type(CharacterLiteral) ;
 StrExpr_RealLiteral: RealLiteral -> type(RealLiteral) ;
 
 StrExpr_Identifier: Identifier -> type(Identifier) ;

@@ -110,9 +110,12 @@ literal
     | array
     | EmptyType
     ;
+
 lineStringLiteral
-    : QUOTE_OPEN (lineStringContent | lineStringExpression)* QUOTE_CLOSE
+    : DOUBLE_QUOTE_OPEN (lineStringContent | lineStringExpression)* DOUBLE_QUOTE_CLOSE
+    | SINGLE_QUOTE_OPEN (lineStringContent | lineStringExpression)* SINGLE_QUOTE_CLOSE
     ;
+
 lineStringContent
     : LineStrText
     | LineStrEscapedChar
