@@ -15,14 +15,14 @@ class Context(private val parentContext: Context? = null,
         values[reference] = value
     }
 
-    private fun propagateValue(reference: String, value: Value): Boolean {
-        if (values.containsKey(reference)) {
-            values[reference] = value
-            return true
-        } else {
-            return parentContext?.propagateValue(reference, value) ?: return false
-        }
-    }
+    private fun propagateValue(reference: String, value: Value): Boolean =
+            if (values.containsKey(reference)) {
+                values[reference] = value
+                true
+            } else {
+                parentContext?.propagateValue(reference, value) ?: false
+            }
+
 
 
     fun getChildContext(arguments: Map<String, Value>) = Context(this, HashMap(arguments))
