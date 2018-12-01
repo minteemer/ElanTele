@@ -90,26 +90,11 @@ DOUBLE_QUOTE_OPEN: '"' -> pushMode(LineString) ;
 SINGLE_QUOTE_OPEN: '\'' -> pushMode(LineString) ;
 
 RealLiteral
-    : ( (DecDigitNoZero DecDigit*)? '.'
-      | (DecDigitNoZero (DecDigit | '_')* DecDigit)? '.')
-     ( DecDigit+
-      | DecDigit (DecDigit | '_')+ DecDigit
-      | DecDigit+ [eE] ('+' | '-')? DecDigit+
-      | DecDigit+ [eE] ('+' | '-')? DecDigit (DecDigit | '_')+ DecDigit
-      | DecDigit (DecDigit | '_')+ DecDigit [eE] ('+' | '-')? DecDigit+
-      | DecDigit (DecDigit | '_')+ DecDigit [eE] ('+' | '-')? DecDigit (DecDigit | '_')+ DecDigit
-     )
+    : DecDigitNoZero DecDigit* '.' DecDigit+
     ;
 
 IntegerLiteral
-    : ('0'
-      | DecDigitNoZero DecDigit*
-      | DecDigitNoZero (DecDigit | '_')+ DecDigit
-      | DecDigitNoZero DecDigit* [eE] ('+' | '-')? DecDigit+
-      | DecDigitNoZero DecDigit* [eE] ('+' | '-')? DecDigit (DecDigit | '_')+ DecDigit
-      | DecDigitNoZero (DecDigit | '_')+ DecDigit [eE] ('+' | '-')? DecDigit+
-      | DecDigitNoZero (DecDigit | '_')+ DecDigit [eE] ('+' | '-')? DecDigit (DecDigit | '_')+ DecDigit
-      )
+    : ('0' | DecDigitNoZero DecDigit*)
     ;
 
 fragment DecDigit
