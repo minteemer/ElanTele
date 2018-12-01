@@ -28,7 +28,7 @@ assignment
     ;
 
 if_expression
-    : IF expression THEN body (ELSE body) END
+    : IF expression NL* THEN NL* body NL* (ELSE NL* body NL*)? END
     ;
 
 loop
