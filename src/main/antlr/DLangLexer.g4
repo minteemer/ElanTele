@@ -10,7 +10,7 @@
  * https://github.com/JetBrains/kotlin/tree/master/compiler/testData/psi
  */
 
-lexer grammar KotlinLexer;
+lexer grammar DLangLexer;
 
 import UnicodeClasses;
 
