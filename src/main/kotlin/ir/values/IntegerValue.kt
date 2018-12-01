@@ -1,6 +1,6 @@
 package ir.values
 
-class IntegerValue(val value: Int): Value() {
+class IntegerValue(val value: Int): Value(ValueClass.INTEGER) {
 
     override fun add(other: Value): Value = when (other) {
         is IntegerValue -> IntegerValue(value + other.value)

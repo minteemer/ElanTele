@@ -1,6 +1,6 @@
 package ir.values
 
-class RealValue(val value: Double) : Value(){
+class RealValue(val value: Double) : Value(ValueClass.REAL){
     override fun add(other: Value): Value = when (other) {
         is IntegerValue -> RealValue(value + other.value)
         is RealValue -> RealValue(value + other.value)
