@@ -39,7 +39,7 @@ class RealValue(val value: Double) : Value(){
 
     override fun notEquals(other: Value): Value= when (other) {
         is IntegerValue -> BooleanValue(value != other.value.toDouble())
-        is RealValue -> BooleanValue(value.toDouble() != other.value)
+        is RealValue -> BooleanValue(value != other.value)
         else -> super.notEquals(other)
     }
 
@@ -62,4 +62,6 @@ class RealValue(val value: Double) : Value(){
     }
 
     override fun unaryMinus(): Value = RealValue(-value)
+
+    override fun toString(): String = value.toString()
 }
