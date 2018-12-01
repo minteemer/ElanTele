@@ -237,7 +237,6 @@ Inside_BooleanLiteral: BooleanLiteral -> type(BooleanLiteral) ;
 Inside_IntegerLiteral: IntegerLiteral -> type(IntegerLiteral) ;
 Inside_CharacterLiteral: CharacterLiteral -> type(CharacterLiteral) ;
 Inside_RealLiteral: RealLiteral -> type(RealLiteral) ;
-Inside_NullLiteral: EmptyLiteral -> type(EmptyLiteral) ;
 
 
 Inside_Identifier: Identifier -> type(Identifier) ;
@@ -300,7 +299,6 @@ StrExpr_BooleanLiteral: BooleanLiteral -> type(BooleanLiteral) ;
 StrExpr_IntegerLiteral: IntegerLiteral -> type(IntegerLiteral) ;
 StrExpr_CharacterLiteral: CharacterLiteral -> type(CharacterLiteral) ;
 StrExpr_RealLiteral: RealLiteral -> type(RealLiteral) ;
-StrExpr_NullLiteral: EmptyLiteral -> type(EmptyLiteral) ;
 
 StrExpr_Identifier: Identifier -> type(Identifier) ;
 StrExpr_Comment: (LineComment | DelimitedComment) -> channel(HIDDEN) ;
