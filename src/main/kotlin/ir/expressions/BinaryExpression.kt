@@ -24,4 +24,8 @@ class BinaryExpression(val a: Value, val b: Value, val op: OperatorType) : Expre
             // @formatter:on
         }
     }
+
+    override fun toString(): String {
+        return "BinaryExpression(a=$a, b=$b, op=$op)"
+    }
 }

@@ -14,4 +14,8 @@ class UnaryExpression(val a: Value, val op: OperatorType) : Expression {
             // @formatter:on
         }
     }
+
+    override fun toString(): String {
+        return "UnaryExpression(a=$a, op=$op)"
+    }
 }
