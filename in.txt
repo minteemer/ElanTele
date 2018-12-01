@@ -1,57 +1,15 @@
-package test.input
+var a := {a:=1, b:=2, c, d:= func(x)=>x+1}; var g, h, j, k; print a.d(1);
 
-import java.io.*
+var b := 2;
+for a.d(1)..b
+loop
+    if a.a < a.b
+    then
+        a.a := 10;
+    else
+        a.b := 10;
+        print a
+    end;
+end;
 
-typealias Строка = String
-
-object TestObject{
-    val lazyString: Строка? by lazy { "We're no strangers to love" }
-}
-
-fun main(args: Array<String>) {
-
-    println(
-            TestObject.lazyString
-                    ?.plus("You know the rules and so do I")
-                    ?: "A full commitment's what I'm thinking of"
-    )
-
-    if (true){
-        println("You wouldn't get this from any other guy")
-    } else if (true) {
-        println("I just wanna tell you how I'm feeling")
-    } else {
-        println("Gotta make you understand")
-    }
-
-    var sum = 1 + 10
-    val mul = 1*0
-    val sub = 1.1e-3 - 1
-    val div = 1.0/1
-    val mod = 2%1
-
-    sum = sum(15, 10)
-    val heh = 1.applyFunc(2){ a, b -> a + b }
-
-    when(1 as Number){
-        16 ->  println("Never gonna give you up")
-        in 1..10 -> println("Never gonna let you down")
-        is Long -> println("Never gonna run around and desert you")
-        else -> println("Never gonna make you cry")
-    }
-
-    for (i in (1..15)){
-        println("Never gonna say goodbye")
-    }
-
-    do {
-        println("Never gonna tell a lie and hurt you")
-    } while (false)
-}
-
-fun sum(a: Int, b:Int):Int {
-    return a + b
-}
-
-/** Applies [func] to this object and [b] */
-fun <A, B, R> A.applyFunc(b: B, func: (A, B) -> R): R = func(this, b)
+var fun := fu

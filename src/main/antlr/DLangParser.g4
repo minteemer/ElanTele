@@ -33,7 +33,7 @@ if_expression
 
 loop
     : (WHILE expression NL* LOOP NL* body NL*  END)
-    | (FOR (Identifier IN)? (expression RANGE expression)? NL* LOOP NL* body NL* END)
+    | (FOR (Identifier IN)? (expression RANGE expression) NL* LOOP NL* body NL* END)
     ;
 
 return_expression

@@ -15,7 +15,7 @@ object KotlinSyntaxTreeGenerator {
         val lexer = DLangLexer(CharStreams.fromPath(filePath))
         val parser = DLangParser(CommonTokenStream(lexer))
 
-        return parser.kotlinFile().toMap()
+        return parser.program().toMap()
     }
 
     /** Traverse through the tree and create [Map] out of it */
