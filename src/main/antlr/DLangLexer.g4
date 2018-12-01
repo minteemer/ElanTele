@@ -19,7 +19,7 @@ WS
       -> skip
     ;
 
-NL: '\u000A' | '\u000D' '\u000A' | SEMICOLON ;
+NL: '\u000A' | '\u000D' '\u000A';
 
 //SEPARATORS & OPERATIONS
 
