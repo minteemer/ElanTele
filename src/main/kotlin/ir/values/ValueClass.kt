@@ -7,5 +7,6 @@ enum class ValueClass {
     STRING,
     DICT,
     ARRAY,
-    FUNCTION
+    FUNCTION,
+    EMPTY
 }

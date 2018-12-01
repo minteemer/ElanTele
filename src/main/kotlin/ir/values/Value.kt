@@ -1,7 +1,6 @@
 package ir.values
 
-open class Value {
-    // TODO: Write exception messages
+open class Value(val valueClass: ValueClass) {
 
     open fun add(other: Value): Value =
             throw UnresolvedOperatorException("Can not add ${javaClass.simpleName} to ${other.javaClass.simpleName}")
@@ -48,5 +47,5 @@ open class Value {
     open fun not(): Value =
             throw UnresolvedOperatorException("Can not apply 'not' logical operation to ${javaClass.simpleName}")
 
-    open fun isClass(valueClass: ValueClass)= BooleanValue(false)
+    open fun isClass(valueClass: ValueClass) = BooleanValue(valueClass == this.valueClass)
 }

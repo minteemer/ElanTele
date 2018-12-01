@@ -1,6 +1,6 @@
 package ir.values
 
-class BooleanValue(val value: Boolean) : Value(){
+class BooleanValue(val value: Boolean) : Value(ValueClass.BOOLEAN){
     override fun and(other: Value): Value = when(other){
         is BooleanValue -> BooleanValue(value and other.value)
         else -> super.and(other)
