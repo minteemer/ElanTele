@@ -9,11 +9,10 @@ class FunctionValue(
         val returnExpression: Expression
 ) : Value(ValueClass.REAL) {
 
-    fun excecute(arguments: Map<String, Value>, context: Context): Value {
-        // TODO: add local context
-        arguments.forEach { name, value -> context.setValue(name, value) }
-        body.executeAll(context)
-        return returnExpression.execute(context)
-    }
+    fun call(arguments: Map<String, Value>, context: Context): Value =
+            context.getChildContext(arguments).let {
+                body.executeAll(it)
+                returnExpression.execute(it)
+            }
 
 }
