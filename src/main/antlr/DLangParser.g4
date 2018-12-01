@@ -136,7 +136,5 @@ tuppleElement
     : Identifier (ASSIGNMENT expression)?
     ;
 body
-    : (declaration
-    | statement
-    | expression)*
+    : ((declaration | statement | expression) NL?)+
     ;
