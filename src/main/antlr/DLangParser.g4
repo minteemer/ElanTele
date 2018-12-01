@@ -130,7 +130,7 @@ tupple
     : LCURL tuppleElement (COMMA tuppleElement)* RCURL
     ;
 tuppleElement
-    : Identifier ASSIGNMENT expression
+    : Identifier ASSIGNMENT expression?
     ;
 body
     : declaration
