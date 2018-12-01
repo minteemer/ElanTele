@@ -3,11 +3,11 @@ parser grammar DLangParser;
 options { tokenVocab = DLangLexer; }
 
 program
-    : NL* (statement (SEMICOLON|NL)*)+ EOF
+    : NL* (statement (NL)*)+ EOF
     ;
 
 declaration
-    : VAR variableDefinition (COMMA variableDefinition)
+    : VAR variableDefinition (COMMA variableDefinition)*
     ;
 
 variableDefinition
