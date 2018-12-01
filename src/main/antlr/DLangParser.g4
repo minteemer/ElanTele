@@ -63,7 +63,7 @@ term
 unary
     : reference
     | reference IS typeIndicator
-    | (ADD|SUB|NOT)? primary
+    | (ADD | SUB | NOT)? primary
     ;
 
 primary
@@ -128,7 +128,8 @@ lineStringExpression
     ;
 
 array
-    : LSQUARE (expression (COMMA expression)*)? RSQUARE
+    : (LSQUARE (expression (COMMA expression)*)? RSQUARE)
+    | ArrayType
     ;
 
 tuple
