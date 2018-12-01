@@ -10,9 +10,8 @@ class WhileStatement(
 ) : Statement {
 
     override fun execute(context: Context) {
+        // TODO: create child context
         while (expression.execute(context).equals(BooleanValue(true)).value)
-
             forBody.executeAll(context)
-
     }
 }
