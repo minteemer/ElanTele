@@ -24,6 +24,7 @@ class Context(private val parentContext: Context? = null,
             }
 
 
+    fun getChildContext(arguments: Map<String, Value> = mapOf()) =
+            Context(this, HashMap(arguments))
 
-    fun getChildContext(arguments: Map<String, Value>) = Context(this, HashMap(arguments))
 }
