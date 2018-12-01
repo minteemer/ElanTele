@@ -1,14 +1,3 @@
-/**
- * Kotlin Grammar for ANTLR v4
- *
- * Based on:
- * http://jetbrains.github.io/kotlin-spec/#_grammars_and_parsing
- * and
- * http://kotlinlang.org/docs/reference/grammar.html
- *
- * Tested on
- * https://github.com/JetBrains/kotlin/tree/master/compiler/testData/psi
- */
 
 lexer grammar DLangLexer;
 
@@ -81,9 +70,19 @@ END: 'end' ;
 PRINT: 'print' ;
 
 
+IntType: 'int' ;
+ReadType: 'real' ;
+StringType: 'string' ;
+BoolType: 'bool' ;
+EmptyType: 'empty' ;
+ArrayType: '[]' ;
+TupleType: '{}' ;
+
+
 ReadInt: 'readInt' ;
 ReadReal: 'readReal' ;
 ReadString: 'readString' ;
+
 
 //
 
@@ -173,10 +172,6 @@ Identifier
 
 CharacterLiteral
     : '\'' (EscapeSeq | .) '\''
-    ;
-
-EmptyLiteral
-    : 'empty'
     ;
 
 fragment EscapeSeq
