@@ -1,6 +1,6 @@
 parser grammar DLangParser;
 
-options { tokenVocab = DLangParser; }
+options { tokenVocab = DLangLexer; }
 
 program
     : NL* (statement (SEMICOLON|NL)*)+ EOF
@@ -15,14 +15,19 @@ variableDefinition
     ;
 
 statement
-    : declaration |assignment| if |loop|return|print
+    :declaration
+    |assignment
+    |if_expression
+    |loop
+    |return_expression
+    |print
     ;
 
 assignment
     : reference ASSIGNMENT expression
     ;
 
-if
+if_expression
     : IF expression THEN body (ELSE body) END
     ;
 
@@ -31,12 +36,12 @@ loop
     | (FOR Identifier IN? expression RANGE expression)
     ;
 
-return
+return_expression
     : RETURN (expression)?
     ;
 
 print
-    : expression (COMMA expression)?
+    :PRINT expression (COMMA expression)?
     ;
 
 expression
@@ -70,12 +75,16 @@ primary
     |
     ;
 typeIndicator
-    : INTTYPE|REALTYPE|STRINGTYPE
-    | EMPTY
-    | ARRAYTYPE
-    | TUPPLETYPE
+    : IntType
+    | RealType
+    | StringType
+    | BoolType
+    | EmptyType
+    | ArrayType
+    | TupleType
     | FUNC
     ;
+
 functionLiteral
     : FUNC (LPAREN Identifier (COMMA Identifier)* RPAREN)? funBody
     ;
@@ -93,17 +102,29 @@ reference
     ;
 
 literal
-    : INTEGER
-    | REAL
-    | STRING
-    | BOOLEAN
-    | TUPLE
-    | ARRAY
-    | EMPTY
+    : IntegerLiteral
+    | RealLiteral
+    | lineStringLiteral
+    | BooleanLiteral
+    | tupple
+    | array
+    | EmptyLiteral
     ;
-boolean
-    : TRUE
-    | FALSE
+lineStringLiteral
+    : QUOTE_OPEN (lineStringContent | lineStringExpression)* QUOTE_CLOSE
+    ;
+lineStringContent
+    : LineStrText
+    | LineStrEscapedChar
+    | LineStrRef
+    ;
+
+lineStringExpression
+    : LineStrExprStart expression RCURL
+    ;
+boolean_literal
+    :
+    BooleanLiteral
     ;
 
 array
@@ -117,6 +138,6 @@ tuppleElement
     ;
 body
     : declaration
-    |statement
-    |expression
+    | statement
+    | expression
     ;
