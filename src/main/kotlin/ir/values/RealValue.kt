@@ -20,8 +20,8 @@ class RealValue(val value: Double) : Value(){
     }
 
     override fun divide(other: Value): Value = when (other) {
-        is IntegerValue -> RealValue(value.toDouble() / other.value)
-        is RealValue -> RealValue(value.toDouble() / other.value)
+        is IntegerValue -> RealValue(value / other.value)
+        is RealValue -> RealValue(value / other.value)
         else -> super.divide(other)
     }
 
