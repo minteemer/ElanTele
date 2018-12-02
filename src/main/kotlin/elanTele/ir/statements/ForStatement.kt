@@ -19,7 +19,7 @@ class ForStatement(
             for (i in begin.value..end.value) {
                 val newContext = context.getChildContext()
                 variable?.let { newContext.createLocalReference(it, IntegerValue(i)) }
-                forBody.executeAll(newContext)
+                forBody.execute(newContext)
             }
         } else {
             throw UniterableRangeException("Iteration can not be done through $firstExpression and $secondExpression")

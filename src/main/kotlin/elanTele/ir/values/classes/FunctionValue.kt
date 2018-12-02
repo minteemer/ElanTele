@@ -13,7 +13,7 @@ class FunctionValue(
 
     fun call(arguments: Map<String, Value>, context: Context): Value =
             context.getChildContext(arguments).let {
-                body.executeAll(it)
+                body.execute(it)
                 returnExpression.execute(it)
             }
 

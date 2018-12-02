@@ -16,7 +16,7 @@ class WhileStatement(
             val conditionExpression = expression.execute(context)
             if (conditionExpression is BooleanValue) {
                 if (conditionExpression.value)
-                    whileBody.executeAll(context.getChildContext())
+                    whileBody.execute(context.getChildContext())
                 else
                     break
             } else

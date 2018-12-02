@@ -2,9 +2,9 @@ package elanTele.ir.statements
 
 import elanTele.ir.Context
 
-class StatementsSequence(private val statements: List<Statement>) {
+class StatementsSequence(private val statements: List<Statement>): Statement {
 
-    fun executeAll(context: Context) {
+    override fun execute(context: Context) {
         statements.forEach { it.execute(context) }
     }
 

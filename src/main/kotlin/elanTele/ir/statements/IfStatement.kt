@@ -16,9 +16,9 @@ class IfStatement(
         if (condition is BooleanValue){
             val newContext = context.getChildContext()
             if (condition.value)
-                ifBody.executeAll(newContext)
+                ifBody.execute(newContext)
             else
-                elseBody?.executeAll(newContext)
+                elseBody?.execute(newContext)
         } else
             throw InvalidTypeException("Expected boolean value for \"if\" condition $conditionExpression")
     }
