@@ -1,7 +1,7 @@
 package elanTele.interpreter.references
 
 
-import elanTele.interpreter.expressions.BinaryExpressionInterpreter
+import elanTele.interpreter.expressions.ExpressionInterpreter
 import elanTele.ir.references.*
 import elanTele.parser.ElanTeleParser
 import org.antlr.v4.runtime.tree.ParseTree
@@ -25,14 +25,16 @@ object ReferenceInterpreter {
     private fun getReferenceIdentifier(variable: Reference, tree: ParseTree): Reference {
         when (tree) {
             is ElanTeleParser.ArrayElementReferenceContext -> {
-                return ArrayElementReference(variable, BinaryExpressionInterpreter.getBinaryExpression(tree))
+                return ArrayElementReference(variable, ExpressionInterpreter.getExpression(tree))
             }
             is ElanTeleParser.DictElementIdentifierReferenceContext -> {
                 return DictElementReference(variable, tree.getChild(1).text)
             }
+//            TODO: Add calling dictionary by integer values
 //            is ElanTeleParser.DictElementNumberReferenceContext -> {
-//                return ArrayElementReference(variable, BinaryExpressionInterpreter.getBinaryExpression(tree))
+//                return ???(variable, tree.getChild(1).text)
 //            }
+//            TODO: create map to pass to FunctionCallReference
 //            is ElanTeleParser.FunctionCallReferenceContext -> {
 //                return FunctionCallReference(variable, )
 //            }
