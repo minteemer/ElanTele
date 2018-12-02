@@ -7,17 +7,17 @@ import elanTele.ir.values.classes.FunctionValue
 import elanTele.ir.values.Value
 
 data class FunctionCallReference(
-        val identifier: String,
-        val arguments: Map<String, Expression>
+        val identifier: Reference,
+        val arguments: List<Expression>
 ) : Reference {
     override fun setValue(context: Context, value: Value) =
             throw Exception() // TODO: handle set value to function call
 
     override fun getValue(context: Context): Value {
-        val function = context.getValue(identifier)
+        val function = identifier.getValue(context)
         if (function is FunctionValue) {
             return function.call(
-                    arguments.mapValues { (_, expression) -> expression.execute(context) },
+                    arguments.map{ it.execute(context) },
                     context
             )
         } else

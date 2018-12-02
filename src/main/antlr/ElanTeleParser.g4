@@ -3,7 +3,7 @@ parser grammar ElanTeleParser;
 options { tokenVocab = ElanTeleLexer; }
 
 program
-    : NL* (statement (NL)*)+ EOF
+    : NL* body+ EOF
     ;
 
 declaration
@@ -99,11 +99,31 @@ funBody
     ;
 
 reference
+    : variableReference
+    | reference arrayElementReference
+    | reference functionCallReference
+    | reference dictElementNumberReference
+    | reference dictElementIdentifierReference
+    ;
+
+variableReference
     : Identifier
-    | reference LSQUARE expression RSQUARE
-    | reference LPAREN expression (COMMA expression)* RPAREN
-    | reference DOT IntegerLiteral
-    | reference DOT Identifier
+    ;
+
+arrayElementReference
+    : LSQUARE expression RSQUARE
+    ;
+
+functionCallReference
+    : LPAREN expression (COMMA expression)* RPAREN
+    ;
+
+dictElementIdentifierReference
+    : DOT Identifier
+    ;
+
+dictElementNumberReference
+    : DOT IntegerLiteral
     ;
 
 literal
@@ -140,5 +160,5 @@ tupleElement
     ;
 
 body
-    : ((declaration | statement | expression) NL?)+
+    : ((statement ) NL?)+
     ;
