@@ -1,20 +1,22 @@
 package elanTele.interpreter.statements
 
+import elanTele.interpreter.expressions.ExpressionInterpreter
 import elanTele.ir.statements.ForStatement
 import elanTele.ir.statements.Statement
 import elanTele.parser.ElanTeleParser
 import org.antlr.v4.runtime.tree.ParseTree
-import javax.naming.Context
 
 object ForStatementInterpreter {
 
     fun getStatement(tree: ParseTree): Statement {
-        if (tree is ElanTeleParser.LoopContext) {
-            if (tree.for_loop()==null){
-
-            }
+        if (tree is ElanTeleParser.For_loopContext) {
+            return ForStatement(tree.Identifier()?.toString(),
+                    ExpressionInterpreter.getExpression(tree.expression(0)),
+                    ExpressionInterpreter.getExpression(tree.expression(1)),
+                    BodyStatementInterpreter.getBody(tree.body()))
+        } else {
+            throw Exception("For loop statement exception")
         }
-        throw Exception("")
     }
 
 }

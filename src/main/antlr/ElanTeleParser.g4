@@ -28,7 +28,11 @@ assignment
     ;
 
 if_expression
-    : IF expression NL* THEN NL* body NL* (ELSE NL* body NL*)? END
+    : IF expression NL* THEN NL* body NL* else_branch? END
+    ;
+
+else_branch
+    : ELSE NL* body NL*
     ;
 
 loop

@@ -5,9 +5,9 @@ import elanTele.ir.statements.StatementsSequence
 import elanTele.parser.ElanTeleParser
 import org.antlr.v4.runtime.tree.ParseTree
 
-object StatementsSequenceInterpreter {
+object BodyStatementInterpreter {
 
-    fun getStatementSequence(tree: ParseTree): StatementsSequence {
+    fun getBody(tree: ParseTree): StatementsSequence {
         if (tree is ElanTeleParser.BodyContext) {
 
             val statements = ArrayList<Statement>()

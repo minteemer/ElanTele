@@ -14,7 +14,7 @@ object AssignmentStatementInterpreter {
         if (tree is ElanTeleParser.AssignmentContext) {
             return AssignmentStatement(ReferenceInterpreter.getReference(tree.reference())
                     , ExpressionInterpreter.getExpression(tree.expression()))
-        }else
+        } else
             throw Exception("Exception during traversing tree in Assignment Interpreter while ${tree.payload}")
     }
 
