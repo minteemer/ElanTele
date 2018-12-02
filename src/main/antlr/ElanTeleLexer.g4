@@ -237,16 +237,13 @@ SINGLE_QUOTE_CLOSE
     ;
 
 LineStrText
-    : ~('\\' | '\'' | '"' | '$')+ | '$'
+    : ~('\\' | '\'' | '"')+ | '$'
     ;
 
 LineStrEscapedChar
     : '\\' .
     ;
 
-LineStrExprStart
-    : '${' -> pushMode(StringExpression)
-    ;
 
 mode StringExpression ;
 

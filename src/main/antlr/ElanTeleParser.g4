@@ -3,7 +3,7 @@ parser grammar ElanTeleParser;
 options { tokenVocab = ElanTeleLexer; }
 
 program
-    : NL* (statement (NL)*)+ EOF
+    : NL* body+ EOF
     ;
 
 declaration
@@ -137,17 +137,13 @@ literal
     ;
 
 lineStringLiteral
-    : DOUBLE_QUOTE_OPEN (lineStringContent | lineStringExpression)* DOUBLE_QUOTE_CLOSE
-    | SINGLE_QUOTE_OPEN (lineStringContent | lineStringExpression)* SINGLE_QUOTE_CLOSE
+    : DOUBLE_QUOTE_OPEN (lineStringContent)* DOUBLE_QUOTE_CLOSE
+    | SINGLE_QUOTE_OPEN (lineStringContent)* SINGLE_QUOTE_CLOSE
     ;
 
 lineStringContent
     : LineStrText
     | LineStrEscapedChar
-    ;
-
-lineStringExpression
-    : LineStrExprStart expression RCURL
     ;
 
 array
@@ -164,5 +160,5 @@ tupleElement
     ;
 
 body
-    : ((declaration | statement | expression) NL?)+
+    : ((statement ) NL?)+
     ;

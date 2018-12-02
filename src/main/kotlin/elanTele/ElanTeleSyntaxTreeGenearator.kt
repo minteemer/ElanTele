@@ -1,5 +1,6 @@
 package elanTele
 
+import com.google.gson.GsonBuilder
 import elanTele.parser.ElanTeleLexer
 import elanTele.parser.ElanTeleParser
 import org.antlr.v4.runtime.CharStreams
@@ -7,6 +8,7 @@ import org.antlr.v4.runtime.CommonTokenStream
 import org.antlr.v4.runtime.RuleContext
 import org.antlr.v4.runtime.Token
 import org.antlr.v4.runtime.tree.ParseTree
+import java.io.File
 import java.nio.file.Path
 
 object ElanTeleSyntaxTreeGenearator {
@@ -20,6 +22,12 @@ object ElanTeleSyntaxTreeGenearator {
         val parser = ElanTeleParser(CommonTokenStream(lexer))
 
         return parser.program().toMap()
+    }
+
+    private val gson = GsonBuilder().setPrettyPrinting().create()
+
+    fun printJsonTree(tree: ParseTree){
+        println(gson.toJson(tree.toMap()))
     }
 
     /** Traverse through the tree and create [Map] out of it */

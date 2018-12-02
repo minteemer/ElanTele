@@ -21,7 +21,7 @@ compileKotlin.dependsOn generateGrammarSource
 
 sourceCompatibility = 1.8
 
-mainClassName = "Main"
+mainClassName = "elanTele.Main"
 
 repositories {
     mavenCentral()
