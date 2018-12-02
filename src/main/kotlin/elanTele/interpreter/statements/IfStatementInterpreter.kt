@@ -1,20 +1,26 @@
 package elanTele.interpreter.statements
 
+import elanTele.interpreter.expressions.ExpressionInterpreter
+import elanTele.ir.statements.ForStatement
+import elanTele.ir.statements.IfStatement
 import elanTele.ir.statements.Statement
 import elanTele.parser.ElanTeleParser
 import org.antlr.v4.runtime.tree.ParseTree
 
 object IfStatementInterpreter {
 
-    fun getStatement(tree: ParseTree): Statement {
-        val child = tree.getChild(0)
-        //TODO Implement function
-        when (child) {
-            is ElanTeleParser.DeclarationContext -> {
-                return DeclarationInterpreter.getDeclaration(child)
-            }
-            else -> throw ClassCastException("Unknown tree element")
+    fun getIfStatement(tree: ParseTree): Statement =
+        if (tree is ElanTeleParser.If_expressionContext) {
+            IfStatement(
+                    ExpressionInterpreter.getExpression(tree.expression()),
+                    BodyStatementInterpreter.getBody(tree.body()),
+                    tree.else_branch()
+                            ?.let { BodyStatementInterpreter.getBody(it.body()) }
+            )
+
+        } else {
+            throw ClassCastException("IfStatement exception")
         }
-    }
+
 
 }
