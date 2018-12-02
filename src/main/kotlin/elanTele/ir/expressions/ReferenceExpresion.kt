@@ -1,7 +1,7 @@
 package elanTele.ir.expressions
 
 import elanTele.ir.Context
-import elanTele.ir.Reference
+import elanTele.ir.references.Reference
 import elanTele.ir.values.Value
 
 data class ReferenceExpresion(val reference: Reference) : Expression {
