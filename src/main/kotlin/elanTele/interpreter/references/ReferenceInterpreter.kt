@@ -34,10 +34,9 @@ object ReferenceInterpreter {
 //            is ElanTeleParser.DictElementNumberReferenceContext -> {
 //                return ???(variable, tree.getChild(1).text)
 //            }
-//            TODO: create map to pass to FunctionCallReference
-//            is ElanTeleParser.FunctionCallReferenceContext -> {
-//                return FunctionCallReference(variable, )
-//            }
+            is ElanTeleParser.FunctionCallReferenceContext -> {
+                return FunctionCallReference(variable, tree.expression().map{ExpressionInterpreter.getExpression(it)})
+            }
             else -> throw Exception("Exception during interpreting reference type in class ReferenceInterpreter")
         }
     }
