@@ -9,7 +9,7 @@ class DeclarationStatement(
 ) : Statement {
 
     override fun execute(context: Context) {
-        context.setValue(variableName, expression.execute(context))
+        context.createLocalReference(variableName, expression.execute(context))
     }
 
 }
