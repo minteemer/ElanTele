@@ -3,7 +3,7 @@ parser grammar ElanTeleParser;
 options { tokenVocab = ElanTeleLexer; }
 
 program
-    : NL* (statement (NL)*)+ EOF
+    : NL* body+ EOF
     ;
 
 declaration
@@ -28,14 +28,23 @@ assignment
     ;
 
 if_expression
-    : IF expression NL* THEN NL* body NL* (ELSE NL* body NL*)? END
+    : IF expression NL* THEN NL* body NL* else_branch? END
+    ;
+
+else_branch
+    : ELSE NL* body NL*
     ;
 
 loop
-    : (WHILE expression NL* LOOP NL* body NL*  END)
-    | (FOR (Identifier IN)? (expression RANGE expression) NL* LOOP NL* body NL* END)
+    : while_loop
+    | for_loop
     ;
-
+while_loop
+    :WHILE expression NL* LOOP NL* body NL*  END
+    ;
+for_loop
+    :FOR (Identifier IN)? (expression RANGE expression) NL* LOOP NL* body NL* END
+    ;
 return_expression
     : RETURN expression?
     ;
@@ -99,11 +108,31 @@ funBody
     ;
 
 reference
+    : variableReference
+    | reference arrayElementReference
+    | reference functionCallReference
+    | reference dictElementNumberReference
+    | reference dictElementIdentifierReference
+    ;
+
+variableReference
     : Identifier
-    | reference LSQUARE expression RSQUARE
-    | reference LPAREN expression (COMMA expression)* RPAREN
-    | reference DOT IntegerLiteral
-    | reference DOT Identifier
+    ;
+
+arrayElementReference
+    : LSQUARE expression RSQUARE
+    ;
+
+functionCallReference
+    : LPAREN expression (COMMA expression)* RPAREN
+    ;
+
+dictElementIdentifierReference
+    : DOT Identifier
+    ;
+
+dictElementNumberReference
+    : DOT IntegerLiteral
     ;
 
 literal
@@ -117,17 +146,13 @@ literal
     ;
 
 lineStringLiteral
-    : DOUBLE_QUOTE_OPEN (lineStringContent | lineStringExpression)* DOUBLE_QUOTE_CLOSE
-    | SINGLE_QUOTE_OPEN (lineStringContent | lineStringExpression)* SINGLE_QUOTE_CLOSE
+    : DOUBLE_QUOTE_OPEN (lineStringContent)* DOUBLE_QUOTE_CLOSE
+    | SINGLE_QUOTE_OPEN (lineStringContent)* SINGLE_QUOTE_CLOSE
     ;
 
 lineStringContent
     : LineStrText
     | LineStrEscapedChar
-    ;
-
-lineStringExpression
-    : LineStrExprStart expression RCURL
     ;
 
 array
@@ -144,5 +169,5 @@ tupleElement
     ;
 
 body
-    : ((declaration | statement | expression) NL?)+
+    : ((statement ) NL?)+
     ;
