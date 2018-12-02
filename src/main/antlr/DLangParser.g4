@@ -45,7 +45,8 @@ print
     ;
 
 expression
-    : relation ((OR|AND|XOR) relation)*
+    : relation
+    | expression ((OR|AND|XOR) relation)
     ;
 
 relation
@@ -53,11 +54,13 @@ relation
     ;
 
 factor
-    : term ((ADD|SUB) term)*
+    : term
+    | factor ((ADD|SUB) term)
     ;
 
 term
-    : unary ((MULT|DIV) unary)*
+    : unary
+    | term ((MULT|DIV) unary)
     ;
 
 unary

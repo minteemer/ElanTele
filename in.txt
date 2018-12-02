@@ -1,15 +1,1 @@
-var a := {a:=1, b:=2, c, d:= func(x)=>x+1}; var g, h, j, k; print a.d(1);
-
-var b := 2;
-for a.d(1)..b
-loop
-    if a.a < a.b
-    then
-        a.a := 10;
-    else
-        a.b := 10;
-        print a
-    end;
-end;
-
-var fun := fu
+var b := a + 1;
