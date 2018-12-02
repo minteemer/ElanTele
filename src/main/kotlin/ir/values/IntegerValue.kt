@@ -1,6 +1,6 @@
 package ir.values
 
-class IntegerValue(val value: Int): Value(ValueClass.INTEGER) {
+class IntegerValue(val value: Int) : Value(ValueClass.INTEGER) {
 
     override fun add(other: Value): Value = when (other) {
         is IntegerValue -> IntegerValue(value + other.value)
@@ -26,37 +26,37 @@ class IntegerValue(val value: Int): Value(ValueClass.INTEGER) {
         else -> super.divide(other)
     }
 
-    override fun greater(other: Value): Value = when (other) {
+    override fun greater(other: Value): BooleanValue = when (other) {
         is IntegerValue -> BooleanValue(value > other.value)
         is RealValue -> BooleanValue(value > other.value)
         else -> super.greater(other)
     }
 
-    override fun equals(other: Value): Value = when (other) {
+    override fun equals(other: Value): BooleanValue = when (other) {
         is IntegerValue -> BooleanValue(value == other.value)
         is RealValue -> BooleanValue(value.toDouble() == other.value)
         else -> super.equals(other)
     }
 
-    override fun notEquals(other: Value): Value= when (other) {
+    override fun notEquals(other: Value): BooleanValue= when (other) {
         is IntegerValue -> BooleanValue(value != other.value)
         is RealValue -> BooleanValue(value.toDouble() != other.value)
         else -> super.notEquals(other)
     }
 
-    override fun greaterOrEqual(other: Value): Value = when (other) {
+    override fun greaterOrEqual(other: Value): BooleanValue  = when (other) {
         is IntegerValue -> BooleanValue(value >= other.value)
         is RealValue -> BooleanValue(value >= other.value)
         else -> super.greaterOrEqual(other)
     }
 
-    override fun less(other: Value): Value = when (other) {
+    override fun less(other: Value): BooleanValue = when (other) {
         is IntegerValue -> BooleanValue(value < other.value)
         is RealValue -> BooleanValue(value < other.value)
         else -> super.less(other)
     }
 
-    override fun lessOrEqual(other: Value): Value = when (other) {
+    override fun lessOrEqual(other: Value): BooleanValue = when (other) {
         is IntegerValue -> BooleanValue(value <= other.value)
         is RealValue -> BooleanValue(value <= other.value)
         else -> super.lessOrEqual(other)

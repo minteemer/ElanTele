@@ -15,6 +15,10 @@ class Context(private val parentContext: Context? = null,
         values[reference] = value
     }
 
+    fun createLocalReference(reference: String, value: Value) {
+        values[reference] = value
+    }
+
     private fun propagateValue(reference: String, value: Value): Boolean =
             if (values.containsKey(reference)) {
                 values[reference] = value

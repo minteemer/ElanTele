@@ -17,34 +17,35 @@ open class Value(val valueClass: ValueClass) {
     open fun divide(other: Value): Value =
             throw UnresolvedOperatorException("Can not divide  ${javaClass.simpleName} by ${other.javaClass.simpleName}")
 
-    open fun equals(other: Value): Value =
+
+    open fun equals(other: Value): BooleanValue =
             throw UnresolvedOperatorException("Can not match ${javaClass.simpleName} and ${other.javaClass.simpleName}")
 
-    open fun greater(other: Value): Value =
+    open fun greater(other: Value): BooleanValue =
             throw UnresolvedOperatorException("Can not apply > operation to ${javaClass.simpleName} and ${other.javaClass.simpleName}")
 
-    open fun less(other: Value): Value =
+    open fun less(other: Value): BooleanValue =
             throw UnresolvedOperatorException("Can not apply < operation to  ${javaClass.simpleName} and ${other.javaClass.simpleName}")
 
-    open fun greaterOrEqual(other: Value): Value =
+    open fun greaterOrEqual(other: Value): BooleanValue =
             throw UnresolvedOperatorException("Can not apply >= operation to  ${javaClass.simpleName} and ${other.javaClass.simpleName}")
 
-    open fun lessOrEqual(other: Value): Value =
+    open fun lessOrEqual(other: Value): BooleanValue =
             throw UnresolvedOperatorException("Can not apply <= operation to  ${javaClass.simpleName} and ${other.javaClass.simpleName}")
 
-    open fun notEquals(other: Value): Value =
+    open fun notEquals(other: Value): BooleanValue =
             throw UnresolvedOperatorException("Can not apply /= operation to  ${javaClass.simpleName} and ${other.javaClass.simpleName}")
 
-    open fun and(other: Value): Value =
+    open fun and(other: Value): BooleanValue =
             throw UnresolvedOperatorException("Can not apply 'and' logical operation to ${javaClass.simpleName} and ${other.javaClass.simpleName}")
 
-    open fun or(other: Value): Value =
+    open fun or(other: Value): BooleanValue =
             throw UnresolvedOperatorException("Can not apply 'or' logical operation to ${javaClass.simpleName} to ${other.javaClass.simpleName}")
 
-    open fun xor(other: Value): Value =
+    open fun xor(other: Value): BooleanValue =
             throw UnresolvedOperatorException("Can not apply 'xor' logical operation to ${javaClass.simpleName} to ${other.javaClass.simpleName}")
 
-    open fun not(): Value =
+    open fun not(): BooleanValue =
             throw UnresolvedOperatorException("Can not apply 'not' logical operation to ${javaClass.simpleName}")
 
     open fun isClass(valueClass: ValueClass) = BooleanValue(valueClass == this.valueClass)
