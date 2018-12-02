@@ -1,6 +1,16 @@
 package ir.values
 
-class DictValue(val values: Map<String, Value>) : Value(ValueClass.DICT) {
+import sun.security.util.ObjectIdentifier
+
+class DictValue(values: Map<String, Value>) : Value(ValueClass.DICT) {
+
+    private val values = HashMap(values)
+
+    fun getElement(identifier: String): Value? = values[identifier]
+
+    fun setElement(identifier: String, value: Value) {
+        values[identifier] = value
+    }
 
     override fun add(other: Value): Value = when (other) {
         is DictValue -> DictValue(values + other.values)
