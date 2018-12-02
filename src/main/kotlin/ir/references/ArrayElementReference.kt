@@ -18,9 +18,9 @@ data class ArrayElementReference(
             if (index is IntegerValue) {
                 array.setElement(index.value, value)
             } else
-                throw Exception() // TODO: handle non-integer index
+                throw InvalidIndexException("Expected IntegerValue index, got ${index.javaClass.simpleName}")
         } else
-            throw Exception() // TODO: handle non-array type
+            throw InvalidVariableTypeException("Expected ArrayValue, got ${array.javaClass.simpleName}")
     }
 
     override fun getValue(context: Context): Value {
@@ -30,8 +30,8 @@ data class ArrayElementReference(
             if (index is IntegerValue) {
                 return array.getElement(index.value)
             } else
-                throw Exception() // TODO: handle non-integer index
+                throw InvalidIndexException("Expected IntegerValue index, got ${index.javaClass.simpleName}")
         } else
-            throw Exception() // TODO: handle non-array type
+            throw InvalidVariableTypeException("Expected ArrayValue, got ${array.javaClass.simpleName}")
     }
 }
