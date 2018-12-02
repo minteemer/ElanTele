@@ -11,8 +11,7 @@ class WhileStatement(
 
     override fun execute(context: Context) {
         while (expression.execute(context).equals(BooleanValue(true)).value) {
-            val newContext = context.getChildContext()
-            forBody.executeAll(newContext)
+            forBody.executeAll(context.getChildContext())
         }
     }
 }

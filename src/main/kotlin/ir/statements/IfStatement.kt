@@ -3,23 +3,22 @@ package ir.statements
 import ir.expressions.Expression
 import ir.Context
 import ir.values.BooleanValue
-import ir.values.IntegerValue
 
 class IfStatement(
-        private val expression: Expression,
+        private val conditionExpression: Expression,
         private val ifBody: StatementsSequence,
         private val elseBody: StatementsSequence? = null
 ) : Statement {
 
     override fun execute(context: Context) {
-
-        if (expression.execute(context).equals(BooleanValue(true)).value) {
+        val condition = conditionExpression.execute(context)
+        if (condition is BooleanValue){
             val newContext = context.getChildContext()
-            ifBody.executeAll(newContext)
-        }
-        else {
-            val newContext = context.getChildContext()
-            elseBody?.executeAll(newContext)
-        }
+            if (condition.value)
+                ifBody.executeAll(newContext)
+            else
+                elseBody?.executeAll(newContext)
+        } else
+            throw Exception("Expected boolean value for \"if\" condition") // TODO: throw better exception
     }
 }
