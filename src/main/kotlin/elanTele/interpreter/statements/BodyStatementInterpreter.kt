@@ -16,7 +16,7 @@ object BodyStatementInterpreter {
             }
             return StatementsSequence(statements)
         } else {
-            throw Exception("Exception in Statement Sequence in ${tree.payload}")
+            throw ClassCastException("Exception in Statement Sequence in ${tree.payload}")
         }
 
     }

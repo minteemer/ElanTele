@@ -9,12 +9,12 @@ import org.antlr.v4.runtime.tree.ParseTree
 
 object WhileStatementInterpreter {
 
-    fun getStatement(tree: ParseTree): Statement {
+    fun getWhileStatement(tree: ParseTree): Statement {
         if (tree is ElanTeleParser.While_loopContext) {
             return WhileStatement(ExpressionInterpreter.getExpression(tree.expression()),
                     BodyStatementInterpreter.getBody(tree.body()))
         } else {
-            throw Exception("WhileStatementInterpreter exception")
+            throw ClassCastException("WhileStatementInterpreter exception")
         }
     }
 

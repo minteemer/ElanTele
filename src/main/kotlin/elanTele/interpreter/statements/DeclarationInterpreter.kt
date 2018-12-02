@@ -24,7 +24,7 @@ object DeclarationInterpreter {
            }
             return StatementsSequence(declarations)
         }else
-            throw Exception("Exception during traversing tree in Declaration Interpreter while ${tree.payload}")
+            throw ClassCastException("Exception during traversing tree in Declaration Interpreter while ${tree.payload}")
     }
 
 }

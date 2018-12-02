@@ -10,7 +10,7 @@ import org.antlr.v4.runtime.tree.ParseTree
 
 object PrintStatementInterpreter {
 
-    fun getStatement(tree: ParseTree): Statement {
+    fun getPrintStatement(tree: ParseTree): Statement {
         if (tree is ElanTeleParser.PrintContext) {
             val expression = ArrayList<Expression>()
             for (ex in tree.expression()) {
@@ -18,7 +18,7 @@ object PrintStatementInterpreter {
             }
             return PrintStatement(expression)
         } else {
-            throw Exception("Print Statement Exception")
+            throw ClassCastException("Print Statement Exception")
         }
     }
 }

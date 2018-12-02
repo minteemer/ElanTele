@@ -15,7 +15,7 @@ object AssignmentStatementInterpreter {
             return AssignmentStatement(ReferenceInterpreter.getReference(tree.reference())
                     , ExpressionInterpreter.getExpression(tree.expression()))
         } else
-            throw Exception("Exception during traversing tree in Assignment Interpreter while ${tree.payload}")
+            throw ClassCastException("Exception during traversing tree in Assignment Interpreter while ${tree.payload}")
     }
 
 }

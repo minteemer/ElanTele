@@ -9,17 +9,18 @@ import org.antlr.v4.runtime.tree.ParseTree
 
 object IfStatementInterpreter {
 
-    fun getStatement(tree: ParseTree): Statement {
+    fun getIfStatement(tree: ParseTree): Statement =
         if (tree is ElanTeleParser.If_expressionContext) {
-            val elseBody = tree.else_branch()?.
-                    let { it -> BodyStatementInterpreter.getBody(it.body()) }
-            return IfStatement(ExpressionInterpreter.getExpression(tree.expression()),
+            IfStatement(
+                    ExpressionInterpreter.getExpression(tree.expression()),
                     BodyStatementInterpreter.getBody(tree.body()),
-                    elseBody)
+                    tree.else_branch()
+                            ?.let { BodyStatementInterpreter.getBody(it.body()) }
+            )
 
         } else {
-            throw Exception("IfStatement exception")
+            throw ClassCastException("IfStatement exception")
         }
-    }
+
 
 }
