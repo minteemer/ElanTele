@@ -7,7 +7,7 @@ import elanTele.ir.expressions.OperatorType
 import elanTele.parser.ElanTeleParser
 import org.antlr.v4.runtime.tree.ParseTree
 
-object RelationInterpreter {
+object RelationExpressionInterpreter {
 
     fun getOP(tree: ElanTeleParser.RelationContext): OperatorType {
         if (tree.EQEQ() != null){
@@ -32,13 +32,13 @@ object RelationInterpreter {
         }
     }
 
-    fun getRelation(tree: ParseTree): Expression {
+    fun getRelationExpression(tree: ParseTree): Expression {
         when (tree) {
             is ElanTeleParser.RelationContext -> {
                 if (tree.factor(1) != null) {
-                    return BinaryExpression(FactorInterpreter.getFactor(tree.factor(0)), FactorInterpreter.getFactor(tree.factor(1)), getOP(tree))
+                    return BinaryExpression(FactorExpressionInterpreter.getFactorExpression(tree.factor(0)), FactorExpressionInterpreter.getFactorExpression(tree.factor(1)), getOP(tree))
                 } else  {
-                    return FactorInterpreter.getFactor(tree.factor(0))
+                    return FactorExpressionInterpreter.getFactorExpression(tree.factor(0))
                 }
             }
             else -> throw ClassCastException("Unknown tree element")
