@@ -1,6 +1,8 @@
 package ir.references
 
 import ir.Context
+import ir.exceptions.InvalidTypeException
+import ir.exceptions.UnresolvedIdentifierException
 import ir.values.classes.DictValue
 import ir.values.Value
 
@@ -14,7 +16,7 @@ data class DictElementReference(
         if (dict is DictValue) {
             dict.setElement(identifier, value)
         } else {
-            throw InvalidVariableTypeException("Expected ArrayValue, got ${dict.javaClass.simpleName}")
+            throw InvalidTypeException("Expected ArrayValue, got ${dict.javaClass.simpleName}")
         }
     }
 
@@ -24,7 +26,7 @@ data class DictElementReference(
             return dict.getElement(identifier)
                     ?: throw UnresolvedIdentifierException("Unresolved identifier: $dict has no $identifier")
         } else {
-            throw InvalidVariableTypeException("Expected ArrayValue, got ${dict.javaClass.simpleName}")
+            throw InvalidTypeException("Expected ArrayValue, got ${dict.javaClass.simpleName}")
         }
     }
 }

@@ -1,6 +1,8 @@
 package ir.references
 
 import ir.Context
+import ir.exceptions.InvalidIndexException
+import ir.exceptions.InvalidTypeException
 import ir.expressions.Expression
 import ir.values.classes.ArrayValue
 import ir.values.classes.IntegerValue
@@ -20,7 +22,7 @@ data class ArrayElementReference(
             } else
                 throw InvalidIndexException("Expected IntegerValue index, got ${index.javaClass.simpleName}")
         } else
-            throw InvalidVariableTypeException("Expected ArrayValue, got ${array.javaClass.simpleName}")
+            throw InvalidTypeException("Expected ArrayValue, got ${array.javaClass.simpleName}")
     }
 
     override fun getValue(context: Context): Value {
@@ -32,6 +34,6 @@ data class ArrayElementReference(
             } else
                 throw InvalidIndexException("Expected IntegerValue index, got ${index.javaClass.simpleName}")
         } else
-            throw InvalidVariableTypeException("Expected ArrayValue, got ${array.javaClass.simpleName}")
+            throw InvalidTypeException("Expected ArrayValue, got ${array.javaClass.simpleName}")
     }
 }

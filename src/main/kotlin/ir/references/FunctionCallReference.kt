@@ -1,6 +1,7 @@
 package ir.references
 
 import ir.Context
+import ir.exceptions.InvalidTypeException
 import ir.expressions.Expression
 import ir.values.classes.FunctionValue
 import ir.values.Value
@@ -20,6 +21,6 @@ data class FunctionCallReference(
                     context
             )
         } else
-            throw InvalidVariableTypeException("Expected FunctionValue, got ${function.javaClass.simpleName}")
+            throw InvalidTypeException("Expected FunctionValue, got ${function.javaClass.simpleName}")
     }
 }
