@@ -38,6 +38,19 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.0.3'
 }
 
+generateGrammarSource {
+    arguments += ["-package", "elanTele.parser"]
+
+    doLast {
+        copy {
+            from 'build/generated-src/antlr/main/'
+            include '*.*'
+            into 'build/generated-src/antlr/main/elanTele/parser'
+        }
+        project.delete fileTree('build/generated-src/antlr/main').include('*.*')
+    }
+}
+
 test {
     useJUnitPlatform()
 }

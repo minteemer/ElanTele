@@ -1,4 +1,0 @@
-package interpreter
-
-class DeclarationStatementParser {
-}
