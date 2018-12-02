@@ -9,7 +9,7 @@ import org.antlr.v4.runtime.tree.ParseTree
 
 object FactorInterpreter {
 
-    private fun getOP(tree: ElanTeleParser.FactorContext): OperatorType {
+    fun getOP(tree: ElanTeleParser.FactorContext): OperatorType {
         if (tree.ADD() != null){
             return OperatorType.ADD
         }
