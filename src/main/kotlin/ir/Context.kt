@@ -2,8 +2,9 @@ package ir
 
 import ir.values.Value
 
-class Context(private val parentContext: Context? = null,
-              private val values: MutableMap<String, Value> = HashMap()) {
+class Context(private val parentContext: Context? = null) {
+
+    private val values: MutableMap<String, Value> = HashMap()
 
     fun getValue(reference: String): Value =
             values[reference]
@@ -28,7 +29,9 @@ class Context(private val parentContext: Context? = null,
             }
 
 
-    fun getChildContext(arguments: Map<String, Value> = mapOf()) =
-            Context(this, HashMap(arguments))
+    fun getChildContext(arguments: Map<String, Value>? = null) =
+            Context(this).apply {
+                arguments?.forEach { name, value -> createLocalReference(name, value) }
+            }
 
 }
