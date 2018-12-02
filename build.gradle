@@ -21,7 +21,7 @@ compileKotlin.dependsOn generateGrammarSource
 
 sourceCompatibility = 1.8
 
-mainClassName = "Main"
+mainClassName = "elanTele.Main"
 
 repositories {
     mavenCentral()
@@ -36,6 +36,19 @@ dependencies {
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.0.3'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.0.3'
+}
+
+generateGrammarSource {
+    arguments += ["-package", "elanTele.parser"]
+
+    doLast {
+        copy {
+            from 'build/generated-src/antlr/main/'
+            include '*.*'
+            into 'build/generated-src/antlr/main/elanTele/parser'
+        }
+        project.delete fileTree('build/generated-src/antlr/main').include('*.*')
+    }
 }
 
 test {
