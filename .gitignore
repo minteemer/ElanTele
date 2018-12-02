@@ -1,3 +1,6 @@
 .idea
 out.txt
 .iml
+.gradle
+build
+ElanTele.iml
