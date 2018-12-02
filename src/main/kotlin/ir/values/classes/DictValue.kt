@@ -1,6 +1,7 @@
-package ir.values
+package ir.values.classes
 
-import sun.security.util.ObjectIdentifier
+import ir.values.Value
+import ir.values.ValueClass
 
 class DictValue(values: Map<String, Value>) : Value(ValueClass.DICT) {
 

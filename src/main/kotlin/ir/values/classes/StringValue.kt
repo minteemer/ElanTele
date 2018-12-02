@@ -1,4 +1,7 @@
-package ir.values
+package ir.values.classes
+
+import ir.values.Value
+import ir.values.ValueClass
 
 class StringValue(val value: String) : Value(ValueClass.STRING) {
 

@@ -2,8 +2,8 @@ package ir.references
 
 import ir.Context
 import ir.expressions.Expression
-import ir.values.ArrayValue
-import ir.values.IntegerValue
+import ir.values.classes.ArrayValue
+import ir.values.classes.IntegerValue
 import ir.values.Value
 
 data class ArrayElementReference(

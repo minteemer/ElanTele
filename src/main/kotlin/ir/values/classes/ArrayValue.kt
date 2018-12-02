@@ -1,4 +1,7 @@
-package ir.values
+package ir.values.classes
+
+import ir.values.Value
+import ir.values.ValueClass
 
 class ArrayValue(values: Map<Int, Value>) : Value(ValueClass.ARRAY) {
 

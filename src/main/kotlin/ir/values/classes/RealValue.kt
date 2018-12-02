@@ -1,4 +1,7 @@
-package ir.values
+package ir.values.classes
+
+import ir.values.Value
+import ir.values.ValueClass
 
 class RealValue(val value: Double) : Value(ValueClass.REAL){
     override fun add(other: Value): Value = when (other) {
@@ -37,7 +40,7 @@ class RealValue(val value: Double) : Value(ValueClass.REAL){
         else -> super.equals(other)
     }
 
-    override fun notEquals(other: Value): BooleanValue= when (other) {
+    override fun notEquals(other: Value): BooleanValue = when (other) {
         is IntegerValue -> BooleanValue(value != other.value.toDouble())
         is RealValue -> BooleanValue(value != other.value)
         else -> super.notEquals(other)

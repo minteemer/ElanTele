@@ -1,9 +1,9 @@
 package ir.expressions
 
 import ir.Context
-import ir.values.IntegerValue
-import ir.values.RealValue
-import ir.values.StringValue
+import ir.values.classes.IntegerValue
+import ir.values.classes.RealValue
+import ir.values.classes.StringValue
 import ir.values.Value
 
 data class ReadExpression(val inputType: InputType) : Expression {

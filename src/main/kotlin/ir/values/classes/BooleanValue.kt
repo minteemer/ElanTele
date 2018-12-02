@@ -1,4 +1,7 @@
-package ir.values
+package ir.values.classes
+
+import ir.values.Value
+import ir.values.ValueClass
 
 class BooleanValue(val value: Boolean) : Value(ValueClass.BOOLEAN){
     override fun and(other: Value): BooleanValue = when(other){
