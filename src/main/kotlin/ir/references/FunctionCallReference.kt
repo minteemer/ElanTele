@@ -20,6 +20,6 @@ data class FunctionCallReference(
                     context
             )
         } else
-            throw Exception() // TODO: handle call on non-function type
+            throw InvalidVariableTypeException("Expected FunctionValue, got ${function.javaClass.simpleName}")
     }
 }
