@@ -2,33 +2,30 @@ package ir
 
 import ir.values.Value
 
-class Context(private val parentContext: Context? = null,
-              private val values: MutableMap<String, Value> = HashMap()) {
+class Context(private val parentContext: Context? = null) {
+
+    private val values: MutableMap<String, Value> = HashMap()
 
     fun getValue(reference: String): Value =
             values[reference]
                     ?: parentContext?.getValue(reference)
-                    ?: throw ContextException("Name $reference not found in context")
+                    ?: throw ContextException("Name $reference not found in the context")
 
     fun setValue(reference: String, value: Value) {
-        if (!propagateValue(reference, value)) return
-        values[reference] = value
+        if (values.containsKey(reference))
+            values[reference] = value
+        else
+            parentContext?.setValue(reference, value)
+                    ?: throw ContextException("Name $reference not found in the context")
     }
 
     fun createLocalReference(reference: String, value: Value) {
         values[reference] = value
     }
 
-    private fun propagateValue(reference: String, value: Value): Boolean =
-            if (values.containsKey(reference)) {
-                values[reference] = value
-                true
-            } else {
-                parentContext?.propagateValue(reference, value) ?: false
+    fun getChildContext(arguments: Map<String, Value>? = null) =
+            Context(this).apply {
+                arguments?.forEach { name, value -> createLocalReference(name, value) }
             }
-
-
-    fun getChildContext(arguments: Map<String, Value> = mapOf()) =
-            Context(this, HashMap(arguments))
 
 }
