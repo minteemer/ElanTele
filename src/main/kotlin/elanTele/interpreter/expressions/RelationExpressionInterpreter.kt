@@ -9,7 +9,7 @@ import org.antlr.v4.runtime.tree.ParseTree
 
 object RelationExpressionInterpreter {
 
-    fun getOP(tree: ElanTeleParser.RelationContext): OperatorType {
+    private fun getOP(tree: ElanTeleParser.RelationContext): OperatorType {
         if (tree.EQEQ() != null){
             return OperatorType.EQUAL
         }

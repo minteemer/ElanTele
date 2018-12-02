@@ -4,6 +4,7 @@ import elanTele.interpreter.references.ReferenceInterpreter
 import elanTele.ir.exceptions.UnresolvedOperatorException
 import elanTele.ir.expressions.Expression
 import elanTele.ir.expressions.OperatorType
+import elanTele.ir.expressions.ReferenceExpresion
 import elanTele.ir.expressions.UnaryExpression
 import elanTele.parser.ElanTeleParser
 import org.antlr.v4.runtime.tree.ParseTree
@@ -32,7 +33,7 @@ object UnaryExpressionInterpreter {
             is ElanTeleParser.UnaryContext -> {
                 if (tree.reference() != null) {
                     if (tree.typeIndicator() == null){
-                        return ReferenceInterpreter.getReference(tree.reference())
+                        return ReferenceExpresion(ReferenceInterpreter.getReference(tree.reference()))
                     } else {
                         //TODO 'IS'
                     }
