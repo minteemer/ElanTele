@@ -10,7 +10,7 @@ import org.antlr.v4.runtime.tree.ParseTree
 
 object ExpressionInterpreter {
 
-    fun getOP(tree: ElanTeleParser.ExpressionContext): OperatorType {
+    private fun getOP(tree: ElanTeleParser.ExpressionContext): OperatorType {
         if (tree.AND() != null){
             return OperatorType.AND
         }
