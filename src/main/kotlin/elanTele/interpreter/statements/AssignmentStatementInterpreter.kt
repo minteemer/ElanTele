@@ -1,20 +1,21 @@
 package elanTele.interpreter.statements
 
+import elanTele.interpreter.expressions.ExpressionInterpreter
+import elanTele.interpreter.references.ReferenceInterpreter
+import elanTele.ir.statements.AssignmentStatement
 import elanTele.ir.statements.Statement
 import elanTele.parser.ElanTeleParser
 import org.antlr.v4.runtime.tree.ParseTree
+import java.lang.Exception
 
 object AssignmentStatementInterpreter {
 
     fun getStatement(tree: ParseTree): Statement {
-        val child = tree.getChild(0)
-        //TODO Implement function
-        when (child) {
-            is ElanTeleParser.DeclarationContext -> {
-                return DeclarationInterpreter.getDeclaration(child)
-            }
-            else -> throw ClassCastException("Unknown tree element")
-        }
+        if (tree is ElanTeleParser.AssignmentContext) {
+            return AssignmentStatement(ReferenceInterpreter.getReference(tree.reference())
+                    , ExpressionInterpreter.getExpression(tree.expression()))
+        }else
+            throw Exception("Exception during traversing tree in Assignment Interpreter while ${tree.payload}")
     }
 
 }

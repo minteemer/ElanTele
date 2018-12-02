@@ -8,10 +8,14 @@ object StatementInterpreter {
 
     fun getStatement(tree: ParseTree): Statement {
         val child = tree.getChild(0)
-        when (child) {
+        return when (child) {
             is ElanTeleParser.DeclarationContext -> {
-                return DeclarationInterpreter.getDeclaration(child)
+                DeclarationInterpreter.getDeclaration(child)
             }
+            is ElanTeleParser.AssignmentContext ->{
+                AssignmentStatementInterpreter.getStatement(child)
+            }
+
             else -> throw ClassCastException("Unknown tree element")
         }
     }

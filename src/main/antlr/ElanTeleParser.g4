@@ -32,10 +32,15 @@ if_expression
     ;
 
 loop
-    : (WHILE expression NL* LOOP NL* body NL*  END)
-    | (FOR (Identifier IN)? (expression RANGE expression) NL* LOOP NL* body NL* END)
+    : while_loop
+    | for_loop
     ;
-
+while_loop
+    :WHILE expression NL* LOOP NL* body NL*  END
+    ;
+for_loop
+    :FOR (Identifier IN)? (expression RANGE expression) NL* LOOP NL* body NL* END
+    ;
 return_expression
     : RETURN expression?
     ;
