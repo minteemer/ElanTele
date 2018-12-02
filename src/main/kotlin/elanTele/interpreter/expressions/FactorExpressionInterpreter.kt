@@ -7,7 +7,7 @@ import elanTele.ir.expressions.OperatorType
 import elanTele.parser.ElanTeleParser
 import org.antlr.v4.runtime.tree.ParseTree
 
-object FactorInterpreter {
+object FactorExpressionInterpreter {
 
     private fun getOP(tree: ElanTeleParser.FactorContext): OperatorType {
         if (tree.ADD() != null){
@@ -20,13 +20,13 @@ object FactorInterpreter {
         }
     }
 
-    fun getFactor(tree: ParseTree): Expression {
+    fun getFactorExpression(tree: ParseTree): Expression {
         when (tree) {
             is ElanTeleParser.FactorContext -> {
                 if (tree.factor() == null) {
-                    return TermInterpreter.getTerm(tree.term())
+                    return TermExpressionInterpreter.getTermExpression(tree.term())
                 } else {
-                    return BinaryExpression(TermInterpreter.getTerm(tree.term()), FactorInterpreter.getFactor(tree.factor()), getOP(tree))
+                    return BinaryExpression(TermExpressionInterpreter.getTermExpression(tree.term()), FactorExpressionInterpreter.getFactorExpression(tree.factor()), getOP(tree))
                 }
             }
             else -> throw ClassCastException("Unknown tree element")

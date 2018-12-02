@@ -28,9 +28,9 @@ object ExpressionInterpreter {
         when (tree) {
             is ElanTeleParser.ExpressionContext -> {
                 if (tree.expression() != null) {
-                    return BinaryExpression(getExpression(tree.expression()), RelationInterpreter.getRelation(tree.relation()), getOP(tree))
+                    return BinaryExpression(getExpression(tree.expression()), RelationExpressionInterpreter.getRelationExpression(tree.relation()), getOP(tree))
                  } else {
-                    return RelationInterpreter.getRelation(tree.relation())
+                    return RelationExpressionInterpreter.getRelationExpression(tree.relation())
                 }
             }
             else -> throw ClassCastException("Unknown tree element")
