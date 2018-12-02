@@ -1,4 +1,4 @@
-package elanTele.interpreter.statements
+package elanTele.interpreter.values
 
 import elanTele.ir.values.Value
 import elanTele.ir.values.classes.IntegerValue
@@ -17,7 +17,7 @@ object ValueInterpreter {
     */
     fun getValue(tree: ParseTree): Value {
         val valueString = tree.getChild(0).text
-
+        tree.payload
         // ValueInterpreter should only be called on terminals
         if (valueString.startsWith("(")) {
             // TODO create a new exception
