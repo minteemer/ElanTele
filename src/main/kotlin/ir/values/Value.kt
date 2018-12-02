@@ -1,7 +1,7 @@
 package ir.values
 
 import ir.values.classes.BooleanValue
-import ir.values.exceptions.UnresolvedOperatorException
+import ir.exceptions.UnresolvedOperatorException
 
 open class Value(val valueClass: ValueClass) {
 

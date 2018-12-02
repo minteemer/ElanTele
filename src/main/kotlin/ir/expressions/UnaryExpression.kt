@@ -1,6 +1,7 @@
 package ir.expressions
 
 import ir.Context
+import ir.exceptions.ExpressionException
 import ir.values.Value
 
 data class UnaryExpression(val expression: Expression, val op: OperatorType) : Expression {

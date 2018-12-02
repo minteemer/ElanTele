@@ -3,8 +3,8 @@ package ir.statements
 import ir.values.classes.BooleanValue
 import ir.expressions.Expression
 import ir.Context
-import ir.expressions.BinaryExpression
-import sun.jvm.hotspot.types.WrongTypeException
+import ir.exceptions.InvalidTypeException
+
 
 class WhileStatement(
         private val expression: Expression,
@@ -13,15 +13,14 @@ class WhileStatement(
 
     override fun execute(context: Context) {
         while (true) {
-            val conditionExpression =  expression.execute(context)
+            val conditionExpression = expression.execute(context)
             if (conditionExpression is BooleanValue) {
                 if (conditionExpression.value)
                     whileBody.executeAll(context.getChildContext())
                 else
                     break
-            }else
-                throw WrongTypeException("Expected boolean value for \"while\" loop $conditionExpression")
+            } else
+                throw InvalidTypeException("Expected boolean value for \"while\" loop $conditionExpression")
         }
-
     }
 }

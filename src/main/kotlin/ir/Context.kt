@@ -1,5 +1,6 @@
 package ir
 
+import ir.exceptions.ContextException
 import ir.values.Value
 
 class Context(private val parentContext: Context? = null) {
