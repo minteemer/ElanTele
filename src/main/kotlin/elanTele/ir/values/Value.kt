@@ -1,7 +1,7 @@
 package elanTele.ir.values
 
-import elanTele.ir.values.classes.BooleanValue
 import elanTele.ir.exceptions.UnresolvedOperatorException
+import elanTele.ir.values.classes.BooleanValue
 
 open class Value(val valueClass: ValueClass) {
 

@@ -1,7 +1,4 @@
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import elanTele.ElanTeleSyntaxTreeGenearator
-import elanTele.interpreter.statements.StatementsSequenceInterpreter
+import elanTele.interpreter.statements.BodyStatementInterpreter
 import elanTele.parser.ElanTeleLexer
 import elanTele.parser.ElanTeleParser
 import org.antlr.v4.runtime.CharStreams
@@ -25,7 +22,7 @@ class InterpreterTests {
             val lexer = ElanTeleLexer(CharStreams.fromPath(inputFile.toPath()))
             val parser = ElanTeleParser(CommonTokenStream(lexer))
             val program = parser.program()
-            val statements = StatementsSequenceInterpreter.getStatementSequence(program)
+            val statements = BodyStatementInterpreter.getBody(program)
             Assertions.assertNotNull(statements)
         }
     }

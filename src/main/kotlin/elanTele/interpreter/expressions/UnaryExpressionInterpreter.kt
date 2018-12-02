@@ -1,7 +1,6 @@
 package elanTele.interpreter.expressions
 
 import elanTele.interpreter.references.ReferenceInterpreter
-import elanTele.ir.exceptions.UnresolvedOperatorException
 import elanTele.ir.expressions.Expression
 import elanTele.ir.expressions.OperatorType
 import elanTele.ir.expressions.ReferenceExpresion

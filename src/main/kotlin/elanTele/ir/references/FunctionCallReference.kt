@@ -3,8 +3,8 @@ package elanTele.ir.references
 import elanTele.ir.Context
 import elanTele.ir.exceptions.InvalidTypeException
 import elanTele.ir.expressions.Expression
-import elanTele.ir.values.classes.FunctionValue
 import elanTele.ir.values.Value
+import elanTele.ir.values.classes.FunctionValue
 
 data class FunctionCallReference(
         val identifier: Reference,

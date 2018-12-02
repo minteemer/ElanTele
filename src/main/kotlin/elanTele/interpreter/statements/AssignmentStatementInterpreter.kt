@@ -6,7 +6,6 @@ import elanTele.ir.statements.AssignmentStatement
 import elanTele.ir.statements.Statement
 import elanTele.parser.ElanTeleParser
 import org.antlr.v4.runtime.tree.ParseTree
-import java.lang.Exception
 
 object AssignmentStatementInterpreter {
 

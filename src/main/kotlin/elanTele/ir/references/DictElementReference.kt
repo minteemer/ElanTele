@@ -3,8 +3,8 @@ package elanTele.ir.references
 import elanTele.ir.Context
 import elanTele.ir.exceptions.InvalidTypeException
 import elanTele.ir.exceptions.UnresolvedIdentifierException
-import elanTele.ir.values.classes.DictValue
 import elanTele.ir.values.Value
+import elanTele.ir.values.classes.DictValue
 
 data class DictElementReference(
         val arrayReference: Reference,

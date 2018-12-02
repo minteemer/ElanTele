@@ -1,17 +1,13 @@
 package elanTele.interpreter.statements
 
 
-import elanTele.ElanTeleSyntaxTreeGenearator
 import elanTele.interpreter.expressions.ExpressionInterpreter
-import elanTele.interpreter.references.ReferenceInterpreter
-import elanTele.ir.statements.AssignmentStatement
 import elanTele.ir.statements.DeclarationStatement
 import elanTele.ir.statements.Statement
 import elanTele.ir.statements.StatementsSequence
 import elanTele.parser.ElanTeleParser
 import org.antlr.v4.runtime.tree.ParseTree
-import java.lang.Exception
-import java.util.ArrayList
+import java.util.*
 
 object DeclarationInterpreter {
 
