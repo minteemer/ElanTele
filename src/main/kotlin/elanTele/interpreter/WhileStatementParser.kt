@@ -1,4 +1,4 @@
-package interpreter
+package elanTele.interpreter
 
 class WhileStatementParser {
 }
