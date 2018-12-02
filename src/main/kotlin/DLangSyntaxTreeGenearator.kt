@@ -5,7 +5,7 @@ import org.antlr.v4.runtime.Token
 import org.antlr.v4.runtime.tree.ParseTree
 import java.nio.file.Path
 
-object KotlinSyntaxTreeGenerator {
+object DLangSyntaxTreeGenearator {
 
     /**
      * Parses file with given [filePath] and creates Abstract Syntax Tree

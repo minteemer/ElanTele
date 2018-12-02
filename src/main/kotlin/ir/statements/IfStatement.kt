@@ -3,6 +3,7 @@ package ir.statements
 import ir.expressions.Expression
 import ir.Context
 import ir.values.classes.BooleanValue
+import ir.exceptions.InvalidTypeException
 
 class IfStatement(
         private val conditionExpression: Expression,
@@ -19,6 +20,6 @@ class IfStatement(
             else
                 elseBody?.executeAll(newContext)
         } else
-            throw Exception("Expected boolean value for \"if\" condition") // TODO: throw better exception
+            throw InvalidTypeException("Expected boolean value for \"if\" condition $conditionExpression")
     }
 }

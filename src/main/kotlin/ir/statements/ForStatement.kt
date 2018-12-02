@@ -3,7 +3,7 @@ package ir.statements
 import ir.expressions.Expression
 import ir.Context
 import ir.values.classes.IntegerValue
-import ir.values.exceptions.UniterableRangeException
+import ir.exceptions.UniterableRangeException
 
 class ForStatement(
         private val variable: String? = null,

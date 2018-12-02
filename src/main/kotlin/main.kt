@@ -10,7 +10,7 @@ private val gson = GsonBuilder().setPrettyPrinting().create()
 
 fun main(args: Array<String>) {
     println("Generating tree...")
-    val tree = KotlinSyntaxTreeGenerator.generateTree(File(INPUT_FILE).toPath())
+    val tree = DLangSyntaxTreeGenearator.generateTree(File(INPUT_FILE).toPath())
 
     println("Converting to JSON...")
     val output = gson.toJson(tree)

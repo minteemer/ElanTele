@@ -1,4 +1,4 @@
-package ir
+package ir.exceptions
 
 import java.lang.Exception
 
