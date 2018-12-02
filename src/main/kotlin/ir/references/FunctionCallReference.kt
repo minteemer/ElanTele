@@ -2,7 +2,7 @@ package ir.references
 
 import ir.Context
 import ir.expressions.Expression
-import ir.values.FunctionValue
+import ir.values.classes.FunctionValue
 import ir.values.Value
 
 data class FunctionCallReference(

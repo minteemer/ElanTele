@@ -1,6 +1,6 @@
 package ir.statements
 
-import ir.values.BooleanValue
+import ir.values.classes.BooleanValue
 import ir.expressions.Expression
 import ir.Context
 

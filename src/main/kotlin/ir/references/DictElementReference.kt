@@ -1,9 +1,7 @@
 package ir.references
 
 import ir.Context
-import ir.values.ArrayValue
-import ir.values.DictValue
-import ir.values.IntegerValue
+import ir.values.classes.DictValue
 import ir.values.Value
 
 data class DictElementReference(
