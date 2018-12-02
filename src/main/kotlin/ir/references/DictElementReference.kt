@@ -6,7 +6,7 @@ import ir.values.DictValue
 import ir.values.IntegerValue
 import ir.values.Value
 
-class DictElementReference(
+data class DictElementReference(
         val arrayReference: Reference,
         val identifier: String
 ) : Reference {

@@ -6,7 +6,7 @@ import ir.values.RealValue
 import ir.values.StringValue
 import ir.values.Value
 
-class ReadExpression(val inputType: InputType) : Expression {
+data class ReadExpression(val inputType: InputType) : Expression {
     enum class InputType { REAL, INTEGER, STRING }
 
     override fun execute(context: Context): Value = (readLine() ?: "").let { input ->

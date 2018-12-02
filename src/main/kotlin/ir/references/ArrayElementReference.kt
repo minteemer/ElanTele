@@ -6,7 +6,7 @@ import ir.values.ArrayValue
 import ir.values.IntegerValue
 import ir.values.Value
 
-class ArrayElementReference(
+data class ArrayElementReference(
         val arrayReference: Reference,
         val indexExpression: Expression
 ) : Reference {

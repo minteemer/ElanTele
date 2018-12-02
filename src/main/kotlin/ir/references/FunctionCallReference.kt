@@ -5,7 +5,7 @@ import ir.expressions.Expression
 import ir.values.FunctionValue
 import ir.values.Value
 
-class FunctionCallReference(
+data class FunctionCallReference(
         val identifier: String,
         val arguments: Map<String, Expression>
 ) : Reference {
