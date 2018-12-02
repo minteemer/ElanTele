@@ -2,6 +2,7 @@ package ir.statements
 
 import ir.expressions.Expression
 import ir.Context
+import ir.references.InvalidVariableTypeException
 import ir.values.BooleanValue
 
 class IfStatement(
@@ -19,6 +20,6 @@ class IfStatement(
             else
                 elseBody?.executeAll(newContext)
         } else
-            throw Exception("Expected boolean value for \"if\" condition") // TODO: throw better exception
+            throw InvalidVariableTypeException("Expected boolean for \"if\", got ${condition.javaClass.simpleName} ")
     }
 }
