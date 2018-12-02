@@ -9,7 +9,6 @@ object BodyStatementInterpreter {
 
     fun getBody(tree: ParseTree): StatementsSequence {
         if (tree is ElanTeleParser.BodyContext) {
-
             val statements = ArrayList<Statement>()
             for (st in tree.statement()) {
                 statements.add(StatementInterpreter.getStatement(st))

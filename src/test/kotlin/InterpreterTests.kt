@@ -1,4 +1,6 @@
+import elanTele.interpreter.ProgramInterpreter
 import elanTele.interpreter.statements.BodyStatementInterpreter
+import elanTele.ir.Context
 import elanTele.parser.ElanTeleLexer
 import elanTele.parser.ElanTeleParser
 import org.antlr.v4.runtime.CharStreams
@@ -18,11 +20,11 @@ class InterpreterTests {
     @TestFactory
     fun testTreeGeneration() = testFiles.map { inputFile ->
         DynamicTest.dynamicTest(inputFile.nameWithoutExtension) {
-            //inputFile.readText()
             val lexer = ElanTeleLexer(CharStreams.fromPath(inputFile.toPath()))
             val parser = ElanTeleParser(CommonTokenStream(lexer))
             val program = parser.program()
-            val statements = BodyStatementInterpreter.getBody(program)
+            val statements = ProgramInterpreter.getProgram(program)
+            statements.execute(Context())
             Assertions.assertNotNull(statements)
         }
     }

@@ -13,13 +13,17 @@ object DeclarationInterpreter {
 
     fun getDeclaration(tree: ParseTree): Statement {
         if (tree is ElanTeleParser.DeclarationContext) {
-           val declarations = ArrayList<Statement>()
-           for (dec in tree.variableDefinition()){
-               declarations.add(DeclarationStatement(dec.Identifier().toString(),
-                       ExpressionInterpreter.getExpression(dec.expression())))
-           }
+            val declarations = ArrayList<Statement>()
+            for (dec in tree.variableDefinition()) {
+                declarations.add(
+                        DeclarationStatement(
+                                dec.Identifier().toString(),
+                                dec.expression()?.let { ExpressionInterpreter.getExpression(it) }
+                        )
+                )
+            }
             return StatementsSequence(declarations)
-        }else
+        } else
             throw ClassCastException("Exception during traversing tree in Declaration Interpreter while ${tree.payload}")
     }
 
