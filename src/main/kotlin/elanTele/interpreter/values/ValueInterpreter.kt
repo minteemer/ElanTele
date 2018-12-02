@@ -1,4 +1,4 @@
-package elanTele.interpreter.statements
+package elanTele.interpreter.values
 
 import elanTele.ir.values.Value
 import elanTele.ir.values.classes.*

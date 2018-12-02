@@ -11,20 +11,14 @@ import java.util.*
 
 object DeclarationInterpreter {
 
-    fun getDeclaration(tree: ParseTree): Statement {
-        if (tree is ElanTeleParser.DeclarationContext) {
-            val declarations = ArrayList<Statement>()
-            for (dec in tree.variableDefinition()) {
-                declarations.add(
+    fun getDeclaration(tree: ElanTeleParser.DeclarationContext): StatementsSequence =
+            StatementsSequence(
+                    tree.variableDefinition().map { definition ->
                         DeclarationStatement(
-                                dec.Identifier().toString(),
-                                dec.expression()?.let { ExpressionInterpreter.getExpression(it) }
+                                definition.Identifier().toString(),
+                                definition.expression()?.let { ExpressionInterpreter.getExpression(it) }
                         )
-                )
-            }
-            return StatementsSequence(declarations)
-        } else
-            throw ClassCastException("Exception during traversing tree in Declaration Interpreter while ${tree.payload}")
-    }
+                    }
+            )
 
 }

@@ -9,14 +9,7 @@ import org.antlr.v4.runtime.tree.ParseTree
 
 object ProgramInterpreter {
 
-    fun getProgram(tree: ParseTree): StatementsSequence {
-        if (tree is ElanTeleParser.ProgramContext) {
-            return BodyStatementInterpreter.getBody(tree.body())
-        } else {
-            throw ClassCastException("Exception in Statement Sequence in ${tree.payload}")
-        }
-
-    }
-
+    fun getProgram(tree: ElanTeleParser.ProgramContext): StatementsSequence =
+        BodyStatementInterpreter.getBody(tree.body())
 
 }

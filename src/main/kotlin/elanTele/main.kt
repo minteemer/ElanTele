@@ -3,6 +3,7 @@
 package elanTele
 
 import com.google.gson.GsonBuilder
+import elanTele.interpreter.ProgramInterpreter
 import elanTele.interpreter.statements.BodyStatementInterpreter
 import elanTele.parser.ElanTeleLexer
 import elanTele.parser.ElanTeleParser
@@ -19,7 +20,7 @@ fun main(args: Array<String>) {
     val lexer = ElanTeleLexer(CharStreams.fromPath(File(INPUT_FILE).toPath()))
     val parser = ElanTeleParser(CommonTokenStream(lexer))
 
-    BodyStatementInterpreter.getBody(parser.program())
+    ProgramInterpreter.getProgram(parser.program())
     /*println("Generating tree...")
     val tree = ElanTeleSyntaxTreeGenearator.generateTree(File(INPUT_FILE).toPath())
 

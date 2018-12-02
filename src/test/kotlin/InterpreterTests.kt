@@ -24,7 +24,11 @@ class InterpreterTests {
             val parser = ElanTeleParser(CommonTokenStream(lexer))
             val program = parser.program()
             val statements = ProgramInterpreter.getProgram(program)
-            statements.execute(Context())
+
+            val context = Context()
+            statements.execute(context)
+            println(context)
+
             Assertions.assertNotNull(statements)
         }
     }
