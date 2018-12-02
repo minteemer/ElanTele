@@ -1,8 +1,10 @@
-package ir.values
+package ir.values.classes
 
 import ir.Context
 import ir.expressions.Expression
 import ir.statements.StatementsSequence
+import ir.values.Value
+import ir.values.ValueClass
 
 class FunctionValue(
         val body: StatementsSequence,

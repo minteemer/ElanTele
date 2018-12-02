@@ -2,8 +2,8 @@ package ir.statements
 
 import ir.expressions.Expression
 import ir.Context
-import ir.values.IntegerValue
-import ir.values.UniterableRangeException
+import ir.values.classes.IntegerValue
+import ir.values.exceptions.UniterableRangeException
 
 class ForStatement(
         private val variable: String? = null,
@@ -13,21 +13,16 @@ class ForStatement(
 ) : Statement {
 
     override fun execute(context: Context) {
-        // TODO: create child context
         val begin = firstExpression.execute(context)
         val end = secondExpression.execute(context)
         if (begin is IntegerValue && end is IntegerValue) {
             for (i in begin.value..end.value) {
-                if (variable != null) {
-                    val newContext = context.getChildContext(mapOf(Pair(variable, IntegerValue(i))))
-                    forBody.executeAll(newContext)
-                } else {
-                    forBody.executeAll(context)
-                }
-
+                val newContext = context.getChildContext()
+                variable?.let { newContext.createLocalReference(it, IntegerValue(i)) }
+                forBody.executeAll(newContext)
             }
         } else {
-            throw UniterableRangeException("Iteration can not be done through ${firstExpression.toString()} and ${secondExpression.toString()}")
+            throw UniterableRangeException("Iteration can not be done through $firstExpression and $secondExpression")
         }
 
     }

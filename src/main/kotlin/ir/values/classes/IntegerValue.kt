@@ -1,4 +1,7 @@
-package ir.values
+package ir.values.classes
+
+import ir.values.Value
+import ir.values.ValueClass
 
 class IntegerValue(val value: Int) : Value(ValueClass.INTEGER) {
 
@@ -38,13 +41,13 @@ class IntegerValue(val value: Int) : Value(ValueClass.INTEGER) {
         else -> super.equals(other)
     }
 
-    override fun notEquals(other: Value): BooleanValue= when (other) {
+    override fun notEquals(other: Value): BooleanValue = when (other) {
         is IntegerValue -> BooleanValue(value != other.value)
         is RealValue -> BooleanValue(value.toDouble() != other.value)
         else -> super.notEquals(other)
     }
 
-    override fun greaterOrEqual(other: Value): BooleanValue  = when (other) {
+    override fun greaterOrEqual(other: Value): BooleanValue = when (other) {
         is IntegerValue -> BooleanValue(value >= other.value)
         is RealValue -> BooleanValue(value >= other.value)
         else -> super.greaterOrEqual(other)

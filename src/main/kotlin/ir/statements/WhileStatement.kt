@@ -1,6 +1,6 @@
 package ir.statements
 
-import ir.values.BooleanValue
+import ir.values.classes.BooleanValue
 import ir.expressions.Expression
 import ir.Context
 
@@ -10,8 +10,8 @@ class WhileStatement(
 ) : Statement {
 
     override fun execute(context: Context) {
-        // TODO: create child context
-        while (expression.execute(context).equals(BooleanValue(true)).value)
-            forBody.executeAll(context)
+        while (expression.execute(context).equals(BooleanValue(true)).value) {
+            forBody.executeAll(context.getChildContext())
+        }
     }
 }
