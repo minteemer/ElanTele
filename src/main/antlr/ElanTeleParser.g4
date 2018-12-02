@@ -3,7 +3,7 @@ parser grammar ElanTeleParser;
 options { tokenVocab = ElanTeleLexer; }
 
 program
-    : NL* (statement (NL)*)+ EOF
+    : NL* body+ EOF
     ;
 
 declaration
@@ -140,5 +140,5 @@ tupleElement
     ;
 
 body
-    : ((declaration | statement | expression) NL?)+
+    : ((statement ) NL?)+
     ;
