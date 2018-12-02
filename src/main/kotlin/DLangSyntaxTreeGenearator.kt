@@ -14,7 +14,7 @@ object DLangSyntaxTreeGenearator {
     fun generateTree(filePath: Path): Map<String, Any>? {
         val lexer = DLangLexer(CharStreams.fromPath(filePath))
         val parser = DLangParser(CommonTokenStream(lexer))
-
+        print(parser.program())
         return parser.program().toMap()
     }
 
