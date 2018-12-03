@@ -50,7 +50,7 @@ return_expression
     ;
 
 print
-    : PRINT expression (COMMA expression)?
+    : PRINT expression (COMMA expression)*
     ;
 
 expression
@@ -169,5 +169,5 @@ tupleElement
     ;
 
 body
-    : ((statement ) NL?)+
+    : ((statement ) NL*)+
     ;

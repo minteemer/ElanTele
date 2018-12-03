@@ -3,6 +3,7 @@ package elanTele.ir.statements
 import elanTele.ir.Context
 import elanTele.ir.exceptions.InvalidTypeException
 import elanTele.ir.expressions.Expression
+import elanTele.ir.values.Value
 import elanTele.ir.values.classes.BooleanValue
 
 class IfStatement(
@@ -11,9 +12,9 @@ class IfStatement(
         private val elseBody: StatementsSequence? = null
 ) : Statement {
 
-    override fun execute(context: Context) {
+    override fun execute(context: Context): Value? {
         val condition = conditionExpression.execute(context)
-        if (condition is BooleanValue){
+        return if (condition is BooleanValue){
             val newContext = context.getChildContext()
             if (condition.value)
                 ifBody.execute(newContext)

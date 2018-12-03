@@ -1,11 +1,7 @@
-if false then
-  print "failed"
-else
-  print "passed"
-end
+if 1 > 0 then print 1; end;
 
-if true then
-  print "passed"
+if 1 > 0 then
+print 0;
 else
-  print "failed"
-end
+print 1;
+end;

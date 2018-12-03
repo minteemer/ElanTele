@@ -7,7 +7,7 @@ import elanTele.ir.values.Value
 data class BinaryExpression(val left: Expression, val right: Expression, val operator: OperatorType) : Expression {
     override fun execute(context: Context): Value {
         val leftValue = left.execute(context)
-        val rightValue = left.execute(context)
+        val rightValue = right.execute(context)
         return when (operator) {
             // @formatter:off
             OperatorType.ADD           -> leftValue.add(rightValue)

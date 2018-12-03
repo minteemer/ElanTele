@@ -12,6 +12,7 @@ object StatementInterpreter {
                     ?: tree.loop()?.let { LoopStatementInterpreter.getLoopStatement(it) }
                     ?: tree.print()?.let { PrintStatementInterpreter.getPrintStatement(it) }
                     ?: tree.if_expression()?.let { IfStatementInterpreter.getIfStatement(it) }
+                    ?: tree.return_expression()?.let { ReturnStatementInterpreter.getReturnStatement(it) }
                     ?: throw ClassCastException("Unknown tree element")
 
 
