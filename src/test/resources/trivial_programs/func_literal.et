@@ -1,2 +1,3 @@
 var a := func(x) => x + (x)
-var a := func(x) is print x; end;
+var b := func(x) is print x; end;
+print b(a(3))
