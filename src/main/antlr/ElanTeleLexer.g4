@@ -47,42 +47,42 @@ LE: '<=' ;
 GE: '>=' ;
 EXCL_EQ: '/=' ;
 EQEQ: '=' ;
-AND: 'and';
-XOR: 'xor';
-OR: 'or';
-NOT: 'not';
+AND: 'and'| 'һәм';
+XOR: 'xor' ;
+OR: 'or'| 'яки';
+NOT: 'not'| 'түгел';
+
 
 //KEYWORDS
 
-FUNC: 'func' ;
-VAR: 'var' ;
-IF: 'if' ;
-THEN: 'then';
-IN: 'in';
-ELSE: 'else' ;
-WHEN: 'when' ;
-FOR: 'for' ;
-WHILE: 'while' ;
-RETURN: 'return' ;
-IS: 'is' ;
-END: 'end' ;
-PRINT: 'print' ;
-LOOP: 'loop' ;
+FUNC: 'func' | 'функция' ;
+VAR: 'var' | 'вариацион' ;
+IF: 'if' | 'әгәр' ;
+THEN: 'then'| 'бу_очракта';
+IN: 'in'| 'эчендә'; // начар
+ELSE: 'else' | 'башка_очракта' ;
+WHEN: 'when' | 'кайчан' ;
+FOR: 'for' | 'дәвамында' ;
+WHILE: 'while' | 'әлегә' ;
+RETURN: 'return' | 'кайтар' ;
+IS: 'is' | 'бу' ;
+END: 'end' | 'бетте' ;
+PRINT: 'print' | 'яз' ;
+LOOP: 'loop' | 'элмәк' ;
 
-IntType: 'int' ;
-RealType: 'real' ;
-StringType: 'string' ;
-BoolType: 'bool' ;
-EmptyType: 'empty' ;
+
+IntType: 'int' | 'сан' ;
+RealType: 'real' | 'чын_сан';
+StringType: 'string' | 'сүз' ;
+BoolType: 'bool' | 'логик' ;
+EmptyType: 'empty' | 'буш' ;
 ArrayType: '[]' ;
 TupleType: '{}' ;
 
 
-
-ReadInt: 'readInt' ;
-ReadReal: 'readReal' ;
-ReadString: 'readString' ;
-
+ReadInt: 'readInt' | 'санУку' ;
+ReadReal: 'readReal' | 'чынСанУку' ;
+ReadString: 'readString' | 'сүзУку' ;
 
 //
 

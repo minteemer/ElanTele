@@ -9,13 +9,15 @@ import elanTele.parser.ElanTeleParser
 object FactorExpressionInterpreter {
 
     fun getFactorExpression(tree: ElanTeleParser.FactorContext): Expression =
-            tree.factor()?.let { factor ->
-                BinaryExpression(
-                        TermExpressionInterpreter.getTermExpression(tree.term()),
-                        getFactorExpression(factor),
-                        tree.getOperator()
-                )
-            } ?: TermExpressionInterpreter.getTermExpression(tree.term())
+            tree.term()?.let { term ->
+                tree.factor()?.let { factor ->
+                    BinaryExpression(
+                            getFactorExpression(factor),
+                            TermExpressionInterpreter.getTermExpression(term),
+                            tree.getOperator()
+                    )
+                } ?: TermExpressionInterpreter.getTermExpression(term)
+            } ?: throw Exception() // TODO: proper exception
 
     private fun ElanTeleParser.FactorContext.getOperator(): OperatorType = when {
         ADD() != null -> OperatorType.ADD
