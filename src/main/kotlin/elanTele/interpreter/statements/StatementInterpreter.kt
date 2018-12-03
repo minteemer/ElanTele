@@ -6,14 +6,13 @@ import org.antlr.v4.runtime.tree.ParseTree
 
 object StatementInterpreter {
 
-    fun getStatement(tree: ParseTree): Statement {
-        val child = tree.getChild(0)
-        when (child) {
-            is ElanTeleParser.DeclarationContext -> {
-                return DeclarationInterpreter.getDeclaration(child)
-            }
-            else -> throw ClassCastException("Unknown tree element")
-        }
-    }
+    fun getStatement(tree: ElanTeleParser.StatementContext): Statement =
+            tree.declaration()?.let { DeclarationInterpreter.getDeclaration(it) }
+                    ?: tree.assignment()?.let { AssignmentStatementInterpreter.getAssignmentStatement(it) }
+                    ?: tree.loop()?.let { LoopStatementInterpreter.getLoopStatement(it) }
+                    ?: tree.print()?.let { PrintStatementInterpreter.getPrintStatement(it) }
+                    ?: tree.if_expression()?.let { IfStatementInterpreter.getIfStatement(it) }
+                    ?: throw ClassCastException("Unknown tree element")
+
 
 }

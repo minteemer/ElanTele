@@ -1,20 +1,15 @@
 package elanTele.interpreter.statements
 
-import elanTele.ir.statements.Statement
+import elanTele.interpreter.expressions.binary.ExpressionInterpreter
+import elanTele.ir.statements.WhileStatement
 import elanTele.parser.ElanTeleParser
-import org.antlr.v4.runtime.tree.ParseTree
 
 object WhileStatementInterpreter {
 
-    fun getStatement(tree: ParseTree): Statement {
-        val child = tree.getChild(0)
-        //TODO Implement function
-        when (child) {
-            is ElanTeleParser.DeclarationContext -> {
-                return DeclarationInterpreter.getDeclaration(child)
-            }
-            else -> throw ClassCastException("Unknown tree element")
-        }
-    }
+    fun getWhileStatement(tree: ElanTeleParser.While_loopContext): WhileStatement =
+            WhileStatement(
+                    ExpressionInterpreter.getExpression(tree.expression()),
+                    BodyStatementInterpreter.getBody(tree.body())
+            )
 
 }

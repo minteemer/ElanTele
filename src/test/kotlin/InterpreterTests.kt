@@ -1,7 +1,6 @@
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import elanTele.ElanTeleSyntaxTreeGenearator
-import elanTele.interpreter.statements.StatementsSequenceInterpreter
+import elanTele.interpreter.ProgramInterpreter
+import elanTele.interpreter.statements.BodyStatementInterpreter
+import elanTele.ir.Context
 import elanTele.parser.ElanTeleLexer
 import elanTele.parser.ElanTeleParser
 import org.antlr.v4.runtime.CharStreams
@@ -21,11 +20,15 @@ class InterpreterTests {
     @TestFactory
     fun testTreeGeneration() = testFiles.map { inputFile ->
         DynamicTest.dynamicTest(inputFile.nameWithoutExtension) {
-            //inputFile.readText()
             val lexer = ElanTeleLexer(CharStreams.fromPath(inputFile.toPath()))
             val parser = ElanTeleParser(CommonTokenStream(lexer))
             val program = parser.program()
-            val statements = StatementsSequenceInterpreter.getStatementSequence(program)
+            val statements = ProgramInterpreter.getProgram(program)
+
+            val context = Context()
+            statements.execute(context)
+            println("Result context: $context")
+
             Assertions.assertNotNull(statements)
         }
     }

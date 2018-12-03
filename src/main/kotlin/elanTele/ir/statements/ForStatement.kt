@@ -1,9 +1,9 @@
 package elanTele.ir.statements
 
-import elanTele.ir.expressions.Expression
 import elanTele.ir.Context
-import elanTele.ir.values.classes.IntegerValue
 import elanTele.ir.exceptions.UniterableRangeException
+import elanTele.ir.expressions.Expression
+import elanTele.ir.values.classes.IntegerValue
 
 class ForStatement(
         private val variable: String? = null,

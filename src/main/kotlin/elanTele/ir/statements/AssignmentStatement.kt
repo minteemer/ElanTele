@@ -1,7 +1,7 @@
 package elanTele.ir.statements
 
-import elanTele.ir.expressions.Expression
 import elanTele.ir.Context
+import elanTele.ir.expressions.Expression
 import elanTele.ir.references.Reference
 
 class AssignmentStatement(

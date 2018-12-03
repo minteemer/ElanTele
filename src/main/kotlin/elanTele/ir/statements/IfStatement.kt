@@ -1,9 +1,9 @@
 package elanTele.ir.statements
 
-import elanTele.ir.expressions.Expression
 import elanTele.ir.Context
-import elanTele.ir.values.classes.BooleanValue
 import elanTele.ir.exceptions.InvalidTypeException
+import elanTele.ir.expressions.Expression
+import elanTele.ir.values.classes.BooleanValue
 
 class IfStatement(
         private val conditionExpression: Expression,

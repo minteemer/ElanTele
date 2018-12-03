@@ -8,7 +8,6 @@ import org.antlr.v4.runtime.CommonTokenStream
 import org.antlr.v4.runtime.RuleContext
 import org.antlr.v4.runtime.Token
 import org.antlr.v4.runtime.tree.ParseTree
-import java.io.File
 import java.nio.file.Path
 
 object ElanTeleSyntaxTreeGenearator {

@@ -3,7 +3,7 @@ parser grammar ElanTeleParser;
 options { tokenVocab = ElanTeleLexer; }
 
 program
-    : NL* body+ EOF
+    : NL* body EOF
     ;
 
 declaration
@@ -28,14 +28,23 @@ assignment
     ;
 
 if_expression
-    : IF expression NL* THEN NL* body NL* (ELSE NL* body NL*)? END
+    : IF expression NL* THEN NL* body NL* else_branch? END
+    ;
+
+else_branch
+    : ELSE NL* body NL*
     ;
 
 loop
-    : (WHILE expression NL* LOOP NL* body NL*  END)
-    | (FOR (Identifier IN)? (expression RANGE expression) NL* LOOP NL* body NL* END)
+    : while_loop
+    | for_loop
     ;
-
+while_loop
+    :WHILE expression NL* LOOP NL* body NL*  END
+    ;
+for_loop
+    :FOR (Identifier IN)? (expression RANGE expression) NL* LOOP NL* body NL* END
+    ;
 return_expression
     : RETURN expression?
     ;

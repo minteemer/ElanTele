@@ -1,20 +1,14 @@
 package elanTele.interpreter.statements
 
-import elanTele.ir.statements.Statement
+import elanTele.interpreter.expressions.binary.ExpressionInterpreter
+import elanTele.ir.statements.PrintStatement
 import elanTele.parser.ElanTeleParser
-import org.antlr.v4.runtime.tree.ParseTree
 
 object PrintStatementInterpreter {
 
-    fun getStatement(tree: ParseTree): Statement {
-        val child = tree.getChild(0)
-        //TODO Implement function
-        when (child) {
-            is ElanTeleParser.DeclarationContext -> {
-                return DeclarationInterpreter.getDeclaration(child)
-            }
-            else -> throw ClassCastException("Unknown tree element")
-        }
-    }
+    fun getPrintStatement(tree: ElanTeleParser.PrintContext): PrintStatement =
+            PrintStatement(tree.expression().map { ExpressionInterpreter.getExpression(it) })
 
 }
+
+

@@ -15,8 +15,8 @@ class FunctionValue(
     fun call(arguments: List<Value>, context: Context): Value =
             arguments.mapIndexed { index, value -> parameters[index] to value }
                     .associate { it }
-                    .let {arguments ->
-                        context.getChildContext(arguments).let {
+                    .let {argsMap ->
+                        context.getChildContext(argsMap).let {
                             body.execute(it)
                             returnExpression.execute(it)
                         }

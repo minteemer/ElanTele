@@ -1,17 +1,21 @@
 package elanTele.interpreter.statements
 
 
-import elanTele.ElanTeleSyntaxTreeGenearator
+import elanTele.interpreter.expressions.binary.ExpressionInterpreter
 import elanTele.ir.statements.DeclarationStatement
-import elanTele.ir.statements.Statement
+import elanTele.ir.statements.StatementsSequence
 import elanTele.parser.ElanTeleParser
-import org.antlr.v4.runtime.tree.ParseTree
 
 object DeclarationInterpreter {
 
-    fun getDeclaration(tree: ElanTeleParser.DeclarationContext): Statement {
-        ElanTeleSyntaxTreeGenearator.printJsonTree(tree)
-        TODO("Implement declaration parsing")
-    }
+    fun getDeclaration(tree: ElanTeleParser.DeclarationContext): StatementsSequence =
+            StatementsSequence(
+                    tree.variableDefinition().map { definition ->
+                        DeclarationStatement(
+                                definition.Identifier().toString(),
+                                definition.expression()?.let { ExpressionInterpreter.getExpression(it) }
+                        )
+                    }
+            )
 
 }

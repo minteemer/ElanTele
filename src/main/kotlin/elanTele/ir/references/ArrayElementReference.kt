@@ -4,9 +4,9 @@ import elanTele.ir.Context
 import elanTele.ir.exceptions.InvalidIndexException
 import elanTele.ir.exceptions.InvalidTypeException
 import elanTele.ir.expressions.Expression
+import elanTele.ir.values.Value
 import elanTele.ir.values.classes.ArrayValue
 import elanTele.ir.values.classes.IntegerValue
-import elanTele.ir.values.Value
 
 data class ArrayElementReference(
         val arrayReference: Reference,

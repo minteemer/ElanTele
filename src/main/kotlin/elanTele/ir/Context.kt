@@ -1,5 +1,6 @@
 package elanTele.ir
 
+import com.google.gson.GsonBuilder
 import elanTele.ir.exceptions.ContextException
 import elanTele.ir.values.Value
 
@@ -29,4 +30,5 @@ class Context(private val parentContext: Context? = null) {
                 arguments?.forEach { name, value -> createLocalReference(name, value) }
             }
 
+    override fun toString(): String = GsonBuilder().setPrettyPrinting().create().toJson(values)
 }
