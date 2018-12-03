@@ -1,10 +1,7 @@
 package elanTele.interpreter.expressions.unary
 
 import elanTele.interpreter.references.ReferenceInterpreter
-import elanTele.ir.expressions.Expression
-import elanTele.ir.expressions.OperatorType
-import elanTele.ir.expressions.ReferenceExpresion
-import elanTele.ir.expressions.UnaryExpression
+import elanTele.ir.expressions.*
 import elanTele.ir.values.ValueClass
 import elanTele.parser.ElanTeleParser
 import java.lang.Exception
@@ -15,7 +12,10 @@ object UnaryExpressionInterpreter {
     fun getUnaryExpression(tree: ElanTeleParser.UnaryContext): Expression =
             tree.reference()?.let { reference ->
                 tree.typeIndicator()?.let { type ->
-                    TODO("Implement is operator, get class with type.getClass()")
+                    IsExpression(
+                            ReferenceExpresion(ReferenceInterpreter.getReference(reference)),
+                            type.getClass()
+                    )
                 } ?: ReferenceExpresion(ReferenceInterpreter.getReference(reference))
             } ?: tree.primary()?.let { PrimaryExpressionInterpreter.getPrimaryExpression(it) }
                     ?.let { primaryExpression ->
