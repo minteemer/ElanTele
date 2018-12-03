@@ -1,0 +1,8 @@
+var a:= true
+var b:= false
+b := a or b
+b := a xor b
+b := a and b
+b := not (a or b)
+b := not (a xor b)
+b := not (a and b)

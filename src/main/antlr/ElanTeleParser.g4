@@ -169,5 +169,5 @@ tupleElement
     ;
 
 body
-    : ((statement ) NL?)+
+    : ((statement ) NL*)+
     ;

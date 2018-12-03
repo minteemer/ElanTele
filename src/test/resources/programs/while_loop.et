@@ -1,0 +1,2 @@
+var a := 1;
+while false loop var a:= 1 + a; end;
