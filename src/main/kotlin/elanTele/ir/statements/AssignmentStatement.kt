@@ -3,14 +3,16 @@ package elanTele.ir.statements
 import elanTele.ir.Context
 import elanTele.ir.expressions.Expression
 import elanTele.ir.references.Reference
+import elanTele.ir.values.Value
 
 class AssignmentStatement(
         private val reference: Reference,
         private val expression: Expression
 ) : Statement {
 
-    override fun execute(context: Context) {
+    override fun execute(context: Context): Value? {
         reference.setValue(context, expression.execute(context))
+        return null
     }
 
 }
