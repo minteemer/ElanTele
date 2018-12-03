@@ -1,4 +1,0 @@
-var f := func(a) is
-    return 123 + a
-end
-print f(1)

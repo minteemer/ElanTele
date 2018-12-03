@@ -1,4 +1,4 @@
 var b:= {a:=1}
-print {a:=1, c};
+print {a:=11, b:=11};
 print b;
 print b.a;
