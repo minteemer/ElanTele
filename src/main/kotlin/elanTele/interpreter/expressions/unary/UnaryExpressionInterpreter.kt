@@ -23,7 +23,7 @@ object UnaryExpressionInterpreter {
                             UnaryExpression(primaryExpression, operator)
                         } ?: primaryExpression
                     }
-            ?: throw Exception() // TODO: proper exception
+            ?: throw Exception("getUnaryExpression failed") // TODO: proper exception
 
 
     private fun ElanTeleParser.UnaryContext.getOperator(): OperatorType? = when {
@@ -43,6 +43,6 @@ object UnaryExpressionInterpreter {
         ArrayType() != null -> ValueClass.ARRAY
         TupleType() != null -> ValueClass.DICT
         FUNC() != null -> ValueClass.FUNCTION
-        else -> throw Exception() // TODO: unresolved class name exception
+        else -> throw Exception("Unresolved class name: ${this}") // TODO: unresolved class name exception
     }
 }
