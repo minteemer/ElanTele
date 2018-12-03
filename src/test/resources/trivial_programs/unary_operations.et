@@ -1,0 +1,15 @@
+var a:= 1337
+var b;
+b := - (a)
+b := + (a)
+b := - 2
+b := + 2
+b := a
+b := a is int
+b := a is real
+b := a is bool
+b := a is string
+b := a is empty
+b := a is []
+b := a is {}
+b := a is func
