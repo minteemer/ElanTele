@@ -2,11 +2,11 @@ package elanTele.ir.expressions
 
 import elanTele.ir.Context
 import elanTele.ir.values.Value
-import elanTele.ir.values.classes.DictValue
+import elanTele.ir.values.classes.TupleValue
 
-class TupleCreationExpression(private val expressions: Map<String, Expression>):Expression {
+class TupleCreationExpression(private val expressions: List<Pair<String?, Expression>>) : Expression {
 
     override fun execute(context: Context): Value =
-            DictValue(expressions.mapValues { (key, value) -> value.execute(context) })
+            TupleValue(expressions.map { (key, value) -> key to value.execute(context) })
 
 }

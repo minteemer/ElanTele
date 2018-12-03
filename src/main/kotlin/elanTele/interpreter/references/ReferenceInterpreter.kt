@@ -4,7 +4,6 @@ package elanTele.interpreter.references
 import elanTele.interpreter.expressions.binary.ExpressionInterpreter
 import elanTele.ir.references.*
 import elanTele.parser.ElanTeleParser
-import org.antlr.v4.runtime.tree.ParseTree
 
 object ReferenceInterpreter {
 
@@ -17,11 +16,10 @@ object ReferenceInterpreter {
                 ArrayElementReference(variable, ExpressionInterpreter.getExpression(it.expression()))
             }
                     ?: tree.dictElementIdentifierReference()?.let {
-                        DictElementReference(variable, it.Identifier().text)
+                        TupleElementIdentifierReference(variable, it.Identifier().text)
                     }
                     ?: tree.dictElementNumberReference()?.let {
-                        TODO("Implement access tuple element by index")
-                        // DictElementReference(variable, it.IntegerLiteral().text.toInt())
+                        TupleElementIndexReference(variable, it.IntegerLiteral().text.toInt())
                     }
                     ?: tree.functionCallReference()?.let {
                         FunctionCallReference(

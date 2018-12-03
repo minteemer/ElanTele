@@ -4,16 +4,16 @@ import elanTele.ir.Context
 import elanTele.ir.exceptions.InvalidTypeException
 import elanTele.ir.exceptions.UnresolvedIdentifierException
 import elanTele.ir.values.Value
-import elanTele.ir.values.classes.DictValue
+import elanTele.ir.values.classes.TupleValue
 
-data class DictElementReference(
+data class TupleElementIndexReference(
         val arrayReference: Reference,
-        val identifier: String
+        val identifier: Int
 ) : Reference {
 
     override fun setValue(context: Context, value: Value) {
         val dict = arrayReference.getValue(context)
-        if (dict is DictValue) {
+        if (dict is TupleValue) {
             dict.setElement(identifier, value)
         } else {
             throw InvalidTypeException("Expected ArrayValue, got ${dict.javaClass.simpleName}")
@@ -22,7 +22,7 @@ data class DictElementReference(
 
     override fun getValue(context: Context): Value {
         val dict = arrayReference.getValue(context)
-        if (dict is DictValue) {
+        if (dict is TupleValue) {
             return dict.getElement(identifier)
                     ?: throw UnresolvedIdentifierException("Unresolved identifier: $dict has no $identifier")
         } else {
