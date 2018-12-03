@@ -1,6 +1,6 @@
 package elanTele.interpreter.statements
 
-import elanTele.interpreter.expressions.ExpressionInterpreter
+import elanTele.interpreter.expressions.binary.ExpressionInterpreter
 import elanTele.ir.statements.ForStatement
 import elanTele.parser.ElanTeleParser
 

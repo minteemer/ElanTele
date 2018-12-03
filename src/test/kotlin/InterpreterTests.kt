@@ -27,7 +27,7 @@ class InterpreterTests {
 
             val context = Context()
             statements.execute(context)
-            println(context)
+            println("Result context: $context")
 
             Assertions.assertNotNull(statements)
         }

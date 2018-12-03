@@ -1,13 +1,10 @@
 package elanTele.interpreter.statements
 
 
-import elanTele.interpreter.expressions.ExpressionInterpreter
+import elanTele.interpreter.expressions.binary.ExpressionInterpreter
 import elanTele.ir.statements.DeclarationStatement
-import elanTele.ir.statements.Statement
 import elanTele.ir.statements.StatementsSequence
 import elanTele.parser.ElanTeleParser
-import org.antlr.v4.runtime.tree.ParseTree
-import java.util.*
 
 object DeclarationInterpreter {
 
