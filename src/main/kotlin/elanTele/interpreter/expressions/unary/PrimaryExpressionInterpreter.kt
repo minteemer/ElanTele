@@ -11,7 +11,7 @@ object PrimaryExpressionInterpreter {
     fun getPrimaryExpression(tree: ElanTeleParser.PrimaryContext): Expression =
             tree.literal()?.let {
                 it.array()?.let { interpretArray(it) }
-                it.tuple()?.let { interpretTuple(it) }
+                        ?: it.tuple()?.let { interpretTuple(it) }
                         ?: ValueExpression(LiteralInterpreter.getLiteral(it))
             }
                     ?: tree.functionLiteral()?.let { ValueExpression(FunctionLiteralInterpreter.getFunction(it)) }
@@ -22,12 +22,12 @@ object PrimaryExpressionInterpreter {
                     ?: throw ClassCastException("Unknown tree element")
 
     private fun interpretTuple(tupleContext: ElanTeleParser.TupleContext): TupleCreationExpression =
-        TupleCreationExpression(
-                tupleContext.tupleElement().mapIndexed { _, tupleElement ->
-                    tupleElement.Identifier().toString() to
-                            ExpressionInterpreter.getExpression(tupleElement.expression())
-                }.associate { it }
-        )
+            TupleCreationExpression(
+                    tupleContext.tupleElement().mapIndexed { _, tupleElement ->
+                        tupleElement.Identifier().toString() to
+                                ExpressionInterpreter.getExpression(tupleElement.expression())
+                    }.associate { it }
+            )
 
 
     private fun interpretArray(arrayContext: ElanTeleParser.ArrayContext): ArrayCreationExpression =
