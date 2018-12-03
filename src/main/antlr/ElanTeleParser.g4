@@ -54,10 +54,18 @@ print
     ;
 
 expression
-    : relation
-    | expression ((OR|AND|XOR) relation)
+    : disjuntion
+    | expression (DISJ disjuntion)
     ;
 
+conjuction
+    : relation
+    | relation (XOR conjuction)
+    ;
+disjuntion
+    : conjuction
+    | conjuction CONJ conjuction
+    ;
 relation
     : factor ((LE|GE|EXCL_EQ|LANGLE|RANGLE|EQEQ) factor)?
     ;

@@ -47,9 +47,9 @@ LE: '<=' ;
 GE: '>=' ;
 EXCL_EQ: '/=' ;
 EQEQ: '=' ;
-AND: 'and'| 'һәм';
+CONJ: 'and' ;
+DISJ: 'or' ;
 XOR: 'xor' ;
-OR: 'or'| 'яки';
 NOT: 'not'| 'түгел';
 
 
@@ -191,6 +191,9 @@ Inside_MULT: MULT -> type(MULT) ;
 Inside_DIV: DIV -> type(DIV) ;
 Inside_ADD: ADD  -> type(ADD) ;
 Inside_SUB: SUB  -> type(SUB) ;
+Inside_XOR: XOR  -> type(XOR) ;
+Inside_CONJ: CONJ  -> type(CONJ) ;
+Inside_DISJ: DISJ  -> type(DISJ) ;
 Inside_COLON: COLON  -> type(COLON) ;
 Inside_SEMICOLON: SEMICOLON  -> type(SEMICOLON) ;
 Inside_ASSIGNMENT: ASSIGNMENT  -> type(ASSIGNMENT) ;
@@ -252,6 +255,7 @@ StrExpr_RCURL: RCURL -> popMode, type(RCURL) ;
 StrExpr_LPAREN: LPAREN -> pushMode(Inside), type(LPAREN) ;
 StrExpr_LSQUARE: LSQUARE -> pushMode(Inside), type(LSQUARE) ;
 
+
 StrExpr_RPAREN: ')' -> type(RPAREN) ;
 StrExpr_RSQUARE: ']' -> type(RSQUARE);
 StrExpr_LCURL: LCURL -> pushMode(StringExpression), type(LCURL) ;
@@ -261,6 +265,9 @@ StrExpr_MULT: MULT -> type(MULT) ;
 StrExpr_DIV: DIV -> type(DIV) ;
 StrExpr_ADD: ADD  -> type(ADD) ;
 StrExpr_SUB: SUB  -> type(SUB) ;
+StrExpr_XOR: XOR  -> type(XOR) ;
+StrExpr_CONJ: CONJ  -> type(CONJ) ;
+StrExpr_DISJ: DISJ  -> type(DISJ) ;
 StrExpr_COLON: COLON  -> type(COLON) ;
 StrExpr_SEMICOLON: SEMICOLON  -> type(SEMICOLON) ;
 StrExpr_ASSIGNMENT: ASSIGNMENT  -> type(ASSIGNMENT) ;
