@@ -146,8 +146,8 @@ fragment UNICODE_CLASS_ND_NoZeros
 	;
 
 BooleanLiteral
-    : 'true'
-    | 'false'
+    : 'true' | 'дөрес'
+    | 'false' | 'ялган'
     ;
 
 Identifier
