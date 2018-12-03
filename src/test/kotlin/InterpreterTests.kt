@@ -1,5 +1,4 @@
 import elanTele.interpreter.ProgramInterpreter
-import elanTele.interpreter.statements.BodyStatementInterpreter
 import elanTele.ir.Context
 import elanTele.parser.ElanTeleLexer
 import elanTele.parser.ElanTeleParser
@@ -12,13 +11,15 @@ class InterpreterTests {
     companion object {
         private val classLoader = InterpreterTests::class.java.classLoader
 
-        private val inputFilesFolder = classLoader.getResource("programs").file
+        private val trivialProgramsFolder = classLoader.getResource("trivial_programs").file
+        private val trivialFiles: List<File> = File(trivialProgramsFolder).listFiles().filter { it.isFile }
 
-        private val testFiles: List<File> = File(inputFilesFolder).listFiles().filter { it.isFile }
+        private val incorrectProgramsFolder = classLoader.getResource("incorrect_programs").file
+        private val incorrectFiles: List<File> = File(incorrectProgramsFolder).listFiles().filter { it.isFile }
     }
 
     @TestFactory
-    fun testTreeGeneration() = testFiles.map { inputFile ->
+    fun trivialTestsGenerator() = trivialFiles.map { inputFile ->
         DynamicTest.dynamicTest(inputFile.nameWithoutExtension) {
             val lexer = ElanTeleLexer(CharStreams.fromPath(inputFile.toPath()))
             val parser = ElanTeleParser(CommonTokenStream(lexer))
@@ -28,8 +29,24 @@ class InterpreterTests {
             val context = Context()
             statements.execute(context)
             println("Result context: $context")
+        }
+    }
 
-            Assertions.assertNotNull(statements)
+    @TestFactory
+    fun incorrectTestsGenerator() = incorrectFiles.map { inputFile ->
+        DynamicTest.dynamicTest(inputFile.nameWithoutExtension) {
+            val lexer = ElanTeleLexer(CharStreams.fromPath(inputFile.toPath()))
+            val parser = ElanTeleParser(CommonTokenStream(lexer))
+            val program = parser.program()
+            val statements = ProgramInterpreter.getProgram(program)
+
+            val context = Context()
+            // interpreter/parser should throw an exception if the program is invalid
+            // instead of interpreting who knows what.
+            Assertions.assertThrows(Exception::class.java) {
+                statements.execute(context)
+            }
+            println("Result context: $context")
         }
     }
 }

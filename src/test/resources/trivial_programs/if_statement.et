@@ -1,0 +1,11 @@
+if false then
+  print "failed"
+else
+  print "passed"
+end
+
+if true then
+  print "passed"
+else
+  print "failed"
+end
