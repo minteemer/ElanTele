@@ -27,5 +27,7 @@ class TupleValue(values: List<Pair<String?, Value>>) : Value(ValueClass.DICT) {
     }
 
     override fun toString(): String = values
-            .joinToString(prefix = "{", postfix = "}") { (name, value) -> "$name: $value" }
+            .joinToString(prefix = "{", postfix = "}") { (name, value) ->
+                name?.let { "$name: $value" } ?: value.toString()
+            }
 }

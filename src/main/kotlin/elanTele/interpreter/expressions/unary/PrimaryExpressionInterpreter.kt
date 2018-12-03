@@ -23,10 +23,10 @@ object PrimaryExpressionInterpreter {
 
     private fun interpretTuple(tupleContext: ElanTeleParser.TupleContext): TupleCreationExpression =
             TupleCreationExpression(
-                    tupleContext.tupleElement().mapIndexed { _, tupleElement ->
-                        tupleElement.Identifier().toString() to
+                    tupleContext.tupleElement().map { tupleElement ->
+                        tupleElement.Identifier()?.toString() to
                                 ExpressionInterpreter.getExpression(tupleElement.expression())
-                    }.associate { it }
+                    }
             )
 
 
