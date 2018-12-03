@@ -8,13 +8,13 @@ import elanTele.ir.values.classes.TupleValue
 
 data class TupleElementIndexReference(
         val arrayReference: Reference,
-        val identifier: Int
+        val index: Int
 ) : Reference {
 
     override fun setValue(context: Context, value: Value) {
         val dict = arrayReference.getValue(context)
         if (dict is TupleValue) {
-            dict.setElement(identifier, value)
+            dict.setElement(index - 1, value)
         } else {
             throw InvalidTypeException("Expected ArrayValue, got ${dict.javaClass.simpleName}")
         }
@@ -23,8 +23,8 @@ data class TupleElementIndexReference(
     override fun getValue(context: Context): Value {
         val dict = arrayReference.getValue(context)
         if (dict is TupleValue) {
-            return dict.getElement(identifier)
-                    ?: throw UnresolvedIdentifierException("Unresolved identifier: $dict has no $identifier")
+            return dict.getElement(index - 1)
+                    ?: throw UnresolvedIdentifierException("Unresolved identifier: $dict has no index $index")
         } else {
             throw InvalidTypeException("Expected ArrayValue, got ${dict.javaClass.simpleName}")
         }
