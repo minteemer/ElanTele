@@ -10,7 +10,7 @@ object LiteralInterpreter {
     fun getLiteral(tree: ElanTeleParser.LiteralContext): Value = with(tree) {
         tuple()?.let { interpretTuple(it) }
                 ?: array()?.let { interpretArray(it) }
-                ?: lineStringLiteral()?.let { interpretString(it) }
+                ?: lineStringLiteral()?.let { StringInterpreter.interpretString(it) }
                 ?: IntegerLiteral()?.let { IntegerValue(it.text.toInt()) }
                 ?: RealLiteral()?.let { RealValue(it.text.toDouble()) }
                 ?: BooleanLiteral()?.let { BooleanValue(it.text!!.toBoolean()) }
@@ -18,9 +18,6 @@ object LiteralInterpreter {
                 ?: throw Exception("The tree has unknown LiteralContext payload: $tree")
     }
 
-    private fun interpretString(stringLiteralContext: ElanTeleParser.LineStringLiteralContext): Value {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 
     private fun interpretTuple(tupleContext: ElanTeleParser.TupleContext): DictValue {
         TODO("Implement tuple interpreter. Received tuple context: $tupleContext")
@@ -30,7 +27,4 @@ object LiteralInterpreter {
         TODO("Implement array interpreter. Received array context: $arrayContext")
     }
 
-    private fun interpretLineString(lineStringLiteralContext: ElanTeleParser.LineStringLiteralContext): StringValue {
-        TODO("Implement LineString interpreter. Received line string literal context: $lineStringLiteralContext")
-    }
 }
