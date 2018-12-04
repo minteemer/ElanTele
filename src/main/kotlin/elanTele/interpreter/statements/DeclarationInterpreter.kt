@@ -8,6 +8,11 @@ import elanTele.parser.ElanTeleParser
 
 object DeclarationInterpreter {
 
+
+    /**
+     *  @param [tree] is [ElanTeleParser.DeclarationContext]
+     *  @return [StatementsSequence] that contains list of parsed statements
+     */
     fun getDeclaration(tree: ElanTeleParser.DeclarationContext): StatementsSequence =
             StatementsSequence(
                     tree.variableDefinition().map { definition ->

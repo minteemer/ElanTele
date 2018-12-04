@@ -7,7 +7,10 @@ import elanTele.parser.ElanTeleParser
 
 
 object ExpressionInterpreter {
-
+    /**
+     *  @param [tree] is [ElanTeleParser.ExpressionContext]
+     *  @return [Expression] that contains expression
+     */
     fun getExpression(tree: ElanTeleParser.ExpressionContext): Expression =
             tree.expression()?.let {
                 BinaryExpression(

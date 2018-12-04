@@ -5,7 +5,10 @@ import elanTele.ir.statements.ForStatement
 import elanTele.parser.ElanTeleParser
 
 object ForStatementInterpreter {
-
+    /**
+     *  @param [tree] is [ElanTeleParser.For_loopContext]
+     *  @return [ForStatement] that contains 2 expression, body and may contain Identifier
+     */
     fun getForStatement(tree: ElanTeleParser.For_loopContext): ForStatement =
             ForStatement(
                     tree.Identifier()?.toString(),

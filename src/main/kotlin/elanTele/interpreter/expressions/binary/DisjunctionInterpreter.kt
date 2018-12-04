@@ -8,6 +8,10 @@ import elanTele.parser.ElanTeleParser
 
 object DisjunctionInterpreter {
 
+    /**
+     *  @param [tree] is [ElanTeleParser.DisjuntionContext]
+     *  @return [Expression] that contains  disjunction expression
+     */
     fun getDisjunctionExpression(tree: ElanTeleParser.DisjuntionContext): Expression =
             tree.disjuntion()?.let {
                 BinaryExpression(

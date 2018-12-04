@@ -5,7 +5,10 @@ import elanTele.ir.statements.PrintStatement
 import elanTele.parser.ElanTeleParser
 
 object PrintStatementInterpreter {
-
+    /**
+     *  @param [tree] is [ElanTeleParser.PrintContext]
+     *  @return [PrintStatement] that contains list of expressions to print
+     */
     fun getPrintStatement(tree: ElanTeleParser.PrintContext): PrintStatement =
             PrintStatement(tree.expression().map { ExpressionInterpreter.getExpression(it) })
 

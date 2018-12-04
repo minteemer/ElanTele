@@ -2,9 +2,15 @@ package elanTele.interpreter.statements
 
 import elanTele.ir.statements.Statement
 import elanTele.parser.ElanTeleParser
-import org.antlr.v4.runtime.tree.ParseTree
 
 object StatementInterpreter {
+
+    /**
+     *  @param [tree] is [ElanTeleParser.StatementContext]
+     *  Determines type of statement and parse it
+     *  @return [Statement]
+     *
+     */
 
     fun getStatement(tree: ElanTeleParser.StatementContext): Statement =
             tree.declaration()?.let { DeclarationInterpreter.getDeclaration(it) }

@@ -7,7 +7,11 @@ import elanTele.parser.ElanTeleParser
 import org.antlr.v4.runtime.tree.TerminalNode
 
 object StringInterpreter {
-
+    /**
+     *  @param [tree] is [ElanTeleParser.LineStringLiteralContext]
+     *  @return [Value] that contains literal
+     *
+     */
     fun interpretString(stringLiteralContext: ElanTeleParser.LineStringLiteralContext): Value =
             StringBuilder().apply {
                 stringLiteralContext.lineStringContent().map { stringContent ->

@@ -8,6 +8,10 @@ import elanTele.parser.ElanTeleParser
 
 object RelationExpressionInterpreter {
 
+    /**
+     *  @param [tree] is [ElanTeleParser.RelationContext]
+     *  @return [Expression] that contains relation expression
+     */
     fun getRelationExpression(tree: ElanTeleParser.RelationContext): Expression =
             if (tree.factor(1) != null) {
                 BinaryExpression(
@@ -19,7 +23,9 @@ object RelationExpressionInterpreter {
                 FactorExpressionInterpreter.getFactorExpression(tree.factor(0))
             }
 
-
+    /**
+     * Operation parsing
+     */
     private fun ElanTeleParser.RelationContext.getOperator(): OperatorType =
             EQEQ()?.let { OperatorType.EQUAL }
                     ?: EXCL_EQ()?.let { OperatorType.NOT_EQUAL }

@@ -14,7 +14,7 @@ class IfStatement(
 
     override fun execute(context: Context): Value? {
         val condition = conditionExpression.execute(context)
-        return if (condition is BooleanValue){
+        return if (condition is BooleanValue) {
             val newContext = context.getChildContext()
             if (condition.value)
                 ifBody.execute(newContext)
