@@ -1,4 +1,6 @@
 # ElanTele dynamic language
+*By Timur Valiev, Vasiliy Alabugin, Ninkolay Matyashov, 
+Ilgizar Murzakov and Arsen Kuzmin*
 ## Build
 Run `./gradlew build` to build the project (or `bash gradlew build`).
 
