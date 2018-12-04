@@ -1,5 +1,6 @@
 package elanTele.interpreter.expressions.binary
 
+import elanTele.interpreter.exceptions.InvalidFactorExpressionException
 import elanTele.ir.exceptions.UnresolvedOperatorException
 import elanTele.ir.expressions.BinaryExpression
 import elanTele.ir.expressions.Expression
@@ -17,7 +18,7 @@ object FactorExpressionInterpreter {
                             tree.getOperator()
                     )
                 } ?: TermExpressionInterpreter.getTermExpression(term)
-            } ?: throw Exception() // TODO: proper exception
+            } ?: throw InvalidFactorExpressionException("Invalid FactorContext: $tree")
 
     private fun ElanTeleParser.FactorContext.getOperator(): OperatorType = when {
         ADD() != null -> OperatorType.ADD
