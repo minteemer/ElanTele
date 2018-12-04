@@ -1,5 +1,7 @@
 package elanTele.interpreter.expressions.unary
 
+import elanTele.interpreter.exceptions.InvalidUnaryExpressionException
+import elanTele.interpreter.exceptions.UnresolvedClassNameException
 import elanTele.interpreter.references.ReferenceInterpreter
 import elanTele.ir.expressions.*
 import elanTele.ir.values.ValueClass
@@ -23,7 +25,7 @@ object UnaryExpressionInterpreter {
                             UnaryExpression(primaryExpression, operator)
                         } ?: primaryExpression
                     }
-            ?: throw Exception("getUnaryExpression failed") // TODO: proper exception
+            ?: throw InvalidUnaryExpressionException("Invalid UnaryContext: $tree")
 
 
     private fun ElanTeleParser.UnaryContext.getOperator(): OperatorType? = when {
@@ -43,6 +45,6 @@ object UnaryExpressionInterpreter {
         ArrayType() != null -> ValueClass.ARRAY
         TupleType() != null -> ValueClass.DICT
         FUNC() != null -> ValueClass.FUNCTION
-        else -> throw Exception("Unresolved class name: ${this}") // TODO: unresolved class name exception
+        else -> throw UnresolvedClassNameException("Unresolved class name: ${this}")
     }
 }

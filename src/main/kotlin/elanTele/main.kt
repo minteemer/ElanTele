@@ -3,7 +3,9 @@
 package elanTele
 
 import elanTele.interpreter.ProgramInterpreter
+import elanTele.interpreter.exceptions.InterpreterException
 import elanTele.ir.Context
+import elanTele.ir.exceptions.InternalRepresentationException
 import elanTele.parser.ElanTeleLexer
 import elanTele.parser.ElanTeleLexerTatarcha
 import elanTele.parser.ElanTeleParser
@@ -11,6 +13,7 @@ import org.antlr.v4.runtime.CharStream
 import org.antlr.v4.runtime.CharStreams
 import org.antlr.v4.runtime.CommonTokenStream
 import org.antlr.v4.runtime.Lexer
+import org.antlr.v4.runtime.misc.ParseCancellationException
 import java.io.File
 
 const val TATAR_KEYWORD_FLAG = "-t"
@@ -35,11 +38,7 @@ private fun runRepl(tatarTokes: Boolean) {
     var input = readLine()
     while (input != EXIT_KEYWORD) {
         val lexer = getLexer(tatarTokes, CharStreams.fromString(input))
-        try {
-            execute(context, lexer)
-        } catch (e: Exception){
-            e.printStackTrace()
-        }
+        execute(context, lexer)
 
         print(">>> ")
         input = readLine()
@@ -53,7 +52,26 @@ private fun getLexer(useTatarTokes: Boolean, charStream: CharStream) =
             ElanTeleLexer(charStream)
 
 private fun execute(context: Context, lexer: Lexer) {
-    val parser = ElanTeleParser(CommonTokenStream(lexer))
-    val program = ProgramInterpreter.getProgram(parser.program())
-    program.execute(context)
+    val errorListener = ParserErrorListener()
+
+    lexer.apply {
+        removeErrorListeners()
+        addErrorListener(errorListener)
+    }
+
+    val parser = ElanTeleParser(CommonTokenStream(lexer)).apply {
+        removeErrorListeners()
+        addErrorListener(errorListener)
+    }
+
+    try {
+        val program = ProgramInterpreter.getProgram(parser.program())
+        program.execute(context)
+    } catch (e: InternalRepresentationException) {
+        System.err.println("Representation error: " + e.message)
+    } catch (e: InterpreterException) {
+        System.err.println("Interpretation error: " + e.message)
+    } catch (e: ParseCancellationException) {
+        System.err.println("Parser error: " + e.message)
+    }
 }

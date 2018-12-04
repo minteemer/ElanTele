@@ -7,6 +7,6 @@ import elanTele.ir.values.classes.ArrayValue
 class ArrayCreationExpression(private val expressions: Map<Int, Expression>):Expression {
 
     override fun execute(context: Context): Value =
-            ArrayValue(expressions.mapValues { (key, value) -> value.execute(context) })
+            ArrayValue(expressions.mapValues { (_, value) -> value.execute(context) })
 
 }
