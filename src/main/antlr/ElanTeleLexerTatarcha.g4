@@ -58,9 +58,9 @@ NOT: 'түгел' ;
 FUNC:  'функция' ;
 VAR: 'вар' ;
 IF: 'әгәр' ;
-THEN: 'бу_очракта' ;
+THEN: 'буочракта' ;
 IN: 'эчендә' ; // начар
-ELSE: 'башка_очракта' ;
+ELSE: 'башкаочракта' ;
 WHEN: 'кайчан' ;
 FOR: 'дәвамында' ;
 WHILE: 'әлегә' ;
@@ -72,7 +72,7 @@ LOOP: 'элмәк' ;
 
 
 IntType: 'сан' ;
-RealType: 'чын_сан' ;
+RealType: 'чынсан' ;
 StringType: 'сүз' ;
 BoolType: 'логик' ;
 EmptyType: 'буш' ;
@@ -162,7 +162,7 @@ fragment EscapeSeq
 
 
 fragment EscapedIdentifier
-    : '\\' ('t' | 'b' | 'r' | 'n' | '\'' | '"' | '\\' | '$')
+    : '\\' ('t' | 'b' | 'r' | 'n' | '\'' | '"' | '\\')
     ;
 
 fragment Letter

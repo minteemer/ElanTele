@@ -8,8 +8,8 @@ import elanTele.parser.ElanTeleParser
 
 class ArrayCreationExpression(private val expressions: Map<Int, Expression>) : Expression {
     /**
-     *  @param [Context] of program
-     *  @return [Value] that is [ArrayValue] which contains calculated expressions
+     *
+     * *  @return [Value] that is [ArrayValue] which contains calculated expressions
      *
      */
     override fun execute(context: Context): Value =
