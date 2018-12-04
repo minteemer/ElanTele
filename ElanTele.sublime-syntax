@@ -3,7 +3,8 @@
 # See http://www.sublimetext.com/docs/3/syntax.html
 name: Elan Tele
 file_extensions:
-  - [et, ett]
+  - et
+  - ett
 scope: source.et
 
 contexts:
@@ -46,7 +47,7 @@ contexts:
     # other.
     - match: '\b(func|var|if|then|in|else|when|for|while|return|is|end|print|loop)\b'
       scope: keyword.control.et
-    - match: '\b(функция|вар|әгәр|бу_очракта|эчендә|башка_очракта|кайчан|дәвамында|әлегә|кайтар|бу|бетте|яз|элмәк)\b'
+    - match: '\b(функция|вар|әгәр|буочракта|эчендә|башкаочракта|кайчан|дәвамында|әлегә|кайтар|бу|бетте|яз|элмәк)\b'
       scope: keyword.control.ett
 
   numbers:
@@ -72,7 +73,7 @@ contexts:
   storage:
      - match: \b(string|int|real|bool|empty)\b
        scope: storage.type.et
-     - match: \b(сүз|сан|чын_сан|логик|буш)\b
+     - match: \b(сүз|сан|чынсан|логик|буш)\b
        scope: storage.type.ett
 
   operators:

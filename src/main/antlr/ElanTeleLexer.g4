@@ -160,7 +160,7 @@ fragment EscapeSeq
 
 
 fragment EscapedIdentifier
-    : '\\' ('t' | 'b' | 'r' | 'n' | '\'' | '"' | '\\' | '$')
+    : '\\' ('t' | 'b' | 'r' | 'n' | '\'' | '"' | '\\')
     ;
 
 fragment Letter

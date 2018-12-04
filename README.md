@@ -4,11 +4,12 @@ Run `./gradlew build` to build the project (or `bash gradlew build`).
 
 ## Run
 After building the project, unpack `build/distributions/ElanTele-1.0.tar` 
-or `build/distributions/ElanTele-1.0.zip` and run `bin/ElanTele`
+or `build/distributions/ElanTele-1.0.zip` and run `bin/ElanTele` to start REPL
+or `bin/ElanTele example.et` to execute a file.
 
 
 ## Grammar 
-[Grammar](https://hackmd.io/s/H1EhcAXk4)
+[Grammar](grammar.md)
 
 ## Example of code
 ```
@@ -56,7 +57,7 @@ Example of bubble sort in Tatar ElanTele:
 яз җыештырылмаган
 ```
 
-You can find it in `in.txt`. Run `bin/ElanTele -t in.txt` to see it in action.
+You can find it in `example.et`. Run `bin/ElanTele -t in.txt` to see it in action.
 
 ## ElanTele Syntax File
 You can use syntax file `ElanTele.sublime-syntax` written for Sublime Text 3 
