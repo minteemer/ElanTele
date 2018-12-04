@@ -37,7 +37,7 @@ private fun runRepl(tatarTokes: Boolean) {
         val lexer = getLexer(tatarTokes, CharStreams.fromString(input))
         try {
             execute(context, lexer)
-        } catch (e: Exception){
+        } catch (e: Exception) {
             e.printStackTrace()
         }
 
@@ -53,7 +53,18 @@ private fun getLexer(useTatarTokes: Boolean, charStream: CharStream) =
             ElanTeleLexer(charStream)
 
 private fun execute(context: Context, lexer: Lexer) {
-    val parser = ElanTeleParser(CommonTokenStream(lexer))
+    val errorListener = ParserErrorListener()
+
+    lexer.apply {
+        removeErrorListeners()
+        addErrorListener(errorListener)
+    }
+
+    val parser = ElanTeleParser(CommonTokenStream(lexer)).apply {
+        removeErrorListeners()
+        addErrorListener(errorListener)
+    }
+
     val program = ProgramInterpreter.getProgram(parser.program())
     program.execute(context)
 }
