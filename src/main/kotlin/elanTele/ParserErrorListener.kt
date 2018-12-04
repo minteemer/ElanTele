@@ -11,7 +11,7 @@ class ParserErrorListener : BaseErrorListener() {
     override fun syntaxError(
             recognizer: Recognizer<*, *>, offendingSymbol: Any,
             line: Int, charPositionInLine: Int, msg: String,
-            e: RecognitionException
+            e: RecognitionException?
     ) {
         throw ParseCancellationException("line $line:$charPositionInLine $msg")
     }
