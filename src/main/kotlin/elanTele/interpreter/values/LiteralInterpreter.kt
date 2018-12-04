@@ -9,7 +9,11 @@ import elanTele.parser.ElanTeleParser
 
 
 object LiteralInterpreter {
-
+    /**
+     *  @param [tree] is [ElanTeleParser.LiteralContext]
+     *  @return [Value] that contains literal
+     *
+     */
     fun getLiteral(tree: ElanTeleParser.LiteralContext): Value = with(tree) {
         lineStringLiteral()?.let { StringInterpreter.interpretString(it) }
                 ?: IntegerLiteral()?.let { IntegerValue(it.text.toInt()) }

@@ -10,7 +10,10 @@ import java.lang.Exception
 
 object UnaryExpressionInterpreter {
 
-    // oh god, what have i done...
+    /**
+     *  @param [tree] is [ElanTeleParser.UnaryContext]
+     *  @return [Expression] that contains unary expression
+     */
     fun getUnaryExpression(tree: ElanTeleParser.UnaryContext): Expression =
             tree.reference()?.let { reference ->
                 tree.typeIndicator()?.let { type ->
@@ -28,6 +31,9 @@ object UnaryExpressionInterpreter {
             ?: throw InvalidUnaryExpressionException("Invalid UnaryContext: $tree")
 
 
+    /**
+     *  parse unary operation
+     */
     private fun ElanTeleParser.UnaryContext.getOperator(): OperatorType? = when {
         IS() != null -> OperatorType.IS
         NOT() != null -> OperatorType.UNARY_NOT
@@ -36,6 +42,9 @@ object UnaryExpressionInterpreter {
         else -> null
     }
 
+    /**
+     *  parse type indicator
+     */
     private fun ElanTeleParser.TypeIndicatorContext.getClass() = when {
         IntType() != null -> ValueClass.INTEGER
         RealType() != null -> ValueClass.REAL

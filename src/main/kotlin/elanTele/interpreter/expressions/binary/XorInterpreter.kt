@@ -8,6 +8,10 @@ import elanTele.parser.ElanTeleParser
 
 object XorInterpreter {
 
+    /**
+     *  @param [tree] is [ElanTeleParser.XorContext]
+     *  @return [Expression] that contains xor expression
+     */
     fun getXorExpression(tree: ElanTeleParser.XorContext): Expression =
             tree.xor()?.let {
                 BinaryExpression(
