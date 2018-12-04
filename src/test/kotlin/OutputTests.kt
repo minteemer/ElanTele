@@ -363,8 +363,100 @@ class OutputTests {
                         mapOf(
                                 "c" to 36.toVal()
                         )
+                ),
+                OutputTest(
+                        "while loop",
+                        "var a := 1;\n" +
+                                "while a<10 loop print a; a:= 1 + a; end;\n" +
+                                "var b := 10\n" +
+                                "while b /= 0\n" +
+                                "loop\n" +
+                                "print b\n" +
+                                "b := b - 2\n" +
+                                "end",
+                        mapOf(
+                                "a" to 10.toVal(),
+                                "b" to 0.toVal()
+                        )
+                ),
+                OutputTest(
+                        "assignments",
+                        "var a := 1;\n" +
+                                "var b := []\n" +
+                                "var c := {1, j:=2, a}\n" +
+                                "var d := \"d\"\n" +
+                                "var e := 2.3\n" +
+                                "var f := true\n" +
+                                "var g := func(x) => x + 2\n" +
+                                "var l := g is func",
+                        mapOf(
+                                "a" to 1.toVal(),
+                                "b" to ArrayValue(mapOf()),
+                                "c" to TupleValue(listOf(null to IntegerValue(1),
+                                        "j" to IntegerValue(2),
+                                        null to IntegerValue(1))),
+                                "d" to "d".toVal(),
+                                "e" to 2.3.toVal(),
+                                "f" to true.toVal(),
+                                "l" to true.toVal()
+                        )
+                ),
+                OutputTest(
+                        "unary operations",
+                        "var a:= 1337\n" +
+                                "var q,w,e,r,t,y,u,i,o,p,s,d,f;\n" +
+                                "q := - (a)\n" +
+                                "w := + (a)\n" +
+                                "e := - 2\n" +
+                                "r := + 2\n" +
+                                "t := a\n" +
+                                "y := a is int\n" +
+                                "u := a is real\n" +
+                                "i := a is bool\n" +
+                                "o := a is string\n" +
+                                "p := a is empty\n" +
+                                "s := a is []\n" +
+                                "d := a is {}\n" +
+                                "f := a is func\n",
+                        mapOf(
+                                "q" to (-1 * 1337).toVal(),
+                                "w" to 1337.toVal(),
+                                "e" to (-1 * 2).toVal(),
+                                "r" to 2.toVal(),
+                                "t" to 1337.toVal(),
+                                "y" to true.toVal(),
+                                "u" to false.toVal(),
+                                "i" to false.toVal(),
+                                "o" to false.toVal(),
+                                "p" to false.toVal(),
+                                "s" to false.toVal(),
+                                "d" to false.toVal(),
+                                "f" to false.toVal()
+                        )
+                ),
+                OutputTest(
+                        "tuple operations",
+                        "var t := {a:=1, b:=2, {d:=3}, [22, 33]};\n" +
+                                "var x := t.b;\n" +
+                                "var y1 := t.1;\n" +
+                                "var y2 := t.4[2];\n" +
+                                "var y3 := t.3.d;",
+                        mapOf(
+                                "x" to 2.toVal(),
+                                "y1" to 1.toVal(),
+                                "y2" to 33.toVal(),
+                                "y3" to 3.toVal()
+                        )
+                ),
+                OutputTest(
+                        "string escapes",
+                        "var a := ('succ' + \"t\\\'e\\\"s\tt\\\\ttt\"); \n" +
+                                "var b := a is string",
+                        mapOf(
+                                "a" to "succt\'e\"s\tt\\ttt".toVal(),
+                                "b" to true.toVal()
+                        )
                 )
-
         )
 
         private fun Int.toVal() = IntegerValue(this)
