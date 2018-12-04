@@ -346,6 +346,15 @@ class OutputTests {
                                 "y2" to 33.toVal(),
                                 "y3" to 3.toVal()
                         )
+                ),
+                OutputTest(
+                        "string escapes",
+                        "var a := ('succ' + \"t\\\'e\\\"s\tt\\\\ttt\"); \n" +
+                                "var b := a is string",
+                        mapOf(
+                                "a" to "succt\'e\"s\tt\\ttt".toVal(),
+                                "b" to true.toVal()
+                        )
                 )
         )
 
