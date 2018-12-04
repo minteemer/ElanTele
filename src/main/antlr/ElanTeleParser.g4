@@ -134,7 +134,7 @@ arrayElementReference
     ;
 
 functionCallReference
-    : LPAREN expression (COMMA expression)* RPAREN
+    : LPAREN expression? (COMMA expression)* RPAREN
     ;
 
 dictElementIdentifierReference
