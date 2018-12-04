@@ -453,6 +453,13 @@ class OutputTests {
                                 "a" to "succt\'e\"s\tt\\ttt".toVal(),
                                 "b" to true.toVal()
                         )
+                ),
+                OutputTest(
+                        "return ends execution",
+                        "var a := 1; return a; var a := 2",
+                        mapOf(
+                                "a" to 1.toVal()
+                        )
                 )
         )
 
