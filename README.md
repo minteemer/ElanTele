@@ -33,7 +33,7 @@ print unsorted
 ```
 
 ## Tatar language support
-Run `bin/ElanTele -t` to use ElanTele in Tatar mode
+Run `./ElanTele -t` to use ElanTele in Tatar mode
 
 Example of bubble sort in Tatar ElanTele:
 ```
@@ -46,20 +46,19 @@ Example of bubble sort in Tatar ElanTele:
 вар ә, җ
 дәвамында ә эчендә 2..озынлык элмәк
     дәвамында җ эчендә 2..(озынлык - 1) элмәк
-        әгәр җыештырылмаган[җ] < җыештырылмаган [җ - 1] бу_очракта
+        әгәр җыештырылмаган[җ] < җыештырылмаган [җ - 1] буочракта
             вар вакытлы := җыештырылмаган[җ]
             җыештырылмаган[җ] := җыештырылмаган[җ - 1]
             җыештырылмаган[җ - 1] := вакытлы
         бетте
     бетте
 бетте
-
 яз җыештырылмаган
 ```
 
-You can find it in `example.et`. Run `bin/ElanTele -t in.txt` to see it in action.
+You can find it in [example.et](example.et). Run `./ElanTele -t example.et` to see it in action.
 
-## ElanTele Syntax File
+## ElanTele Syntax highlighting
 You can use syntax file `ElanTele.sublime-syntax` written for Sublime Text 3 
 in order to use our language more comfortably.
 
