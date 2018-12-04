@@ -14,13 +14,13 @@ or `build/distributions/ElanTele-1.0.zip` and run `bin/ElanTele`
 ```
 var unsorted := [1, 4, 88, 2, 11, 100, 55]
 print unsorted
-var length := 0
+var length := 1
 while unsorted[length] is int loop
     length := length + 1
 end
 var i, j
-for i in 1..length loop
-    for j in 1..(length - 1) loop
+for i in 2..length loop
+    for j in 2..(length - 1) loop
         if unsorted[j] < unsorted [j - 1] then
             var temp := unsorted[j]
             unsorted[j] := unsorted[j - 1]
