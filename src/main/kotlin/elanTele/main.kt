@@ -18,6 +18,7 @@ import java.io.File
 
 const val TATAR_KEYWORD_FLAG = "-t"
 const val EXIT_KEYWORD = "exit"
+const val REPL_COMMAND_PROMPT = ">>> "
 
 fun main(args: Array<String>) {
     val useTatarKeywords = args.contains(TATAR_KEYWORD_FLAG)
@@ -34,13 +35,13 @@ private fun executeFile(sourceFilePath: String, tatarTokens: Boolean) {
 
 private fun runRepl(tatarTokes: Boolean) {
     val context = Context()
-    print(">>> ")
+    print(REPL_COMMAND_PROMPT)
     var input = readLine()
-    while (input != EXIT_KEYWORD) {
+    while (input != null && input != EXIT_KEYWORD) {
         val lexer = getLexer(tatarTokes, CharStreams.fromString(input))
         execute(context, lexer)
 
-        print(">>> ")
+        print(REPL_COMMAND_PROMPT)
         input = readLine()
     }
 }
@@ -68,7 +69,7 @@ fun execute(context: Context, lexer: Lexer) {
         val program = ProgramInterpreter.getProgram(parser.program())
         program.execute(context)
     } catch (e: InternalRepresentationException) {
-        System.err.println("Representation error: " + e.message)
+        System.err.println("Execution error: " + e.message)
     } catch (e: InterpreterException) {
         System.err.println("Interpretation error: " + e.message)
     } catch (e: ParseCancellationException) {
