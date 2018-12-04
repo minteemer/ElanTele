@@ -13,7 +13,7 @@ object DisjunctionInterpreter {
                 BinaryExpression(
                         getDisjunctionExpression(tree.disjuntion()),
                         RelationExpressionInterpreter.getRelationExpression(tree.relation()),
-                        OperatorType.OR)
+                        OperatorType.AND)
             } ?: RelationExpressionInterpreter.getRelationExpression(tree.relation())
 
 

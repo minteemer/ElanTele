@@ -13,7 +13,7 @@ object ExpressionInterpreter {
                 BinaryExpression(
                         getExpression(tree.expression()),
                         XorInterpreter.getXorExpression(tree.xor()),
-                        OperatorType.AND)
+                        OperatorType.XOR)
             } ?: XorInterpreter.getXorExpression(tree.xor())
 
 

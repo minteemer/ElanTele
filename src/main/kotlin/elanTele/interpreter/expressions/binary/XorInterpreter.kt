@@ -13,7 +13,7 @@ object XorInterpreter {
                 BinaryExpression(
                         getXorExpression(tree.xor()),
                         DisjunctionInterpreter.getDisjunctionExpression(tree.disjuntion()),
-                        OperatorType.XOR)
+                        OperatorType.OR)
             } ?: DisjunctionInterpreter.getDisjunctionExpression(tree.disjuntion())
 
 
