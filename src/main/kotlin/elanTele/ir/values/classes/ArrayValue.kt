@@ -6,12 +6,6 @@ import java.lang.IndexOutOfBoundsException
 
 class ArrayValue(values: Map<Int, Value>) : Value(ValueClass.ARRAY) {
 
-    constructor(values: List<Value>) : this(
-            values
-                    .mapIndexed { index, value -> index to value }
-                    .associate { it }
-    )
-
     private val values = HashMap(values)
 
     fun getElement(index: Int): Value = values[index] ?: EmptyValue()
@@ -23,7 +17,13 @@ class ArrayValue(values: Map<Int, Value>) : Value(ValueClass.ARRAY) {
     }
 
     override fun add(other: Value): Value = when (other) {
-        is ArrayValue -> ArrayValue(values + other.values) // TODO: concatenate sparse arrays
+        is ArrayValue -> {
+            val size = values.keys.max() ?: 0
+            val newSparseArray = HashMap(values).apply {
+                other.values.forEach { (index, value) -> put(size + index, value) }
+            }
+            ArrayValue(newSparseArray)
+        }
         else -> super.add(other)
     }
 
