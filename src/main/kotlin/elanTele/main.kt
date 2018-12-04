@@ -5,6 +5,7 @@ package elanTele
 import elanTele.interpreter.ProgramInterpreter
 import elanTele.ir.Context
 import elanTele.parser.ElanTeleLexer
+import elanTele.parser.ElanTeleLexerTatarcha
 import elanTele.parser.ElanTeleParser
 import org.antlr.v4.runtime.CharStream
 import org.antlr.v4.runtime.CharStreams
@@ -23,8 +24,8 @@ fun main(args: Array<String>) {
     } ?: runRepl(useTatarKeywords)
 }
 
-private fun executeFile(sourceFilePath: String, tatarTokes: Boolean) {
-    val lexer = getLexer(tatarTokes, CharStreams.fromPath(File(sourceFilePath).toPath()))
+private fun executeFile(sourceFilePath: String, tatarTokens: Boolean) {
+    val lexer = getLexer(tatarTokens, CharStreams.fromPath(File(sourceFilePath).toPath()))
     execute(Context(), lexer)
 }
 
@@ -47,7 +48,7 @@ private fun runRepl(tatarTokes: Boolean) {
 
 private fun getLexer(useTatarTokes: Boolean, charStream: CharStream) =
         if (useTatarTokes)
-            TODO("implement tatar tokens lexer")
+            ElanTeleLexerTatarcha(charStream)
         else
             ElanTeleLexer(charStream)
 

@@ -1,5 +1,5 @@
 
-lexer grammar ElanTeleLexer;
+lexer grammar ElanTeleLexerTatarcha;
 
 import UnicodeClasses;
 
@@ -47,42 +47,42 @@ LE: '<=' ;
 GE: '>=' ;
 EXCL_EQ: '/=' ;
 EQEQ: '=' ;
-AND: 'and';
-XOR: 'xor'  ;
-OR: 'or' ;
-NOT: 'not' ;
+AND: 'һәм' ;
+XOR: 'ияки' ;
+OR: 'яки' ;
+NOT: 'түгел' ;
 
 
 //KEYWORDS
 
-FUNC: 'func' ;
-VAR: 'var' ;
-IF: 'if' ;
-THEN: 'then' ;
-IN: 'in' ;
-ELSE: 'else' ;
-WHEN: 'when' ;
-FOR: 'for' ;
-WHILE: 'while' ;
-RETURN: 'return' ;
-IS: 'is' ;
-END: 'end' ;
-PRINT: 'print' ;
-LOOP: 'loop' ;
+FUNC:  'функция' ;
+VAR: 'вар' ;
+IF: 'әгәр' ;
+THEN: 'бу_очракта' ;
+IN: 'эчендә' ; // начар
+ELSE: 'башка_очракта' ;
+WHEN: 'кайчан' ;
+FOR: 'дәвамында' ;
+WHILE: 'әлегә' ;
+RETURN: 'кайтар' ;
+IS: 'бу' ;
+END: 'бетте' ;
+PRINT: 'яз' ;
+LOOP: 'элмәк' ;
 
 
-IntType: 'int' ;
-RealType: 'real' ;
-StringType: 'string' ;
-BoolType: 'bool' ;
-EmptyType: 'empty' ;
+IntType: 'сан' ;
+RealType: 'чын_сан' ;
+StringType: 'сүз' ;
+BoolType: 'логик' ;
+EmptyType: 'буш' ;
 ArrayType: '[]' ;
 TupleType: '{}' ;
 
 
-ReadInt: 'readInt' ;
-ReadReal: 'readReal' ;
-ReadString: 'readString' ;
+ReadInt: 'санУку' ;
+ReadReal:  'чынСанУку' ;
+ReadString: 'сүзУку' ;
 
 //
 
@@ -146,8 +146,8 @@ fragment UNICODE_CLASS_ND_NoZeros
 	;
 
 BooleanLiteral
-    : 'true'
-    | 'false'
+    : 'дөрес'
+    | 'ялган'
     ;
 
 Identifier
