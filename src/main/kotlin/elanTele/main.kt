@@ -30,7 +30,7 @@ fun main(args: Array<String>) {
 
 private fun executeFile(sourceFilePath: String, tatarTokens: Boolean) {
     val lexer = getLexer(tatarTokens, CharStreams.fromPath(File(sourceFilePath).toPath()))
-    execute(Context(), lexer)
+    safeExecute(Context(), lexer)
 }
 
 private fun runRepl(tatarTokes: Boolean) {
@@ -39,7 +39,7 @@ private fun runRepl(tatarTokes: Boolean) {
     var input = readLine()
     while (input != null && input != EXIT_KEYWORD) {
         val lexer = getLexer(tatarTokes, CharStreams.fromString(input))
-        execute(context, lexer)
+        safeExecute(context, lexer)
 
         print(REPL_COMMAND_PROMPT)
         input = readLine()
@@ -52,7 +52,7 @@ private fun getLexer(useTatarTokes: Boolean, charStream: CharStream) =
         else
             ElanTeleLexer(charStream)
 
-fun execute(context: Context, lexer: Lexer) {
+fun unsafeExecute(context: Context, lexer: Lexer) {
     val errorListener = ParserErrorListener()
 
     lexer.apply {
@@ -65,9 +65,13 @@ fun execute(context: Context, lexer: Lexer) {
         addErrorListener(errorListener)
     }
 
+    val program = ProgramInterpreter.getProgram(parser.program())
+    program.execute(context)
+}
+
+fun safeExecute(context: Context, lexer: Lexer) {
     try {
-        val program = ProgramInterpreter.getProgram(parser.program())
-        program.execute(context)
+        unsafeExecute(context, lexer)
     } catch (e: InternalRepresentationException) {
         System.err.println("Execution error: " + e.message)
     } catch (e: InterpreterException) {

@@ -1,12 +1,9 @@
-import elanTele.execute
-import elanTele.interpreter.ProgramInterpreter
+import elanTele.safeExecute
 import elanTele.ir.Context
 import elanTele.ir.values.Value
 import elanTele.ir.values.classes.*
 import elanTele.parser.ElanTeleLexer
-import elanTele.parser.ElanTeleParser
 import org.antlr.v4.runtime.CharStreams
-import org.antlr.v4.runtime.CommonTokenStream
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.assertEquals
 
@@ -471,7 +468,7 @@ class OutputTests {
         DynamicTest.dynamicTest(test.name) {
             val lexer = ElanTeleLexer(CharStreams.fromString(test.sourceCode))
             val context = Context()
-            execute(context, lexer)
+            safeExecute(context, lexer)
             println("Result context: $context")
 
             test.outputs.forEach { (varName, value) ->
