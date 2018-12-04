@@ -18,7 +18,7 @@ object LiteralInterpreter {
         lineStringLiteral()?.let { StringInterpreter.interpretString(it) }
                 ?: IntegerLiteral()?.let { IntegerValue(it.text.toInt()) }
                 ?: RealLiteral()?.let { RealValue(it.text.toDouble()) }
-                ?: BooleanLiteral()?.let { BooleanValue(it.text!!.toBoolean()) }
+                ?: BooleanLiteral()?.let { BooleanValue(it.text == "true" || it.text == "дөрес" ) }
                 ?: EmptyType()?.let { EmptyValue() }
                 ?: throw Exception("The tree has unknown LiteralContext payload: $tree")
     }
