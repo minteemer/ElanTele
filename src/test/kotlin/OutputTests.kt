@@ -1,4 +1,4 @@
-import elanTele.safeExecute
+import elanTele.ElanTeleExecutor
 import elanTele.ir.Context
 import elanTele.ir.values.Value
 import elanTele.ir.values.classes.*
@@ -475,7 +475,7 @@ class OutputTests {
         DynamicTest.dynamicTest(test.name) {
             val lexer = ElanTeleLexer(CharStreams.fromString(test.sourceCode))
             val context = Context()
-            safeExecute(context, lexer)
+            ElanTeleExecutor.unsafeExecute(context, lexer)
             println("Result context: $context")
 
             test.outputs.forEach { (varName, value) ->

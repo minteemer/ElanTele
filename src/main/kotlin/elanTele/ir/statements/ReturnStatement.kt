@@ -6,8 +6,9 @@ import elanTele.ir.values.Value
 
 class ReturnStatement(val expression: Expression) : Statement {
 
-    override fun execute(context: Context): Value? {
-        return expression.execute(context)
-    }
+    /**
+     * @return [Value] retrieved from execution of [expression]
+     */
+    override fun execute(context: Context): Value = expression.execute(context)
 
 }

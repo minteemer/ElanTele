@@ -12,6 +12,6 @@ data class IsExpression(val expression: Expression, val className: ValueClass) :
      */
     override fun execute(context: Context): BooleanValue {
         val value = expression.execute(context)
-        return BooleanValue(value.valueClass == className)
+        return value.isClass(className)
     }
 }

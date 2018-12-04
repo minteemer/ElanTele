@@ -10,8 +10,14 @@ class DeclarationStatement(
         private val expression: Expression? = null
 ) : Statement {
 
+    /**
+     * Creates new variable at the top of given [context] with given [variableName],
+     * sets value of the variable to the value calculated by [expression] if it is
+     * not null, otherwise sets value to [EmptyValue]
+     * @return null
+     */
     override fun execute(context: Context): Value? {
-        context.createLocalReference(variableName,
+        context.createLocalVariable(variableName,
                 expression?.execute(context) ?: EmptyValue())
         return null
     }
