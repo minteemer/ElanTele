@@ -5,6 +5,11 @@ import elanTele.ir.exceptions.ExpressionException
 import elanTele.ir.values.Value
 
 data class BinaryExpression(val left: Expression, val right: Expression, val operator: OperatorType) : Expression {
+    /**
+     *  @param [Context] of program
+     *  @return [Value] that contain value of operation between [Expression]s
+     *
+     */
     override fun execute(context: Context): Value {
         val leftValue = left.execute(context)
         val rightValue = right.execute(context)
