@@ -1,7 +1,7 @@
 var a
 a := 10
-a := redInt
-a := redString
-a := redReal
+// a := readInt
+// a := readString
+// a := readReal
 a := func(x) => x + 1
 a := (a > -12)
