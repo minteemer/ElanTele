@@ -325,7 +325,7 @@ class OutputTests {
                                           a := a + 1
                                       end""",
                         mapOf(
-                                "a" to 5.toVal()
+                                "a" to 0.toVal()
                         )
                 ),
                 OutputTest(
