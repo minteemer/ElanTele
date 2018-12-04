@@ -262,7 +262,109 @@ class OutputTests {
                                 "a" to true.toVal(),
                                 "b" to true.toVal()
                         )
+                ),
+                OutputTest(
+                        "array operations",
+                        """var a := []
+                                    var c := 2;
+                                    a[1] := c
+                                    a[c] := 1
+                                    var a1 := a[1]
+                                    var a2 := a[c]
+                                    var d := a[1] + a[c]
+                                    a[100]:= func(x)=>x+1;
+                                    var fun := a[100] is func
+                                    a[1000]:= {d:=1,b:=2.7};
+                                    var tup := a[1000] is {}
+                                    a[1337] := [1, 2, 3];
+                                    var arr := a[1337] is []
+                                    a := a + [1, 2, 3]
+                                    var c0 := a[100](10)
+                                    var c1 := a[1000].d
+                                    var c2 := a[1337][1]""",
+                        mapOf(
+                                "c" to 2.toVal(),
+                                "a1" to 2.toVal(),
+                                "a2" to 1.toVal(),
+                                "d" to 3.toVal(),
+                                "fun" to true.toVal(),
+                                "tup" to true.toVal(),
+                                "arr" to true.toVal(),
+                                "c0" to 11.toVal(),
+                                "c1" to 1.toVal(),
+                                "c2" to 1.toVal()
+                        )
+                ),
+                OutputTest(
+                        "boolean operations",
+                        "var a:= not(false and (true xor false and true))",
+                        mapOf(
+                                "a" to true.toVal()
+                        )
+                ),
+                OutputTest(
+                        "for const loop",
+                        """
+                                      var a := 0
+                                      for 1..3
+                                      loop
+                                          a := a + 1
+                                          a := a + 1
+                                      end""",
+                        mapOf(
+                                "a" to 6.toVal()
+                        )
+                ),
+                OutputTest(
+                        "for const loop",
+                        """
+                                      var a := 0
+                                      for a in 1..3
+                                      loop
+                                          a := a + 1
+                                          a := a + 1
+                                      end""",
+                        mapOf(
+                                "a" to 5.toVal()
+                        )
+                ),
+                OutputTest(
+                        "functions literals",
+                        """var a := func(x) => x + (x)
+                                        var b := func(x) is return x*x end;
+                                        var c := b(a(3))
+                                        """,
+                        mapOf(
+                                "c" to 36.toVal()
+                        )
+                ),
+                OutputTest(
+                        "functions literals",
+                        """  var x, c
+                                        if 1 > 0 then x := 2; end;
+
+                                        if x > 0 then
+                                        c := 3
+                                        else
+                                        c := 1
+                                        end;
+                                        """,
+                        mapOf(
+                                "c" to 3.toVal(),
+                                "x" to 2.toVal()
+                        )
+                ),
+                OutputTest(
+                        "functions literals",
+                        """var a := func(x) => x + (x)
+                                        var b := func(x) is return x*x end;
+                                        var c := b(a(3))
+                                        """,
+                        mapOf(
+                                "c" to 36.toVal()
+                        )
                 )
+
         )
 
         private fun Int.toVal() = IntegerValue(this)
