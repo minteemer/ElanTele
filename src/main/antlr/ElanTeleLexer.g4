@@ -48,7 +48,7 @@ EQEQ: '=' ;
 CONJ: 'and' ;
 DISJ: 'or' ;
 XOR: 'xor' ;
-NOT: 'not'| 'түгел';
+NOT: 'not';
 
 
 //KEYWORDS
