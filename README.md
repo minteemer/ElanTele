@@ -57,3 +57,17 @@ Example of bubble sort in Tatar ElanTele:
 ```
 
 You can find it in `in.txt`. Run `bin/ElanTele -t in.txt` to see it in action.
+
+## ElanTele Syntax File
+You can use syntax file `ElanTele.sublime-syntax` written for Sublime Text 3 
+in order to use our language more comfortably.
+
+Installation manual (Windows):
+1) Find `User` folder:
+    - Go to Preferences > Browse Packages... . Browse `User` folder 
+    in opened window 
+    
+    OR
+    - Go to `C:\Users\%USER%\AppData\Roaming\Sublime Text 3\Packages\User`
+2) Move `ElanTele.sublime-syntax` file inside `User` folder
+3) After restarting Sublime go to View > Syntax > Elan Tele
