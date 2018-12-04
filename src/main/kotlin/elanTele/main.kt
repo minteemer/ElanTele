@@ -51,7 +51,7 @@ private fun getLexer(useTatarTokes: Boolean, charStream: CharStream) =
         else
             ElanTeleLexer(charStream)
 
-private fun execute(context: Context, lexer: Lexer) {
+fun execute(context: Context, lexer: Lexer) {
     val errorListener = ParserErrorListener()
 
     lexer.apply {
