@@ -5,6 +5,9 @@ import elanTele.ir.exceptions.ExpressionException
 import elanTele.ir.values.Value
 
 data class UnaryExpression(val expression: Expression, val op: OperatorType) : Expression {
+    /**
+     * @return expression which contains result of unary operation
+     */
     override fun execute(context: Context): Value {
         val value = expression.execute(context)
         return when (op) {
