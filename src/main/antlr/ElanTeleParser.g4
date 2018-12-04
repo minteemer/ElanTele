@@ -54,8 +54,18 @@ print
     ;
 
 expression
+    : xor
+    | expression (XOR xor)
+    ;
+
+xor
+    : disjuntion
+    | xor DISJ disjuntion
+    ;
+
+disjuntion
     : relation
-    | expression ((OR|AND|XOR) relation)
+    | disjuntion CONJ relation
     ;
 
 relation
