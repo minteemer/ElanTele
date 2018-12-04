@@ -24,7 +24,7 @@ class IntegerValue(val value: Int) : Value(ValueClass.INTEGER) {
     }
 
     override fun divide(other: Value): Value = when (other) {
-        is IntegerValue -> RealValue(value.toDouble() / other.value)
+        is IntegerValue -> IntegerValue(value / other.value)
         is RealValue -> RealValue(value.toDouble() / other.value)
         else -> super.divide(other)
     }
