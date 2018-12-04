@@ -67,4 +67,10 @@ class RealValue(val value: Double) : Value(ValueClass.REAL){
     override fun unaryMinus(): Value = RealValue(-value)
 
     override fun toString(): String = value.toString()
+
+    override fun equals(other: Any?): Boolean =
+            when (other) {
+                is RealValue -> other.value == value
+                else -> super.equals(other)
+            }
 }

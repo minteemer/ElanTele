@@ -69,5 +69,9 @@ class IntegerValue(val value: Int) : Value(ValueClass.INTEGER) {
 
     override fun toString(): String = value.toString()
 
-
+    override fun equals(other: Any?): Boolean =
+            when (other) {
+                is IntegerValue -> other.value == value
+                else -> super.equals(other)
+            }
 }

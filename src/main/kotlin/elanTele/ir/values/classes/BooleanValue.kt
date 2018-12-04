@@ -19,5 +19,11 @@ class BooleanValue(val value: Boolean) : Value(ValueClass.BOOLEAN){
     }
 
     override fun toString(): String = value.toString()
+
+    override fun equals(other: Any?): Boolean =
+        when (other) {
+            is BooleanValue -> other.value == value
+            else -> super.equals(other)
+        }
 }
 
