@@ -10,6 +10,10 @@ class AssignmentStatement(
         private val expression: Expression
 ) : Statement {
 
+    /**
+     * Calculates [expression] and sets value referenced by [reference] to the result
+     * @return null
+     */
     override fun execute(context: Context): Value? {
         reference.setValue(context, expression.execute(context))
         return null

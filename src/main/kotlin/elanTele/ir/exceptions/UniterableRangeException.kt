@@ -1,3 +1,3 @@
 package elanTele.ir.exceptions
 
-class UniterableRangeException(message: String): InternalRepresentationException(message)
+class UniterableRangeException(message: String) : InternalRepresentationException(message)

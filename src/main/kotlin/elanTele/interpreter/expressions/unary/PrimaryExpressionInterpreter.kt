@@ -7,7 +7,10 @@ import elanTele.ir.expressions.*
 import elanTele.parser.ElanTeleParser
 
 object PrimaryExpressionInterpreter {
-
+    /**
+     *  @param [tree] is [ElanTeleParser.PrimaryContext]
+     *  @return [Expression] that contains primary expression
+     */
     fun getPrimaryExpression(tree: ElanTeleParser.PrimaryContext): Expression =
             tree.literal()?.let {
                 it.array()?.let { interpretArray(it) }
@@ -21,6 +24,10 @@ object PrimaryExpressionInterpreter {
                     ?: tree.ReadReal()?.let { ReadExpression(ReadExpression.InputType.REAL) }
                     ?: throw ClassCastException("Unknown tree element")
 
+    /**
+     *  @param [tree] is [ElanTeleParser.TupleContext]
+     *  @return [TupleCreationExpression] that contains list of expression which will be executed in run-time
+     */
     private fun interpretTuple(tupleContext: ElanTeleParser.TupleContext): TupleCreationExpression =
             TupleCreationExpression(
                     tupleContext.tupleElement().map { tupleElement ->
@@ -30,6 +37,10 @@ object PrimaryExpressionInterpreter {
             )
 
 
+    /**
+     *  @param [tree] is [ElanTeleParser.ArrayContext]
+     *  @return [ArrayCreationExpression] that contains list of expression which will be executed in run-time
+     */
     private fun interpretArray(arrayContext: ElanTeleParser.ArrayContext): ArrayCreationExpression =
             ArrayCreationExpression(
                     arrayContext.expression().mapIndexed { index, expressionContext ->

@@ -9,6 +9,10 @@ import elanTele.parser.ElanTeleParser
 
 object TermExpressionInterpreter {
 
+    /**
+     *  @param [tree] is [ElanTeleParser.TermContext]
+     *  @return [Expression] that contains term expression
+     */
     fun getTermExpression(tree: ElanTeleParser.TermContext): Expression =
             tree.term()?.let { term ->
                 BinaryExpression(
@@ -18,6 +22,9 @@ object TermExpressionInterpreter {
                 )
             } ?: UnaryExpressionInterpreter.getUnaryExpression(tree.unary())
 
+    /**
+     * parse operations
+     */
     private fun ElanTeleParser.TermContext.getOperator(): OperatorType = when {
         DIV() != null -> OperatorType.DIVIDE
         MULT() != null -> OperatorType.MULTIPLY

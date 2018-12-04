@@ -7,6 +7,10 @@ import elanTele.parser.ElanTeleParser
 
 object ReferenceInterpreter {
 
+    /**
+     *  @param [tree] is [ElanTeleParser.ReferenceContext]
+     *  @return [Reference] that contains reference
+     */
     fun getReference(tree: ElanTeleParser.ReferenceContext): Reference =
             tree.variableReference()?.let { VariableReference(it.text) }
                     ?: getReferenceIdentifier(getReference(tree.reference()), tree)

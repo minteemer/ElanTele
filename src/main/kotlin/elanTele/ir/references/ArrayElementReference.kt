@@ -13,6 +13,12 @@ data class ArrayElementReference(
         val indexExpression: Expression
 ) : Reference {
 
+    /**
+     * Receives array from the [context] and puts [value] to it.
+     *
+     * @throws InvalidTypeException, if received from the context object is not an array
+     * @throws InvalidIndexException, if index is not an Integer value
+     */
     override fun setValue(context: Context, value: Value) {
         val array = arrayReference.getValue(context)
         if (array is ArrayValue) {
@@ -25,6 +31,13 @@ data class ArrayElementReference(
             throw InvalidTypeException("Expected ArrayValue, got ${array.javaClass.simpleName}")
     }
 
+    /**
+     * Receives array from the [context] and gets a certain value from it.
+     *
+     * @throws InvalidTypeException, if received from the context object is not an array
+     * @throws InvalidIndexException, if index is not an Integer value
+     * @return object of the type [Value] taken from the array
+     */
     override fun getValue(context: Context): Value {
         val array = arrayReference.getValue(context)
         if (array is ArrayValue) {

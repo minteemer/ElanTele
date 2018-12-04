@@ -8,8 +8,10 @@ class PrintStatement(
         private val expressions: List<Expression>
 ) : Statement {
 
-    constructor(expression: Expression): this(listOf(expression))
-
+    /**
+     * Executes all the [expressions] and prints the results in one line joined by ", "
+     * @return null
+     */
     override fun execute(context: Context): Value? {
         expressions
                 .map { it.execute(context) }

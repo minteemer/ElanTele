@@ -9,6 +9,10 @@ import elanTele.parser.ElanTeleParser
 
 object FactorExpressionInterpreter {
 
+    /**
+     *  @param [tree] is [ElanTeleParser.FactorContext]
+     *  @return [Expression] that contains factor expression
+     */
     fun getFactorExpression(tree: ElanTeleParser.FactorContext): Expression =
             tree.term()?.let { term ->
                 tree.factor()?.let { factor ->

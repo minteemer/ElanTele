@@ -1,3 +1,3 @@
 package elanTele.ir.exceptions
 
-class InvalidTypeException(message: String): InternalRepresentationException(message)
+class InvalidTypeException(message: String) : InternalRepresentationException(message)
