@@ -12,6 +12,12 @@ class IfStatement(
         private val elseBody: StatementsSequence? = null
 ) : Statement {
 
+    /**
+     * Calculates [conditionExpression] and executes [ifBody] if it
+     * returned true, otherwise executes [elseBody].
+     * @return [Value] returned by [ifBody] or [elseBody]
+     * @throws InvalidTypeException if value returned by [conditionExpression] is not [BooleanValue]
+     */
     override fun execute(context: Context): Value? {
         val condition = conditionExpression.execute(context)
         return if (condition is BooleanValue) {

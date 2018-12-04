@@ -36,7 +36,6 @@ data class TupleElementIndexReference(
         val dict = arrayReference.getValue(context)
         if (dict is TupleValue) {
             return dict.getElement(index - 1)
-                    ?: throw UnresolvedIdentifierException("Unresolved index: $dict has no index $index")
         } else {
             throw InvalidTypeException("Expected TupleValue, got ${dict.javaClass.simpleName}")
         }

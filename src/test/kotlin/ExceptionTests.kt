@@ -1,14 +1,12 @@
-import elanTele.interpreter.exceptions.InterpreterException
+import elanTele.ElanTeleExecutor
 import elanTele.ir.Context
 import elanTele.ir.exceptions.*
 import elanTele.parser.ElanTeleLexer
-import elanTele.unsafeExecute
 import org.antlr.v4.runtime.CharStreams
 import org.antlr.v4.runtime.misc.ParseCancellationException
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.TestFactory
-import java.lang.IndexOutOfBoundsException
 
 class ExceptionTests {
     private data class ExceptionTest<E>(
@@ -76,7 +74,7 @@ class ExceptionTests {
             val lexer = ElanTeleLexer(CharStreams.fromString(test.sourceCode))
             val context = Context()
             Assertions.assertThrows(test.exceptionClass) {
-                unsafeExecute(context, lexer)
+                ElanTeleExecutor.unsafeExecute(context, lexer)
                 // uncomment if needed
                 // println("Result context: $context")
             }

@@ -8,26 +8,46 @@ class Context(private val parentContext: Context? = null) {
 
     private val values: MutableMap<String, Value> = HashMap()
 
-    fun getValue(reference: String): Value =
-            values[reference]
-                    ?: parentContext?.getValue(reference)
-                    ?: throw ContextException("Name $reference not found in the context")
+    /**
+     * Tries to get [Value] of variable with name [name], if the name is not
+     * found and [parentContext] is not null tries to get value from the parent
+     * context.
+     * @return [Value] of variable with given [name] from closest context in context
+     * stack
+     * @throws ContextException if name is not found
+     */
+    fun getValue(name: String): Value =
+            values[name]
+                    ?: parentContext?.getValue(name)
+                    ?: throw ContextException("Name $name not found in the context")
 
-    fun setValue(reference: String, value: Value) {
-        if (values.containsKey(reference))
-            values[reference] = value
+    /**
+     * Sets value of variable in closest context in context stack that contains
+     * a variable with given [name] to given [Value].
+     * @throws ContextException if [name] is not found in the context stack
+     */
+    fun setValue(name: String, value: Value) {
+        if (values.containsKey(name))
+            values[name] = value
         else
-            parentContext?.setValue(reference, value)
-                    ?: throw ContextException("Name $reference not found in the context")
+            parentContext?.setValue(name, value)
+                    ?: throw ContextException("Name $name not found in the context")
     }
 
-    fun createLocalReference(reference: String, value: Value) {
-        values[reference] = value
+    /**
+     * Creates new variable in this stack with given [name] and [value].
+     */
+    fun createLocalVariable(name: String, value: Value) {
+        values[name] = value
     }
 
+    /**
+     * Creates new context that has this context as parent and initialises
+     * it with given [arguments].
+     */
     fun getChildContext(arguments: Map<String, Value>? = null) =
             Context(this).apply {
-                arguments?.forEach { name, value -> createLocalReference(name, value) }
+                arguments?.forEach { name, value -> createLocalVariable(name, value) }
             }
 
     override fun toString(): String = GsonBuilder().setPrettyPrinting().create().toJson(values)
