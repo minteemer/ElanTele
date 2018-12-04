@@ -1,9 +1,7 @@
 package elanTele.interpreter.statements
 
-import elanTele.ir.statements.IfStatement
 import elanTele.ir.statements.Statement
 import elanTele.parser.ElanTeleParser
-import org.antlr.v4.runtime.tree.ParseTree
 
 object StatementInterpreter {
 

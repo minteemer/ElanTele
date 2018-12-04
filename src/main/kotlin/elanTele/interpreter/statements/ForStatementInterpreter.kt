@@ -2,7 +2,6 @@ package elanTele.interpreter.statements
 
 import elanTele.interpreter.expressions.binary.ExpressionInterpreter
 import elanTele.ir.statements.ForStatement
-import elanTele.ir.statements.StatementsSequence
 import elanTele.parser.ElanTeleParser
 
 object ForStatementInterpreter {

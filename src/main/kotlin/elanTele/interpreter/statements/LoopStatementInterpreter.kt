@@ -1,10 +1,8 @@
 package elanTele.interpreter.statements
 
 import elanTele.interpreter.exceptions.LoopStatementException
-import elanTele.ir.statements.IfStatement
 import elanTele.ir.statements.Statement
 import elanTele.parser.ElanTeleParser
-import org.antlr.v4.runtime.tree.ParseTree
 
 object LoopStatementInterpreter {
     /**

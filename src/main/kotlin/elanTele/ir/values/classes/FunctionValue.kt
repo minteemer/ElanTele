@@ -1,9 +1,7 @@
 package elanTele.ir.values.classes
 
 import elanTele.ir.Context
-import elanTele.ir.expressions.Expression
 import elanTele.ir.statements.Statement
-import elanTele.ir.statements.StatementsSequence
 import elanTele.ir.values.Value
 import elanTele.ir.values.ValueClass
 

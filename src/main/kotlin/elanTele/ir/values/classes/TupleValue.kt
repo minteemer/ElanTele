@@ -2,8 +2,6 @@ package elanTele.ir.values.classes
 
 import elanTele.ir.values.Value
 import elanTele.ir.values.ValueClass
-import java.util.*
-import kotlin.collections.ArrayList
 
 class TupleValue(values: List<Pair<String?, Value>>) : Value(ValueClass.DICT) {
 

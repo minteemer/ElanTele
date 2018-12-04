@@ -6,7 +6,6 @@ import elanTele.interpreter.references.ReferenceInterpreter
 import elanTele.ir.expressions.*
 import elanTele.ir.values.ValueClass
 import elanTele.parser.ElanTeleParser
-import java.lang.Exception
 
 object UnaryExpressionInterpreter {
 

@@ -3,7 +3,7 @@ package elanTele.ir.values.classes
 import elanTele.ir.values.Value
 import elanTele.ir.values.ValueClass
 
-class RealValue(val value: Double) : Value(ValueClass.REAL){
+class RealValue(val value: Double) : Value(ValueClass.REAL) {
     override fun add(other: Value): Value = when (other) {
         is IntegerValue -> RealValue(value + other.value)
         is RealValue -> RealValue(value + other.value)

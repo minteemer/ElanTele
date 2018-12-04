@@ -2,7 +2,6 @@ package elanTele.ir.values.classes
 
 import elanTele.ir.values.Value
 import elanTele.ir.values.ValueClass
-import java.lang.IndexOutOfBoundsException
 
 class ArrayValue(values: Map<Int, Value>) : Value(ValueClass.ARRAY) {
 

@@ -2,8 +2,6 @@ package elanTele.interpreter.statements
 
 import elanTele.interpreter.exceptions.InvalidReturnStatementException
 import elanTele.interpreter.expressions.binary.ExpressionInterpreter
-import elanTele.ir.statements.IfStatement
-import elanTele.ir.statements.PrintStatement
 import elanTele.ir.statements.ReturnStatement
 import elanTele.parser.ElanTeleParser
 

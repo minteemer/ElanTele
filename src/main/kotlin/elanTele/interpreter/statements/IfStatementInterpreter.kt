@@ -1,7 +1,6 @@
 package elanTele.interpreter.statements
 
 import elanTele.interpreter.expressions.binary.ExpressionInterpreter
-import elanTele.ir.statements.ForStatement
 import elanTele.ir.statements.IfStatement
 import elanTele.parser.ElanTeleParser
 

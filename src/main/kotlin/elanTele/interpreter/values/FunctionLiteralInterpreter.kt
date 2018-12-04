@@ -5,10 +5,8 @@ import elanTele.interpreter.expressions.binary.ExpressionInterpreter
 import elanTele.interpreter.statements.BodyStatementInterpreter
 import elanTele.ir.statements.ReturnStatement
 import elanTele.ir.statements.Statement
-import elanTele.ir.statements.StatementsSequence
 import elanTele.ir.values.classes.FunctionValue
 import elanTele.parser.ElanTeleParser
-import java.lang.Exception
 
 object FunctionLiteralInterpreter {
 
@@ -22,6 +20,7 @@ object FunctionLiteralInterpreter {
                     tree.Identifier().map { it.text },
                     getFunBody(tree.funBody())
             )
+
     /**
      *  @param [tree] is [ElanTeleParser.FunBodyContext]
      *  @return [Statement] that contains either expression either body

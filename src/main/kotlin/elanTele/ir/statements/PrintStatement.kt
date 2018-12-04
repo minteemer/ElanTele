@@ -8,7 +8,7 @@ class PrintStatement(
         private val expressions: List<Expression>
 ) : Statement {
 
-    constructor(expression: Expression): this(listOf(expression))
+    constructor(expression: Expression) : this(listOf(expression))
 
     override fun execute(context: Context): Value? {
         expressions
