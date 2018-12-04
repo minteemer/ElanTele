@@ -6,6 +6,7 @@ import elanTele.ir.values.Value
 
 data class UnaryExpression(val expression: Expression, val op: OperatorType) : Expression {
     /**
+     * @param [Context] of program depending on it expressions are executed
      * @return expression which contains result of unary operation
      */
     override fun execute(context: Context): Value {

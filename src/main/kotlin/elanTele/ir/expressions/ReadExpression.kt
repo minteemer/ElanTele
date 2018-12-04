@@ -13,7 +13,7 @@ data class ReadExpression(val inputType: InputType) : Expression {
     enum class InputType { REAL, INTEGER, STRING }
 
     /**
-     * read form console and return it depending on input
+     * read value form console and return it depending on [InputType]
      */
     override fun execute(context: Context): Value = (readLine() ?: "").let { input ->
         when (inputType) {
