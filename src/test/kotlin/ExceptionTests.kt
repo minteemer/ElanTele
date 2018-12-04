@@ -1,8 +1,6 @@
 import elanTele.interpreter.exceptions.InterpreterException
 import elanTele.ir.Context
-import elanTele.ir.exceptions.InternalRepresentationException
-import elanTele.ir.exceptions.InvalidTypeException
-import elanTele.ir.exceptions.UnresolvedIdentifierException
+import elanTele.ir.exceptions.*
 import elanTele.parser.ElanTeleLexer
 import elanTele.unsafeExecute
 import org.antlr.v4.runtime.CharStreams
@@ -10,6 +8,7 @@ import org.antlr.v4.runtime.misc.ParseCancellationException
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.TestFactory
+import java.lang.IndexOutOfBoundsException
 
 class ExceptionTests {
     private data class ExceptionTest<E>(
@@ -21,30 +20,52 @@ class ExceptionTests {
     companion object {
         private val exceptionTests = listOf(
                 ExceptionTest(
-                        "No such variable",
+                        "Assignment",
+                        "var f := func is print 1; end; f() := 1",
+                        AssignmentException::class.java
+                ),
+                ExceptionTest(
+                        "Context",
                         "a := 1;",
-                        InternalRepresentationException::class.java
+                        ContextException::class.java
                 ),
                 ExceptionTest(
-                        "Assigning to function call",
-                        "var f := func is print 1; f() := 1",
-                        ParseCancellationException::class.java
+                        // ExpressionException is unreachable
+                        "Expression",
+                        "1",
+                        Exception::class.java
                 ),
                 ExceptionTest(
-                        "Syntax error",
-                        "print )1+1(",
-                        ParseCancellationException::class.java
-                ),
-                ExceptionTest(
-                        "Invalid index",
+                        "InvalidIndex",
                         "var a := {a := 1, b := 2}; print a.3",
                         // TODO: change this exception type
+                        InvalidIndexException::class.java
+                ),
+                ExceptionTest(
+                        "InvalidType",
+                        "var a := 1; print a.1",
                         InvalidTypeException::class.java
                 ),
                 ExceptionTest(
-                        "Invalid key",
+                        "UniterableRange",
+                        "var a := func is print 1; end; for i in a..1 loop print i; end;",
+                        UniterableRangeException::class.java
+                ),
+                ExceptionTest(
+                        "UnresolvedIdentifier",
                         "var a := {a := 1, b := 2}; print a.c",
-                        UnresolvedIdentifierException::class.java
+                        UnresolvedIdentifierException::
+                        class.java
+                ),
+                ExceptionTest(
+                        "UnresolvedOperator",
+                        "var f := func is print 1; end; print f + 1",
+                        UnresolvedOperatorException::class.java
+                ),
+                ExceptionTest(
+                        "ParseCancellation",
+                        "print )1+1(",
+                        ParseCancellationException::class.java
                 )
         )
     }
