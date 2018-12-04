@@ -1,5 +1,6 @@
 package elanTele.interpreter.values
 
+import elanTele.interpreter.exceptions.InvalidFunctionBodyException
 import elanTele.interpreter.expressions.binary.ExpressionInterpreter
 import elanTele.interpreter.statements.BodyStatementInterpreter
 import elanTele.ir.statements.ReturnStatement
@@ -20,6 +21,6 @@ object FunctionLiteralInterpreter {
     private fun getFunBody(funBody: ElanTeleParser.FunBodyContext): Statement =
             funBody.expression()?.let { ReturnStatement(ExpressionInterpreter.getExpression(it)) }
                     ?: funBody.body()?.let { BodyStatementInterpreter.getBody(it) }
-                    ?: throw Exception() // TODO: proper exception
+                    ?: throw InvalidFunctionBodyException("Can't parse function body: $funBody")
 
 }

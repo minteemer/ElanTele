@@ -4,4 +4,4 @@ a := 10
 // a := readString
 // a := readReal
 a := func(x) => x + 1
-a := (a > -12)
+a := (a(-12) > -12)
