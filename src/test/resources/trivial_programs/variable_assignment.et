@@ -1,6 +1,6 @@
 var a := 1;
 var b := []
-var c := {}
+var c := {1, a:=2, 3}
 var d := "d"
 var e := 2.3
 var f := true

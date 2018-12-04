@@ -47,10 +47,10 @@ LE: '<=' ;
 GE: '>=' ;
 EXCL_EQ: '/=' ;
 EQEQ: '=' ;
-AND: 'and';
-XOR: 'xor'  ;
-OR: 'or' ;
-NOT: 'not' ;
+CONJ: 'and' ;
+DISJ: 'or' ;
+XOR: 'xor' ;
+NOT: 'not'| 'түгел';
 
 
 //KEYWORDS

@@ -11,13 +11,13 @@ data class FunctionCallReference(
         val arguments: List<Expression>
 ) : Reference {
     override fun setValue(context: Context, value: Value) =
-            TODO("handle set value to function call")
+            throw IllegalAccessException()
 
     override fun getValue(context: Context): Value {
         val function = identifier.getValue(context)
         if (function is FunctionValue) {
             return function.call(
-                    arguments.map{ it.execute(context) },
+                    arguments.map { it.execute(context) },
                     context
             )
         } else
