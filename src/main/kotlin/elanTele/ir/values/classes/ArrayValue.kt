@@ -30,4 +30,9 @@ class ArrayValue(values: Map<Int, Value>) : Value(ValueClass.ARRAY) {
     override fun toString(): String = values.entries
             .joinToString(prefix = "[", postfix = "]") { (index, value) -> "$index: $value" }
 
+    override fun equals(other: Any?): Boolean =
+            when (other) {
+                is ArrayValue -> other.values == values
+                else -> super.equals(other)
+            }
 }

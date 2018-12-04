@@ -1,2 +1,1 @@
 var a:= not(false and (true xor false and true))
-print a

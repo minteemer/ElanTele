@@ -24,7 +24,7 @@ class IntegerValue(val value: Int) : Value(ValueClass.INTEGER) {
     }
 
     override fun divide(other: Value): Value = when (other) {
-        is IntegerValue -> RealValue(value.toDouble() / other.value)
+        is IntegerValue -> IntegerValue(value / other.value)
         is RealValue -> RealValue(value.toDouble() / other.value)
         else -> super.divide(other)
     }
@@ -69,5 +69,9 @@ class IntegerValue(val value: Int) : Value(ValueClass.INTEGER) {
 
     override fun toString(): String = value.toString()
 
-
+    override fun equals(other: Any?): Boolean =
+            when (other) {
+                is IntegerValue -> other.value == value
+                else -> super.equals(other)
+            }
 }

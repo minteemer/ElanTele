@@ -52,4 +52,6 @@ open class Value(val valueClass: ValueClass) {
             throw UnresolvedOperatorException("Can not apply 'not' logical operation to ${javaClass.simpleName}")
 
     open fun isClass(valueClass: ValueClass) = BooleanValue(valueClass == this.valueClass)
+
+
 }

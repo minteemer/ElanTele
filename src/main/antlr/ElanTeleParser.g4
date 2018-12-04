@@ -15,12 +15,12 @@ variableDefinition
     ;
 
 statement
-    : declaration SEMICOLON?
-    | assignment SEMICOLON?
-    | if_expression SEMICOLON?
-    | loop SEMICOLON?
-    | return_expression SEMICOLON?
-    | print SEMICOLON?
+    : declaration SEMICOLON? NL*
+    | assignment SEMICOLON? NL*
+    | if_expression SEMICOLON? NL*
+    | loop SEMICOLON? NL*
+    | return_expression SEMICOLON? NL*
+    | print SEMICOLON? NL*
     ;
 
 assignment

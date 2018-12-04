@@ -30,4 +30,10 @@ class TupleValue(values: List<Pair<String?, Value>>) : Value(ValueClass.DICT) {
             .joinToString(prefix = "{", postfix = "}") { (name, value) ->
                 name?.let { "$name: $value" } ?: value.toString()
             }
+
+    override fun equals(other: Any?): Boolean =
+            when (other) {
+                is TupleValue -> other.values == values
+                else -> super.equals(other)
+            }
 }

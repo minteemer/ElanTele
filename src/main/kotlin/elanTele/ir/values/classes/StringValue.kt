@@ -11,4 +11,10 @@ class StringValue(val value: String) : Value(ValueClass.STRING) {
     }
 
     override fun toString(): String = value
+
+    override fun equals(other: Any?): Boolean =
+            when (other) {
+                is StringValue -> other.value == value
+                else -> super.equals(other)
+            }
 }

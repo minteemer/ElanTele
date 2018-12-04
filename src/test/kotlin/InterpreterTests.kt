@@ -16,7 +16,9 @@ class InterpreterTests {
 
         private val incorrectProgramsFolder = classLoader.getResource("incorrect_programs").file
         private val incorrectFiles: List<File> = File(incorrectProgramsFolder).listFiles().filter { it.isFile }
+
     }
+
 
     @TestFactory
     fun trivialTestsGenerator() = trivialFiles.map { inputFile ->
@@ -45,6 +47,5 @@ class InterpreterTests {
             println("Result context: $context")
         }
     }
-
 
 }
