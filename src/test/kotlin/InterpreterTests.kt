@@ -246,7 +246,7 @@ class InterpreterTests {
 
     @Test
     fun intDivideInt() {
-        val lexer = ElanTeleLexer(CharStreams.fromString("var a := (1 / 1); var b := a is int"))
+        val lexer = ElanTeleLexer(CharStreams.fromString("var a := (2 / 1); var b := a is int"))
         val parser = ElanTeleParser(CommonTokenStream(lexer))
         val program = parser.program()
         val statements = ProgramInterpreter.getProgram(program)
@@ -254,7 +254,7 @@ class InterpreterTests {
         val context = Context()
         statements.execute(context)
         assertEquals(BooleanValue(true), context.getValue("b"))
-        assertEquals(IntegerValue(1), context.getValue("a"))
+        assertEquals(IntegerValue(2), context.getValue("a"))
     }
 
     @Test
@@ -306,7 +306,7 @@ class InterpreterTests {
         val context = Context()
         statements.execute(context)
         assertEquals(BooleanValue(true), context.getValue("b"))
-        assertEquals(BooleanValue(true), context.getValue("a"))
+        assertEquals(BooleanValue(false), context.getValue("a"))
     }
 
     @Test
@@ -319,7 +319,7 @@ class InterpreterTests {
         val context = Context()
         statements.execute(context)
         assertEquals(BooleanValue(true), context.getValue("b"))
-        assertEquals(BooleanValue(true), context.getValue("a"))
+        assertEquals(BooleanValue(false), context.getValue("a"))
     }
 
     @Test
@@ -332,7 +332,7 @@ class InterpreterTests {
         val context = Context()
         statements.execute(context)
         assertEquals(BooleanValue(true), context.getValue("b"))
-        assertEquals(BooleanValue(true), context.getValue("a"))
+        assertEquals(BooleanValue(false), context.getValue("a"))
     }
 
     @Test
@@ -345,7 +345,7 @@ class InterpreterTests {
         val context = Context()
         statements.execute(context)
         assertEquals(BooleanValue(true), context.getValue("b"))
-        assertEquals(BooleanValue(true), context.getValue("a"))
+        assertEquals(BooleanValue(false), context.getValue("a"))
     }
 
     @Test
@@ -428,7 +428,7 @@ class InterpreterTests {
 
     @Test
     fun logicalNot() {
-        val lexer = ElanTeleLexer(CharStreams.fromString("var a:= true; var b := not a"))
+        val lexer = ElanTeleLexer(CharStreams.fromString("var a:= true; var b := not (a)"))
         val parser = ElanTeleParser(CommonTokenStream(lexer))
         val program = parser.program()
         val statements = ProgramInterpreter.getProgram(program)
