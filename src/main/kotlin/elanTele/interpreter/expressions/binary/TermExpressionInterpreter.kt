@@ -12,8 +12,8 @@ object TermExpressionInterpreter {
     fun getTermExpression(tree: ElanTeleParser.TermContext): Expression =
             tree.term()?.let { term ->
                 BinaryExpression(
-                        UnaryExpressionInterpreter.getUnaryExpression(tree.unary()),
                         getTermExpression(term),
+                        UnaryExpressionInterpreter.getUnaryExpression(tree.unary()),
                         tree.getOperator()
                 )
             } ?: UnaryExpressionInterpreter.getUnaryExpression(tree.unary())
