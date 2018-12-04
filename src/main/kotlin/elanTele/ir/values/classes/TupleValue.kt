@@ -1,5 +1,6 @@
 package elanTele.ir.values.classes
 
+import elanTele.ir.exceptions.InvalidIndexException
 import elanTele.ir.exceptions.UnresolvedIdentifierException
 import elanTele.ir.values.Value
 import elanTele.ir.values.ValueClass
@@ -10,7 +11,7 @@ class TupleValue(values: List<Pair<String?, Value>>) : Value(ValueClass.DICT) {
     private val values = ArrayList(values)
 
     fun getElement(index: Int): Value = values.getOrNull(index)?.second
-            ?: throw IndexOutOfBoundsException("Tuple $this does not have element with index $index")
+            ?: throw InvalidIndexException("Tuple $this does not have an element with index ${index + 1}")
 
     fun getElement(identifier: String): Value? = getElement(getIndex(identifier))
 
@@ -19,7 +20,7 @@ class TupleValue(values: List<Pair<String?, Value>>) : Value(ValueClass.DICT) {
         if (index in 0 until values.size)
             values[index] = (values[index].first to value)
         else
-            throw IndexOutOfBoundsException("Tuple $this does not have element with index $index")
+            throw InvalidIndexException("Tuple $this does not have an element with index ${index + 1}")
     }
 
     fun setElement(identifier: String, value: Value) = setElement(getIndex(identifier), value)

@@ -1,19 +1,25 @@
 package elanTele.ir.values.classes
 
+import elanTele.ir.exceptions.InvalidIndexException
 import elanTele.ir.values.Value
 import elanTele.ir.values.ValueClass
-import java.lang.IndexOutOfBoundsException
 
 class ArrayValue(values: Map<Int, Value>) : Value(ValueClass.ARRAY) {
 
     private val values = HashMap(values)
 
-    fun getElement(index: Int): Value = values[index] ?: EmptyValue()
+    fun getElement(index: Int): Value =
+            if (index in 1..Int.MAX_VALUE)
+                values[index] ?: EmptyValue()
+            else
+                throw InvalidIndexException("Array indexes must be positive non-zero integers")
+
 
     fun setElement(index: Int, value: Value) {
-        if (index !in 1..Int.MAX_VALUE)
-            throw IndexOutOfBoundsException("Array indexes must be positive non-zero integers")
-        values[index] = value
+        if (index in 1..Int.MAX_VALUE)
+            values[index] = value
+        else
+            throw InvalidIndexException("Array indexes must be positive non-zero integers")
     }
 
     override fun add(other: Value): Value = when (other) {
