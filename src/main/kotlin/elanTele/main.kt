@@ -37,7 +37,7 @@ private fun runRepl(tatarTokes: Boolean) {
     val context = Context()
     print(REPL_COMMAND_PROMPT)
     var input = readLine()
-    while (input != EXIT_KEYWORD) {
+    while (input != null && input != EXIT_KEYWORD) {
         val lexer = getLexer(tatarTokes, CharStreams.fromString(input))
         execute(context, lexer)
 
