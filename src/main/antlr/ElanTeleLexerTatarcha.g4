@@ -1,5 +1,5 @@
 
-lexer grammar ElanTeleLexer;
+lexer grammar ElanTeleLexerTatarcha;
 
 import UnicodeClasses;
 
@@ -47,42 +47,42 @@ LE: '<=' ;
 GE: '>=' ;
 EXCL_EQ: '/=' ;
 EQEQ: '=' ;
-CONJ: 'and' ;
-DISJ: 'or' ;
-XOR: 'xor' ;
-NOT: 'not'| 'түгел';
+AND: 'һәм' ;
+XOR: 'ияки' ;
+OR: 'яки' ;
+NOT: 'түгел' ;
 
 
 //KEYWORDS
 
-FUNC: 'func' ;
-VAR: 'var' ;
-IF: 'if' ;
-THEN: 'then' ;
-IN: 'in' ;
-ELSE: 'else' ;
-WHEN: 'when' ;
-FOR: 'for' ;
-WHILE: 'while' ;
-RETURN: 'return' ;
-IS: 'is' ;
-END: 'end' ;
-PRINT: 'print' ;
-LOOP: 'loop' ;
+FUNC:  'функция' ;
+VAR: 'вар' ;
+IF: 'әгәр' ;
+THEN: 'бу_очракта' ;
+IN: 'эчендә' ; // начар
+ELSE: 'башка_очракта' ;
+WHEN: 'кайчан' ;
+FOR: 'дәвамында' ;
+WHILE: 'әлегә' ;
+RETURN: 'кайтар' ;
+IS: 'бу' ;
+END: 'бетте' ;
+PRINT: 'яз' ;
+LOOP: 'элмәк' ;
 
 
-IntType: 'int' ;
-RealType: 'real' ;
-StringType: 'string' ;
-BoolType: 'bool' ;
-EmptyType: 'empty' ;
+IntType: 'сан' ;
+RealType: 'чын_сан' ;
+StringType: 'сүз' ;
+BoolType: 'логик' ;
+EmptyType: 'буш' ;
 ArrayType: '[]' ;
 TupleType: '{}' ;
 
 
-ReadInt: 'readInt' ;
-ReadReal: 'readReal' ;
-ReadString: 'readString' ;
+ReadInt: 'санУку' ;
+ReadReal:  'чынСанУку' ;
+ReadString: 'сүзУку' ;
 
 //
 
@@ -146,8 +146,8 @@ fragment UNICODE_CLASS_ND_NoZeros
 	;
 
 BooleanLiteral
-    : 'true'
-    | 'false'
+    : 'дөрес'
+    | 'ялган'
     ;
 
 Identifier
@@ -191,9 +191,6 @@ Inside_MULT: MULT -> type(MULT) ;
 Inside_DIV: DIV -> type(DIV) ;
 Inside_ADD: ADD  -> type(ADD) ;
 Inside_SUB: SUB  -> type(SUB) ;
-Inside_XOR: XOR  -> type(XOR) ;
-Inside_CONJ: CONJ  -> type(CONJ) ;
-Inside_DISJ: DISJ  -> type(DISJ) ;
 Inside_COLON: COLON  -> type(COLON) ;
 Inside_SEMICOLON: SEMICOLON  -> type(SEMICOLON) ;
 Inside_ASSIGNMENT: ASSIGNMENT  -> type(ASSIGNMENT) ;
@@ -255,7 +252,6 @@ StrExpr_RCURL: RCURL -> popMode, type(RCURL) ;
 StrExpr_LPAREN: LPAREN -> pushMode(Inside), type(LPAREN) ;
 StrExpr_LSQUARE: LSQUARE -> pushMode(Inside), type(LSQUARE) ;
 
-
 StrExpr_RPAREN: ')' -> type(RPAREN) ;
 StrExpr_RSQUARE: ']' -> type(RSQUARE);
 StrExpr_LCURL: LCURL -> pushMode(StringExpression), type(LCURL) ;
@@ -265,9 +261,6 @@ StrExpr_MULT: MULT -> type(MULT) ;
 StrExpr_DIV: DIV -> type(DIV) ;
 StrExpr_ADD: ADD  -> type(ADD) ;
 StrExpr_SUB: SUB  -> type(SUB) ;
-StrExpr_XOR: XOR  -> type(XOR) ;
-StrExpr_CONJ: CONJ  -> type(CONJ) ;
-StrExpr_DISJ: DISJ  -> type(DISJ) ;
 StrExpr_COLON: COLON  -> type(COLON) ;
 StrExpr_SEMICOLON: SEMICOLON  -> type(SEMICOLON) ;
 StrExpr_ASSIGNMENT: ASSIGNMENT  -> type(ASSIGNMENT) ;

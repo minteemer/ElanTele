@@ -9,7 +9,7 @@ class TupleValue(values: List<Pair<String?, Value>>) : Value(ValueClass.DICT) {
 
     private val values = ArrayList(values)
 
-    fun getElement(index: Int): Value? = values[index].second
+    fun getElement(index: Int): Value? = values.getOrNull(index)?.second
 
     fun getElement(identifier: String): Value? = getElement(getIndex(identifier))
 

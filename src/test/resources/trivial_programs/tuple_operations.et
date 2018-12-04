@@ -6,5 +6,5 @@ var x := t.b;
 print x;
 var y1 := t.1;
 print y1;
-var y2 := t.2.d;
+var y2 := t.3.d;
 print y2;

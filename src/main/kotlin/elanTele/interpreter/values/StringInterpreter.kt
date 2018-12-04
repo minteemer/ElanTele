@@ -1,5 +1,6 @@
 package elanTele.interpreter.values
 
+import elanTele.interpreter.exceptions.InvalidStringLiteralException
 import elanTele.ir.values.Value
 import elanTele.ir.values.classes.StringValue
 import elanTele.parser.ElanTeleParser
@@ -12,7 +13,7 @@ object StringInterpreter {
                 stringLiteralContext.lineStringContent().map { stringContent ->
                     stringContent.LineStrText()?.text
                             ?: stringContent.LineStrEscapedChar().getEscapedChar()
-                            ?: throw Exception() // TODO: proper exception
+                            ?: throw InvalidStringLiteralException("Incorrect string literal: $stringLiteralContext")
                 }.forEach { append(it) }
             }.let { StringValue(it.toString()) }
 

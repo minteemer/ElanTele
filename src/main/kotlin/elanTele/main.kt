@@ -2,33 +2,77 @@
 
 package elanTele
 
-import com.google.gson.GsonBuilder
 import elanTele.interpreter.ProgramInterpreter
-import elanTele.interpreter.statements.BodyStatementInterpreter
+import elanTele.interpreter.exceptions.InterpreterException
+import elanTele.ir.Context
+import elanTele.ir.exceptions.InternalRepresentationException
 import elanTele.parser.ElanTeleLexer
+import elanTele.parser.ElanTeleLexerTatarcha
 import elanTele.parser.ElanTeleParser
+import org.antlr.v4.runtime.CharStream
 import org.antlr.v4.runtime.CharStreams
 import org.antlr.v4.runtime.CommonTokenStream
+import org.antlr.v4.runtime.Lexer
+import org.antlr.v4.runtime.misc.ParseCancellationException
 import java.io.File
 
-const val INPUT_FILE = "in.txt"
-const val OUTPUT_FILE = "out.txt"
-
-private val gson = GsonBuilder().setPrettyPrinting().create()
+const val TATAR_KEYWORD_FLAG = "-t"
+const val EXIT_KEYWORD = "exit"
+const val REPL_COMMAND_PROMPT = ">>> "
 
 fun main(args: Array<String>) {
-    val lexer = ElanTeleLexer(CharStreams.fromPath(File(INPUT_FILE).toPath()))
-    val parser = ElanTeleParser(CommonTokenStream(lexer))
+    val useTatarKeywords = args.contains(TATAR_KEYWORD_FLAG)
 
-    ProgramInterpreter.getProgram(parser.program())
-    /*println("Generating tree...")
-    val tree = ElanTeleSyntaxTreeGenearator.generateTree(File(INPUT_FILE).toPath())
+    args.lastOrNull { it.first() != '-' }?.let {
+        executeFile(it, useTatarKeywords)
+    } ?: runRepl(useTatarKeywords)
+}
 
-    println("Converting to JSON...")
-    val output = gson.toJson(tree)
+private fun executeFile(sourceFilePath: String, tatarTokens: Boolean) {
+    val lexer = getLexer(tatarTokens, CharStreams.fromPath(File(sourceFilePath).toPath()))
+    execute(Context(), lexer)
+}
 
-    println("Writing output...")
-    File(OUTPUT_FILE).writeText(output)
+private fun runRepl(tatarTokes: Boolean) {
+    val context = Context()
+    print(REPL_COMMAND_PROMPT)
+    var input = readLine()
+    while (input != null && input != EXIT_KEYWORD) {
+        val lexer = getLexer(tatarTokes, CharStreams.fromString(input))
+        execute(context, lexer)
 
-    println("Complete!")*/
+        print(REPL_COMMAND_PROMPT)
+        input = readLine()
+    }
+}
+
+private fun getLexer(useTatarTokes: Boolean, charStream: CharStream) =
+        if (useTatarTokes)
+            ElanTeleLexerTatarcha(charStream)
+        else
+            ElanTeleLexer(charStream)
+
+private fun execute(context: Context, lexer: Lexer) {
+    val errorListener = ParserErrorListener()
+
+    lexer.apply {
+        removeErrorListeners()
+        addErrorListener(errorListener)
+    }
+
+    val parser = ElanTeleParser(CommonTokenStream(lexer)).apply {
+        removeErrorListeners()
+        addErrorListener(errorListener)
+    }
+
+    try {
+        val program = ProgramInterpreter.getProgram(parser.program())
+        program.execute(context)
+    } catch (e: InternalRepresentationException) {
+        System.err.println("Execution error: " + e.message)
+    } catch (e: InterpreterException) {
+        System.err.println("Interpretation error: " + e.message)
+    } catch (e: ParseCancellationException) {
+        System.err.println("Parser error: " + e.message)
+    }
 }
