@@ -11,7 +11,7 @@ data class FunctionCallReference(
         val arguments: List<Expression>
 ) : Reference {
     override fun setValue(context: Context, value: Value) =
-            throw Exception() // TODO: handle set value to function call
+            TODO("handle set value to function call")
 
     override fun getValue(context: Context): Value {
         val function = identifier.getValue(context)
