@@ -1,6 +1,7 @@
 package elanTele.ir.references
 
 import elanTele.ir.Context
+import elanTele.ir.exceptions.AssignmentException
 import elanTele.ir.exceptions.InvalidTypeException
 import elanTele.ir.expressions.Expression
 import elanTele.ir.values.Value
@@ -11,7 +12,7 @@ data class FunctionCallReference(
         val arguments: List<Expression>
 ) : Reference {
     override fun setValue(context: Context, value: Value) =
-            throw IllegalAccessException()
+            throw AssignmentException("Can't assign a value to a function call")
 
     override fun getValue(context: Context): Value {
         val function = identifier.getValue(context)
