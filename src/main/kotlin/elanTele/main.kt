@@ -2,33 +2,57 @@
 
 package elanTele
 
-import com.google.gson.GsonBuilder
 import elanTele.interpreter.ProgramInterpreter
-import elanTele.interpreter.statements.BodyStatementInterpreter
+import elanTele.ir.Context
 import elanTele.parser.ElanTeleLexer
 import elanTele.parser.ElanTeleParser
+import org.antlr.v4.runtime.CharStream
 import org.antlr.v4.runtime.CharStreams
 import org.antlr.v4.runtime.CommonTokenStream
+import org.antlr.v4.runtime.Lexer
 import java.io.File
 
-const val INPUT_FILE = "in.txt"
-const val OUTPUT_FILE = "out.txt"
-
-private val gson = GsonBuilder().setPrettyPrinting().create()
+const val TATAR_KEYWORD_FLAG = "-t"
+const val EXIT_KEYWORD = "exit"
 
 fun main(args: Array<String>) {
-    val lexer = ElanTeleLexer(CharStreams.fromPath(File(INPUT_FILE).toPath()))
+    val useTatarKeywords = args.contains(TATAR_KEYWORD_FLAG)
+
+    args.lastOrNull { it.first() != '-' }?.let {
+        executeFile(it, useTatarKeywords)
+    } ?: runRepl(useTatarKeywords)
+}
+
+private fun executeFile(sourceFilePath: String, tatarTokes: Boolean) {
+    val lexer = getLexer(tatarTokes, CharStreams.fromPath(File(sourceFilePath).toPath()))
+    execute(Context(), lexer)
+}
+
+private fun runRepl(tatarTokes: Boolean) {
+    val context = Context()
+    print(">>> ")
+    var input = readLine()
+    while (input != EXIT_KEYWORD) {
+        val lexer = getLexer(tatarTokes, CharStreams.fromString(input))
+        try {
+            execute(context, lexer)
+        } catch (e: Exception){
+            e.printStackTrace()
+        }
+
+        print(">>> ")
+        input = readLine()
+    }
+}
+
+private fun getLexer(useTatarTokes: Boolean, charStream: CharStream) =
+        if (useTatarTokes)
+            TODO("implement tatar tokens lexer")
+        else
+            ElanTeleLexer(charStream)
+
+private fun execute(context: Context, lexer: Lexer) {
     val parser = ElanTeleParser(CommonTokenStream(lexer))
-
-    ProgramInterpreter.getProgram(parser.program())
-    /*println("Generating tree...")
-    val tree = ElanTeleSyntaxTreeGenearator.generateTree(File(INPUT_FILE).toPath())
-
-    println("Converting to JSON...")
-    val output = gson.toJson(tree)
-
-    println("Writing output...")
-    File(OUTPUT_FILE).writeText(output)
-
-    println("Complete!")*/
+    val program = ProgramInterpreter.getProgram(parser.program())
+    program.execute(context)
 }

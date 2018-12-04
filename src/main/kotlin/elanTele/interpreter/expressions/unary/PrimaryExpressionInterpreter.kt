@@ -33,7 +33,7 @@ object PrimaryExpressionInterpreter {
     private fun interpretArray(arrayContext: ElanTeleParser.ArrayContext): ArrayCreationExpression =
             ArrayCreationExpression(
                     arrayContext.expression().mapIndexed { index, expressionContext ->
-                        index to ExpressionInterpreter.getExpression(expressionContext)
+                        index + 1 to ExpressionInterpreter.getExpression(expressionContext)
                     }.associate { it }
             )
 }

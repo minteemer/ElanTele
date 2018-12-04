@@ -19,4 +19,5 @@ class FunctionValue(
                         body.execute(context.getChildContext(argsMap)) ?: EmptyValue()
                     }
 
+    override fun toString(): String = "func(${parameters.joinToString()})"
 }
