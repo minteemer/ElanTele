@@ -8,7 +8,7 @@ or `build/distributions/ElanTele-1.0.zip` and run `bin/ElanTele`
 
 
 ## Grammar 
-[Gramar](https://hackmd.io/s/H1EhcAXk4)
+[Grammar](https://hackmd.io/s/H1EhcAXk4)
 
 ## Example of code
 ```
