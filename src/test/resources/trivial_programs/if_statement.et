@@ -1,7 +1,0 @@
-if 1 > 0 then print 1; end;
-
-if 1 > 0 then
-print 0;
-else
-print 1;
-end;

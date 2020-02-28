@@ -1,4 +1,0 @@
-var a:= 1337
-var b;
-b := a - a
-b := a + a

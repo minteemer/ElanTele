@@ -1,8 +1,0 @@
-var a := 1;
-while a<10 loop print a; a:= 1 + a; end;
-var b := 10
-while b /= 0
-loop
-print b
-b := b - 2
-end

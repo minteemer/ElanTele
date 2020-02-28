@@ -1,2 +1,0 @@
-var a:='Elan ',b:="Tele", c := a + b;
-print c

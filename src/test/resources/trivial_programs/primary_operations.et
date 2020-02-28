@@ -1,7 +1,0 @@
-var a
-a := 10
-// a := readInt
-// a := readString
-// a := readReal
-a := func(x) => x + 1
-a := (a(-12) > -12)
