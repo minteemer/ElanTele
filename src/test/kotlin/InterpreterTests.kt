@@ -11,11 +11,15 @@ class InterpreterTests {
     companion object {
         private val classLoader = InterpreterTests::class.java.classLoader
 
-        private val trivialProgramsFolder = classLoader.getResource("trivial_programs").file
-        private val trivialFiles: List<File> = File(trivialProgramsFolder).listFiles().filter { it.isFile }
+        private val trivialFiles: List<File> = classLoader.getResource("trivial_programs")
+                ?.let { File(it.file).listFiles() }
+                ?.filter { it.isFile }
+                ?: emptyList()
 
-        private val incorrectProgramsFolder = classLoader.getResource("incorrect_programs").file
-        private val incorrectFiles: List<File> = File(incorrectProgramsFolder).listFiles().filter { it.isFile }
+        private val incorrectFiles: List<File> = classLoader.getResource("incorrect_programs")
+                ?.let { File(it.file).listFiles() }
+                ?.filter { it.isFile }
+                ?: emptyList()
 
     }
 

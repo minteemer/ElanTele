@@ -51,8 +51,12 @@ class ExceptionTests {
                 ExceptionTest(
                         "UnresolvedIdentifier",
                         "var a := {a := 1, b := 2}; print a.c",
-                        UnresolvedIdentifierException::
-                        class.java
+                        UnresolvedIdentifierException::class.java
+                ),
+                ExceptionTest(
+                        "Array 0 index",
+                        "var a := [1,2,3]; print a[0]",
+                        InvalidIndexException::class.java
                 ),
                 ExceptionTest(
                         "UnresolvedOperator",
