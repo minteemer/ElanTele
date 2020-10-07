@@ -1,0 +1,2 @@
+var a := func(x) is return 1; end;
+print a(0)

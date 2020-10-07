@@ -1,0 +1,10 @@
+var t := {a:=1, b:=2, {d:=3}};
+print t;
+t := t + {d:=3};
+print t;
+var x := t.b;
+print x;
+var y1 := t.1;
+print y1;
+var y2 := t.3.d;
+print y2;

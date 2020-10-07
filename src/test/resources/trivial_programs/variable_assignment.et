@@ -1,0 +1,8 @@
+var a := 1;
+var b := []
+var c := {1, j:=2, a}
+var d := "d"
+var e := 2.3
+var f := true
+var g := func(x) => x + 2
+var l := g is func

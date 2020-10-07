@@ -1,0 +1,29 @@
+var a:= 1337
+var b;
+print b
+b := - (a)
+print b
+b := + (a)
+print b
+b := - 2
+print b
+b := + 2
+print b
+b := a
+print b
+b := a is int
+print b
+b := a is real
+print b
+b := a is bool
+print b
+b := a is string
+print b
+b := a is empty
+print b
+b := a is []
+print b
+b := a is {}
+print b
+b := a is func
+print b
