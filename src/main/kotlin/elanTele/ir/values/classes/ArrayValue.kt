@@ -54,7 +54,7 @@ class ArrayValue(values: Map<Int, Value>) : Value(ValueClass.ARRAY) {
      *
      */
     override fun toString(): String = values.entries
-            .joinToString(prefix = "[", postfix = "]") { (index, value) -> "$index: $value" }
+            .joinToString(prefix = "[", postfix = "]") { (_, value) -> value.toString() }
 
     /**
      *  @return true if current array equal to other, false otherwise

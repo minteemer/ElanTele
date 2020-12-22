@@ -8,11 +8,15 @@ class StringValue(val value: String) : Value(ValueClass.STRING) {
     /**
      *  @param other string that will be concatenated with current string
      *  @return [StringValue] that is concat of current and other strings
-     *  @throws [UnresolvedOperatorException] if other is not of type [StringValue]
-     *
+     *  @throws [UnresolvedOperatorException] if other can not be concatenated as string
      */
     override fun add(other: Value): Value = when (other) {
-        is StringValue -> StringValue(value + other.value)
+        is StringValue,
+        is IntegerValue,
+        is RealValue,
+        is BooleanValue,
+        is ArrayValue,
+        is TupleValue -> StringValue(value + other.toString())
         else -> super.add(other)
     }
 

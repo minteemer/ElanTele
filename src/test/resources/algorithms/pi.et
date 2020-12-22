@@ -1,0 +1,33 @@
+var SCALE := 10000
+var digits := 10000
+
+var rem := func(a, b) => a - a / b * b
+
+var pi := ""
+var arr := []
+for i in 1..digits loop
+    arr[i] := 2000
+end
+var carry := 0
+var i := digits
+var first := true
+while i > 0 loop
+    var sum := 0
+    for j in 1..i loop
+        j := i - j + 1
+        sum := sum * j + SCALE * arr[j]
+        arr[j] := rem(sum, j * 2 - 1)
+        sum := sum / (j * 2 - 1)
+    end
+    var result := carry + sum / SCALE
+    if first then
+        pi := pi + result / 1000 + "." + rem(result, 1000)
+        first := false
+    else
+        pi := pi + result
+    end
+    carry := rem(sum, SCALE)
+    i := i - 14
+end
+
+print pi

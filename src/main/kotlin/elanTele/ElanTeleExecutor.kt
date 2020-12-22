@@ -14,6 +14,7 @@ import org.antlr.v4.runtime.CommonTokenStream
 import org.antlr.v4.runtime.Lexer
 import org.antlr.v4.runtime.misc.ParseCancellationException
 import java.io.File
+import java.nio.charset.Charset
 
 object ElanTeleExecutor {
     private const val EXIT_KEYWORD = "exit"
@@ -21,7 +22,7 @@ object ElanTeleExecutor {
 
 
     fun executeFile(sourceFilePath: String, tatarTokens: Boolean) {
-        val lexer = getLexer(tatarTokens, CharStreams.fromPath(File(sourceFilePath).toPath()))
+        val lexer = getLexer(tatarTokens, CharStreams.fromPath(File(sourceFilePath).toPath(), Charset.forName("UTF-8")))
         safeExecute(Context(), lexer)
     }
 

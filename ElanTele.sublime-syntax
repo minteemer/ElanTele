@@ -22,7 +22,7 @@ contexts:
         - match: '\*/'
           pop: true
     # Inline comments begin with a '//' and finish at the end of the line.
-    - match: '/[^\*]'
+    - match: '//[^\*]'
       scope: punctuation.definition.comment.et
       push:
         # This is an anonymous context push for brevity.
