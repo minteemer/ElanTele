@@ -15,7 +15,7 @@ or `bin/ElanTele example.et` to execute a file.
 
 ## Example of code
 ```
-var unsorted := [1, 4, 88, 2, 11, 100, 55]
+var unsorted := [1, 41, 288, 2, 11, 100, 55]
 print unsorted
 var length := 1
 while unsorted[length] is int loop
